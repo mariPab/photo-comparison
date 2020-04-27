@@ -11,12 +11,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/client/build')));
+app.use(express.static(path.join(__dirname + '/public')));
 
 
 /* API ENDPOINTS */
-// app.use('/api', require('./routes/any.routes'));
+app.use('/api', require('./routes/photos.routes'));
 
-app.use(express.static(path.join(__dirname + '/public')));
 
 /* REACT WEBSITE */
 app.get('*', (req, res) => {
@@ -28,6 +28,15 @@ app.get('*', (req, res) => {
 app.use((req, res) => {
   res.status(404).send({ message: 'not found...' });
 });
+
+console.log(process.env);
+mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/PhotoComparison?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+const db = mongoose.connection;
+
+db.once('open', () => {
+  console.log('Successfully connected to the database');
+});
+db.on('error', err => console.log('Error: ' + err));
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
