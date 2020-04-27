@@ -1,0 +1,1 @@
+{"version":3,"sources":["Photo.module.scss"],"names":[],"mappings":"AAEA,sBACE,eAAgB,CAChB,YAAa,CACb,sBAAuB","file":"main.fe0d3bd3.chunk.css","sourcesContent":["@import \"../../../styles/settings.scss\";\r\n\r\n.wrapper {\r\n  padding: 100px 0;\r\n  display: flex;\r\n  justify-content: center;\r\n}\r\n"]}
