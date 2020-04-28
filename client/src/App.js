@@ -9,7 +9,7 @@ function App() {
   return (
     <MainLayout>
       <Switch>
-        <Route path={`${MAIN_PAGE_URL}/`} exact to component={Photo} />
+        <Route path={`${MAIN_PAGE_URL}/photos/:id`} exact to component={Photo} />
         {/* <Route path="/submit" exact component={Submit} /> */}
       </Switch>
     </MainLayout>

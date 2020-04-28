@@ -29,7 +29,6 @@ app.use((req, res) => {
   res.status(404).send({ message: 'not found...' });
 });
 
-console.log(process.env);
 mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/PhotoComparison?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
