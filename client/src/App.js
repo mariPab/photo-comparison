@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { MainLayout } from './components/layout/MainLayout/MainLayout';
 import { Photo } from './components/views/Photo/Photo';
-// import { Submit } from './components/views/Submit/Submit';
+import { Submit } from './components/views/Submit/Submit';
 import { MAIN_PAGE_URL } from './config';
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
     <MainLayout>
       <Switch>
         <Route path={`${MAIN_PAGE_URL}/photos/:id`} exact to component={Photo} />
-        {/* <Route path="/submit" exact component={Submit} /> */}
+        <Route path={`${MAIN_PAGE_URL}/submit`} exact to component={Submit} />
       </Switch>
     </MainLayout>
 

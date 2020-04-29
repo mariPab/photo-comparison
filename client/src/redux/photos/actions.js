@@ -1,4 +1,4 @@
-import { GET_PHOTO } from './reducer';
+import { GET_PHOTO, SUBMIT_PHOTOS } from './reducer';
 
 /* action creator */
 export const PhotoActions = {
@@ -6,4 +6,8 @@ export const PhotoActions = {
     type: GET_PHOTO,
     payload: { id }
   }),
+  submitPhotos: data => ({
+    type: SUBMIT_PHOTOS,
+    payload: { data },
+  })
 };
