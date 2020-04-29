@@ -2,17 +2,27 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const mongoose = require('mongoose');
-
+const formidable = require('express-formidable');
+const randomID = require('@maripab/id-generator');
 const app = express();
 
 /* MIDDLEWARE */
 app.use(cors());
+
+app.use(formidable({ uploadDir: './public/uploads/' }, [{
+  event: 'fileBegin', // on every file upload...
+  action: (req, res, next, name, file) => {
+    const fileName = randomID(10) + '.' + file.name.split('.')[1];
+    file.path = __dirname + '/public/images/photo_' + fileName;
+  }
+},
+]));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static(path.join(__dirname + '/client/build')));
 app.use(express.static(path.join(__dirname + '/public')));
-
 
 /* API ENDPOINTS */
 app.use('/api', require('./routes/photos.routes'));
