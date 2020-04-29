@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getPhoto } from '../../../redux/photosReducer';
+import { getPhoto } from '../../../redux/photos/reducer';
 import styles from './Photo.module.scss';
 import BeforeAfterSlider from 'react-before-after-slider';
-import { PhotoActions } from '../../../redux/photosReducer';
+import { PhotoActions } from '../../../redux/photos/actions';
 import { IMAGES_URL } from '../../../config';
 
 const { getPhotoData } = PhotoActions;

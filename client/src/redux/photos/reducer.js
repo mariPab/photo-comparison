@@ -1,30 +1,20 @@
-
 /* selectors */
-
-export const getPhoto = ({ data }) => data;
+export const getPhoto = ({ photo }) => photo;
 
 /* action type */
 export const GET_PHOTO = 'GET_PHOTO';
-
-/* action creator */
-export const PhotoActions = {
-  getPhotoData: id => ({
-    type: GET_PHOTO,
-    payload: { id }
-  }),
-};
+export const SET_PHOTO = 'SET_PHOTO';
 
 const initialState = {
-  data: {},
+  photo: {},
 };
 
 export default function reducer(statePart = initialState, action = {}) {
   switch (action.type) {
-    case GET_PHOTO:
-      console.log(action.data);
+    case SET_PHOTO:
       return {
         ...statePart,
-        data: action.data
+        photo: action.payload
       }
     default:
       return statePart;

@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import photoReducer from './photosReducer.js';
+import photoReducer from './photos/reducer.js';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 

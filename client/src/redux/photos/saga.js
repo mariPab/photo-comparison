@@ -1,8 +1,7 @@
-import { GET_PHOTO } from './photosReducer';
+import { GET_PHOTO, SET_PHOTO } from './reducer';
 import axios from 'axios';
-import { API_URL } from '../config';
-import { all, fork, takeEvery, put, call } from 'redux-saga/effects';
-
+import { API_URL } from '../../config';
+import { all, fork, takeEvery, put } from 'redux-saga/effects';
 
 /* Saga creator */
 export function* getPhotoDataWatcher() {
@@ -12,10 +11,8 @@ export function* getPhotoData({ payload }) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
-    console.log(res);
     if (res && res.data) {
-      console.log(res.data);
-      yield put({ type: GET_PHOTO, data: res.data });
+      yield put({ type: SET_PHOTO, payload: res.data });
     }
   }
   catch (err) {
