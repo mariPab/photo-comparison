@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const product = require('../controllers/photos.controller');
+const photos = require('../controllers/photos.controller');
 
-router.get('/photos/:id', product.loadPhotoById);
-router.post('/submit', product.submitPhotos);
+router.get('/all', photos.loadAll);
+router.get('/photos/:id', photos.loadById);
+router.post('/submit', photos.submit);
 
 module.exports = router;

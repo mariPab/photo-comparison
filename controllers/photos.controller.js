@@ -1,7 +1,17 @@
 
 const Photo = require('../models/photo.model');
 
-exports.loadPhotoById = async (req, res) => {
+exports.loadAll = async (req, res) => {
+  try {
+    const photos = await Photo.find();
+    if (!photos) res.status(404).json({ photo: 'Not Found' });
+    else res.json(photos);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.loadById = async (req, res) => {
   try {
     const photo = await Photo.findOne({ _id: req.params.id });
     if (!photo) res.status(404).json({ photo: 'Not Found' });
@@ -11,7 +21,7 @@ exports.loadPhotoById = async (req, res) => {
   }
 };
 
-exports.submitPhotos = async (req, res) => {
+exports.submit = async (req, res) => {
   const { title, description, width, height } = req.fields;
   try {
     let beforeFile,
