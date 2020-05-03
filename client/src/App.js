@@ -9,9 +9,9 @@ function App() {
   return (
     <MainLayout>
       <Switch>
+        <Route path={`/`} exact to component={Submit} />
         <Route path={`/photos/:id`} exact to component={Photo} />
         <Route path={`/admin`} exact to component={Admin} />
-        <Route path={`/git admin/submit`} exact to component={Submit} />
       </Switch>
     </MainLayout>
 
