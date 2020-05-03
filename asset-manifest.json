@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/photo-comparison/static/css/main.b038c233.chunk.css",
-    "main.js": "/photo-comparison/static/js/main.e558cb3f.chunk.js",
-    "main.js.map": "/photo-comparison/static/js/main.e558cb3f.chunk.js.map",
-    "runtime-main.js": "/photo-comparison/static/js/runtime-main.43f8aa99.js",
-    "runtime-main.js.map": "/photo-comparison/static/js/runtime-main.43f8aa99.js.map",
-    "static/js/2.58d5ec6a.chunk.js": "/photo-comparison/static/js/2.58d5ec6a.chunk.js",
-    "static/js/2.58d5ec6a.chunk.js.map": "/photo-comparison/static/js/2.58d5ec6a.chunk.js.map",
-    "index.html": "/photo-comparison/index.html",
-    "precache-manifest.43fe049179ac3b14cd1e8b55773c9eab.js": "/photo-comparison/precache-manifest.43fe049179ac3b14cd1e8b55773c9eab.js",
-    "service-worker.js": "/photo-comparison/service-worker.js",
-    "static/css/main.b038c233.chunk.css.map": "/photo-comparison/static/css/main.b038c233.chunk.css.map",
-    "static/js/2.58d5ec6a.chunk.js.LICENSE.txt": "/photo-comparison/static/js/2.58d5ec6a.chunk.js.LICENSE.txt"
+    "main.css": "/photo-comparison/admin/static/css/main.b038c233.chunk.css",
+    "main.js": "/photo-comparison/admin/static/js/main.e558cb3f.chunk.js",
+    "main.js.map": "/photo-comparison/admin/static/js/main.e558cb3f.chunk.js.map",
+    "runtime-main.js": "/photo-comparison/admin/static/js/runtime-main.ffa515d6.js",
+    "runtime-main.js.map": "/photo-comparison/admin/static/js/runtime-main.ffa515d6.js.map",
+    "static/js/2.58d5ec6a.chunk.js": "/photo-comparison/admin/static/js/2.58d5ec6a.chunk.js",
+    "static/js/2.58d5ec6a.chunk.js.map": "/photo-comparison/admin/static/js/2.58d5ec6a.chunk.js.map",
+    "index.html": "/photo-comparison/admin/index.html",
+    "precache-manifest.90953e210ed532db214893c451bb6d56.js": "/photo-comparison/admin/precache-manifest.90953e210ed532db214893c451bb6d56.js",
+    "service-worker.js": "/photo-comparison/admin/service-worker.js",
+    "static/css/main.b038c233.chunk.css.map": "/photo-comparison/admin/static/css/main.b038c233.chunk.css.map",
+    "static/js/2.58d5ec6a.chunk.js.LICENSE.txt": "/photo-comparison/admin/static/js/2.58d5ec6a.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.43f8aa99.js",
+    "static/js/runtime-main.ffa515d6.js",
     "static/js/2.58d5ec6a.chunk.js",
     "static/css/main.b038c233.chunk.css",
     "static/js/main.e558cb3f.chunk.js"
