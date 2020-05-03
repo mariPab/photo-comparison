@@ -84,22 +84,46 @@ class Component extends React.Component {
     return (
       <div className={styles.root}>
         <h2>Dodaj nowe porównanie zdjęć</h2>
-        <form onSubmit={submit}>
-          <div>
-            <label>
+        <form className={styles.form} onSubmit={submit}>
+          <div className={styles.elemWrapper}>
+            <label htmlFor="title">
               Tytuł
-            <input
-                className={styles.formElem}
-                name="title"
-                onChange={updateInputValue}
-                value={photoData.title}
-                minLength="10" required
-                type="text"
-                placeholder="Tytuł"
-              />
             </label>
+            <input
+              id="title"
+              name="title"
+              onChange={updateInputValue}
+              value={photoData.title}
+              minLength="10" required
+              type="text"
+              placeholder="Tytuł"
+            />
           </div>
-          <div>
+          <textarea
+            name="description"
+            onChange={updateInputValue}
+            value={photoData.description}
+            rows="5"
+            placeholder="Opis zdjęć"
+          >
+          </textarea>
+          <div className={styles.elemWrapper}>
+            <label htmlFor="before">Zdjęcie Przed</label>
+            <input
+              id="before"
+              name="before"
+              onChange={setImage}
+              type="file"
+            />
+            <label htmlFor="after">Zdjęcie Po</label>
+            <input
+              id="after"
+              name="after"
+              onChange={setImage}
+              type="file"
+            />
+          </div>
+          <div className={styles.elemWrapper}>
             <label>
               Szerokość
             <input
@@ -115,7 +139,6 @@ class Component extends React.Component {
             <label>
               Wysokość
             <input
-                className={styles.formElem}
                 min={100}
                 max={800}
                 name="height"
@@ -126,39 +149,7 @@ class Component extends React.Component {
               px
             </label>
           </div>
-          <div>
-
-            <label>
-              Zdjęcie Przed
-            <input
-                name="before"
-                onChange={setImage}
-                type="file"
-              />
-            </label>
-            <label>
-              Zdjęcie Po
-            <input
-                className={styles.formElem}
-
-                name="after"
-                onChange={setImage}
-                type="file"
-              />
-            </label>
-          </div>
-          <textarea
-            className={styles.formElem}
-            name="description"
-            onChange={updateInputValue}
-            value={photoData.description}
-            rows="5"
-            placeholder="Opis zdjęć"
-          >
-          </textarea>
-          <button
-            className={`${styles.btn}`}
-          >
+          <button className={`${styles.btn}`}>
             Dodaj
           </button>
         </form>
