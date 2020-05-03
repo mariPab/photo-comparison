@@ -10,7 +10,7 @@ const Component = ({ linksList }) => {
       <ul>
         {linksList.map(link => (
           <li>
-            <NavLink key={link._id} className={styles.navlink} exact to={`${MAIN_PAGE_URL}/photos/${link._id}`}>
+            <NavLink key={link._id} className={styles.navlink} exact to={`/photos/${link._id}`}>
               {link.title}
             </NavLink>
           </li>
