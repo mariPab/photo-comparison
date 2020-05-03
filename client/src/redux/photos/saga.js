@@ -49,6 +49,7 @@ export function* submitPhotos({ payload }) {
           'Content-Type': 'application/json',
         }
       });
+    yield put({ type: GET_ALL });
   } catch (e) {
     console.log(e);
   }
