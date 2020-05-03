@@ -1,5 +1,27 @@
 @import "../../../styles/settings.scss";
 
-// .root {
+.nav {
+  width: 25vw;
+  overflow: auto;
+  border-right: 1px solid lighten($color-border, 20%);
 
-// }
+  ul {
+    text-transform: uppercase;
+    list-style: none;
+    padding: 0 10px;
+  }
+  li {
+    padding: 10px 0;
+  }
+}
+
+.navlink {
+  text-decoration: none;
+  font-weight: 200;
+  color: $color-text;
+  letter-spacing: 0.3rem;
+  font-size: 1.4rem;
+  &:hover {
+    color: $color-border;
+  }
+}

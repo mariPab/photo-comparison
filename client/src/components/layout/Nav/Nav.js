@@ -1,29 +1,32 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
-// import { connect } from 'react-redux';
+import { MAIN_PAGE_URL } from '../../../config';
 
-
-const Component = () => {
+const Component = ({ linksList }) => {
   return (
-    <nav>
-      <NavLink className={styles.navlink} exact to='/'>
-        Strona główna
-        </NavLink>
-    </nav >
+    <nav className={styles.nav}>
+      <ul>
+        {linksList.map(link => (
+          <li>
+            <NavLink key={link._id} className={styles.navlink} exact to={`${MAIN_PAGE_URL}/photos/${link._id}`}>
+              {link.title}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 };
 
-// Component.propTypes = {
-// };
+Component.propTypes = {
+  linksList: PropTypes.arrayOf(PropTypes.object),
+};
 
-// const mapStateToProps = state => ({
-// });
-
-// const Container = connect(mapStateToProps, null)(Component);
 
 export {
   Component as Nav,
   Component as NavComponent,
 };
+

@@ -12,4 +12,50 @@
 
 body {
   font-family: $font-text;
+  background-color: $color-supplemental;
+}
+
+h2 {
+  font-family: $font-supplemental;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+label {
+  // text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  margin-right: 20px;
+  font-size: 1.8rem;
+  display: block;
+  margin: 20px 5px 10px 0;
+}
+
+input:not([type="file"]),
+textarea {
+  border: 1px solid $color-border;
+  background-color: $color-supplemental;
+  padding: 10px;
+  margin: 10px;
+  font-family: $font-text;
+  // border-radius: 5px;
+  outline: none;
+  font-size: 1.5rem;
+
+  &:active,
+  &:focus {
+    border-color: $color-neutral;
+    background-color: lighten($color-neutral, 50%);
+  }
+
+  &::placeholder {
+    font-size: 1.6rem;
+  }
+}
+
+input[type="text"] {
+  width: 80%;
+}
+
+textarea {
+  width: 100%;
+  margin: 0;
 }
