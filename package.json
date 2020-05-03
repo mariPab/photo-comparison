@@ -17,7 +17,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "homepage": "https://maripab.github.io/photo-comparison/",
+  "homepage": "https://maripab.github.io/photo-comparison/admin",
   "devDependencies": {
     "express-formidable": "^1.2.0",
     "nodemon": "^2.0.2"
