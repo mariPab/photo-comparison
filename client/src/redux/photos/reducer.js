@@ -8,6 +8,7 @@ export const SET_PHOTO = 'SET_PHOTO';
 export const GET_ALL = 'GET_ALL';
 export const SET_ALL = 'SET_ALL';
 export const SUBMIT_PHOTOS = 'SUBMIT_PHOTOS';
+export const DELETE_COMPARISON = 'DELETE_COMPARISON';
 
 const initialState = {
   photo: {},
