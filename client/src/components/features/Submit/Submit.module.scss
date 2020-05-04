@@ -15,27 +15,6 @@
   width: 100%;
   margin: 10px 0;
 }
-.btn {
-  color: darken($color-border, 15%);
-  background: $color-supplemental;
-  border: 1px solid $color-border;
-  text-align: center;
-  padding: 1.2rem 1.8rem;
-  cursor: pointer;
-  letter-spacing: 0.1rem;
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  transition: $transition-all;
-  outline: none;
-  float: right;
-  margin-top: 30px;
-
-  &:hover {
-    background-color: lighten($color-neutral, 50%);
-    color: $color-neutral;
-    border-color: $color-neutral;
-  }
-}
 
 .formElem {
   padding: 4px 7px;

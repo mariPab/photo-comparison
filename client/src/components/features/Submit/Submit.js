@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styles from './Submit.module.scss';
 import { PhotoActions } from '../../../redux/photos/actions';
-
+import { Button } from '../../common/Button/Button';
 const { submitPhotos } = PhotoActions;
 
 class Component extends React.Component {
@@ -149,9 +149,9 @@ class Component extends React.Component {
               px
             </label>
           </div>
-          <button className={`${styles.btn}`}>
+          <Button>
             Dodaj
-          </button>
+          </Button>
         </form>
       </div >
     );
