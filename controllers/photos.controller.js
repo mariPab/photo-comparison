@@ -52,3 +52,13 @@ exports.submit = async (req, res) => {
     res.status(500).json(err);
   }
 };
+
+exports.deleteById = (req, res) => {
+  try {
+    Photo.deleteOne({ _id: req.params.id }, (err) => {
+      err ? res.status(404).json({ message: 'Not found...' }) : res.json({ message: 'Deleted successfully' });
+    });
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
