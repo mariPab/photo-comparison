@@ -1,4 +1,10 @@
-import { GET_PHOTO, SUBMIT_PHOTOS, GET_ALL, DELETE_COMPARISON } from './reducer';
+import {
+  GET_PHOTO,
+  SUBMIT_PHOTOS,
+  GET_ALL,
+  EDIT_COMPARISON,
+  DELETE_COMPARISON
+} from './reducer';
 
 /* action creator */
 export const PhotoActions = {
@@ -12,6 +18,10 @@ export const PhotoActions = {
   submitPhotos: data => ({
     type: SUBMIT_PHOTOS,
     payload: { data },
+  }),
+  editComparison: (id, data) => ({
+    type: EDIT_COMPARISON,
+    payload: { id, data }
   }),
   deleteComparison: id => ({
     type: DELETE_COMPARISON,

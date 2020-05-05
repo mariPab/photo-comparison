@@ -1,4 +1,3 @@
-
 const Photo = require('../models/photo.model');
 
 exports.loadAll = async (req, res) => {
@@ -26,7 +25,7 @@ exports.submit = async (req, res) => {
   try {
     let beforeFile,
       afterFile;
-    if (req.files.before.name && req.files.after.name) {
+    if (req.files.before && req.files.after) {
       beforeFile = req.files.before.path.split('/').slice(-1)[0];
       afterFile = req.files.after.path.split('/').slice(-1)[0];
     } else throw new Error("Missing images");
@@ -58,8 +57,10 @@ exports.editPhotoComparison = async (req, res) => {
     const { title, description, width, height } = req.fields;
     let beforeFile,
       afterFile;
-    req.files.before.name ? beforeFile = req.files.before.path.split('/').slice(-1)[0] : beforeFile = null;
-    req.files.after.name ? afterFile = req.files.after.path.split('/').slice(-1)[0] : afterFile = null;
+    if (JSON.stringify(req.files) !== '{}') {
+      req.files.before ? beforeFile = req.files.before.path.split('/').slice(-1)[0] : beforeFile = null;
+      req.files.after ? afterFile = req.files.after.path.split('/').slice(-1)[0] : afterFile = null;
+    }
     const photo = await Photo.findOne({ _id: req.params.id });
     if (!photo) res.status(404).json({ photo: 'Not Found' });
     else if (title && description && width && height) {

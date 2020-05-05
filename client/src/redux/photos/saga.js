@@ -1,8 +1,15 @@
-import { GET_PHOTO, SET_PHOTO, SUBMIT_PHOTOS, GET_ALL, SET_ALL, DELETE_COMPARISON } from './reducer';
+import {
+  GET_PHOTO,
+  SET_PHOTO,
+  SUBMIT_PHOTOS,
+  GET_ALL,
+  SET_ALL,
+  EDIT_COMPARISON,
+  DELETE_COMPARISON
+} from './reducer';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
-import { getList } from './reducer';
 
 /* Saga creator */
 export function* getAllWatcher() {
@@ -57,13 +64,33 @@ export function* submitPhotos({ payload }) {
   }
 }
 
+export function* editComparisonWatcher() {
+  yield takeEvery(EDIT_COMPARISON, editComparison)
+}
+
+export function* editComparison({ payload }) {
+  const { id, data } = payload;
+  console.log('I want edit: ' + id);
+  try {
+    const res = yield axios.put(`${API_URL}/photos/${id}`,
+      data,
+      {
+        headers: {
+          'Content-Type': 'application/json',
+        }
+      });
+    yield put({ type: GET_PHOTO, payload: id })
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export function* deleteComparisonWatcher() {
   yield takeEvery(DELETE_COMPARISON, deleteComparison)
 }
 
 export function* deleteComparison({ payload }) {
   const { id } = payload;
-  console.log('I want delete: ' + id);
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
     yield put({ type: GET_ALL })
@@ -77,6 +104,7 @@ export default function* rootSaga() {
     fork(getAllWatcher),
     fork(getPhotoDataWatcher),
     fork(submitPhotosWatcher),
+    fork(editComparisonWatcher),
     fork(deleteComparisonWatcher),
   ]);
 }
