@@ -26,10 +26,10 @@ exports.submit = async (req, res) => {
   try {
     let beforeFile,
       afterFile;
-    if (req.files.before && req.files.after) {
+    if (req.files.before.name && req.files.after.name) {
       beforeFile = req.files.before.path.split('/').slice(-1)[0];
       afterFile = req.files.after.path.split('/').slice(-1)[0];
-    } else res.status(404).json('Missing images');
+    } else throw new Error("Missing images");
     if (title && description && width && height) {
       const newPhoto = new Photo({
         title,
@@ -48,6 +48,30 @@ exports.submit = async (req, res) => {
     } else {
       throw new Error('Wrong input!');
     }
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
+exports.editPhotoComparison = async (req, res) => {
+  try {
+    const { title, description, width, height } = req.fields;
+    let beforeFile,
+      afterFile;
+    req.files.before.name ? beforeFile = req.files.before.path.split('/').slice(-1)[0] : beforeFile = null;
+    req.files.after.name ? afterFile = req.files.after.path.split('/').slice(-1)[0] : afterFile = null;
+    const photo = await Photo.findOne({ _id: req.params.id });
+    if (!photo) res.status(404).json({ photo: 'Not Found' });
+    else if (title && description && width && height) {
+      photo.title = title;
+      photo.description = description;
+      photo.dimensions.width = width;
+      photo.dimensions.height = height;
+      if (beforeFile) photo.images.before = beforeFile;
+      if (afterFile) photo.images.after = afterFile;
+      await photo.save();
+      res.json(photo);
+    } else throw new Error('Wrong input!');
   } catch (err) {
     res.status(500).json(err);
   }
