@@ -6,7 +6,7 @@ import {
   SET_ALL,
   EDIT_COMPARISON,
   DELETE_COMPARISON
-} from './reducer';
+} from './types';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
