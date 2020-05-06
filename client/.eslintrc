@@ -5,7 +5,7 @@
     "node": true,
     "jest": true
   },
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module",
@@ -19,12 +19,14 @@
     }
   },
   "plugins": [
-    "react"
+    "react",
+    "@typescript-eslint"
   ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "react-app"
+    "react-app",
+    "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
     "indent": [
