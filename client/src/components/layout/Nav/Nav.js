@@ -6,15 +6,18 @@ import styles from './Nav.module.scss';
 const Component = ({ linksList }) => {
   return (
     <nav className={styles.nav}>
-      <ul>
-        {linksList.map(link => (
-          <li key={link._id}>
-            <NavLink className={styles.navlink} exact to={`/photos/${link._id}`}>
-              {link.title}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
+      <h3>Przejdź do podglądu</h3>
+      {linksList && linksList.length ? (
+        <ul>
+          {linksList.map(link => (
+            <li key={link._id}>
+              <NavLink className={styles.navlink} exact to={`/photos/${link._id}`}>
+                {link.title}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </nav>
   );
 };

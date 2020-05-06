@@ -19,8 +19,7 @@
     }
   },
   "plugins": [
-    "react",
-    "@typescript-eslint"
+    "react"
   ],
   "extends": [
     "eslint:recommended",

@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import styles from './Admin.module.scss';
 import { getList } from '../../../redux/photos/reducer';
 import { Nav } from '../../layout/Nav/Nav';
-// import { Submit } from '../../features/Submit/Submit';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { NavLink } from 'react-router-dom';
 import { PhotoCard } from '../../features/PhotoCard/PhotoCard';
@@ -24,14 +23,16 @@ class Component extends React.Component {
     const { photosList } = this.props;
     return (
       <div className={styles.root}>
-        {photosList && photosList.length ? <Nav linksList={photosList} /> : null}
+        <Nav linksList={photosList} />
         <div className={styles.panel}>
           <NavLink exact to={`/admin/submit`}>
             Dodaj nowe porównanie
           </NavLink>
-          {photosList.map(elem => (
-            <PhotoCard key={elem._id} photoData={elem} />
-          ))}
+          <div className={styles.manageSection}>
+            {photosList.map(elem => (
+              <PhotoCard key={elem._id} photoData={elem} />
+            ))}
+          </div>
         </div>
       </div >
     );

@@ -14,10 +14,12 @@ const { deleteComparison } = PhotoActions;
 const Component = ({ photoData, deleteComparison }) => {
   return (
     <div className={styles.root}>
-      <img
-        src={`${IMAGES_URL}/${photoData.images.before}`}
-        alt={photoData.title}
-      />
+      <div className={styles.imageWrapper}>
+        <img
+          src={`${IMAGES_URL}/${photoData.images.before}`}
+          alt={photoData.title}
+        />
+      </div>
       <div className={styles.details} >
         <p>{photoData.title}</p>
         <NavLink exact to={`/admin/edit/${photoData._id}`}>
@@ -27,7 +29,6 @@ const Component = ({ photoData, deleteComparison }) => {
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>
-
     </div >
   );
 };
