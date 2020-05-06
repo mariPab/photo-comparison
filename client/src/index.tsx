@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Provider } from 'react-redux';
@@ -7,8 +7,8 @@ import { MAIN_PAGE_URL } from './config';
 
 import App from './App';
 
-const Root = () => (
-  <Provider store={store}>
+const Root: FunctionComponent = () => (
+  <Provider store={store} >
     <Router basename={`${MAIN_PAGE_URL}`} >
       <App />
     </Router>
