@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { MainLayoutComponent } from './MainLayout';
+import { MainLayoutComponent } from '.';
 
 describe('Component MainLayout', () => {
   it('should render without crashing', () => {

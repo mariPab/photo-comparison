@@ -1,9 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Nav.module.scss';
+import { PhotoInterface } from '../../../interfaces/photos';
 
-const Component = ({ linksList }) => {
+interface Props {
+  linksList: Array<PhotoInterface>
+}
+const Component: FunctionComponent<Props> = ({ linksList }: Props) => {
   return (
     <nav className={styles.nav}>
       <h3>Przejdź do podglądu</h3>
@@ -21,12 +24,6 @@ const Component = ({ linksList }) => {
     </nav>
   );
 };
-
-Component.propTypes = {
-  linksList: PropTypes.arrayOf(PropTypes.object),
-};
-
-
 export {
   Component as Nav,
   Component as NavComponent,

@@ -2,15 +2,15 @@ import { PhotoState, SET_ALL, SET_PHOTO, PhotosReducerTypes } from './types';
 import { PhotoInterface } from '../../interfaces/photos';
 
 /* selectors */
-export const getPhoto = ({ photo }: PhotoState) => photo;
+export const getPhoto = ({ photoData }: PhotoState) => photoData;
 export const getList = ({ allPhotos }: PhotoState) => allPhotos;
 export const getPhotoById = ({ allPhotos }: PhotoState, photoId: string) => {
-  const filteredPost = allPhotos.filter((photo: PhotoInterface) => photo._id === photoId);
+  const filteredPost = allPhotos.filter((photoData: PhotoInterface) => photoData._id === photoId);
   return filteredPost.length ? filteredPost[0] : { error: true };
 };
 
 const initialState: PhotoState = {
-  photo: {
+  photoData: {
     _id: '',
     title: '',
     description: '',
@@ -33,7 +33,7 @@ export default function reducer(
     case SET_PHOTO:
       return {
         ...statePart,
-        photo: action.payload
+        photoData: action.payload
       }
     case SET_ALL:
       return {

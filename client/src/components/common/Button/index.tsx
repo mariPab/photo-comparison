@@ -1,20 +1,20 @@
 
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './Button.module.scss';
-import PropTypes from 'prop-types';
 
-const Component = ({ onClick, variant = '', ...otherProps }) => {
+interface Props {
+  onClick?: MouseEvent,
+  variant?: string,
+  [key: string]: any,
+}
+const Component: FunctionComponent<Props> = ({ onClick, variant = '', ...otherProps }: Props) => {
   return (
     <button
       {...otherProps}
       className={styles.component + variant.split(' ').map(name => ' ' + (styles[name] || name)).join('')}
-      onClick={onClick}
+      onClick={() => onClick}
     />
   );
-};
-Component.propTypes = {
-  variant: PropTypes.string,
-  onClick: PropTypes.func,
 };
 export {
   Component as Button,

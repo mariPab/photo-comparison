@@ -5,14 +5,15 @@ import {
   GET_ALL,
   SET_ALL,
   EDIT_COMPARISON,
-  DELETE_COMPARISON
+  DELETE_COMPARISON,
 } from './types';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
+import { AnyAction } from 'redux';
 
 /* Saga creator */
-export function* getAllWatcher() {
+export function* getAllWatcher(): Generator {
   yield takeEvery(GET_ALL, getAll)
 }
 export function* getAll() {
@@ -28,10 +29,10 @@ export function* getAll() {
   }
 };
 
-export function* getPhotoDataWatcher() {
+export function* getPhotoDataWatcher(): Generator {
   yield takeEvery(GET_PHOTO, getPhotoData)
 }
-export function* getPhotoData({ payload }) {
+export function* getPhotoData({ payload }: AnyAction) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
@@ -44,11 +45,11 @@ export function* getPhotoData({ payload }) {
   }
 };
 
-export function* submitPhotosWatcher() {
+export function* submitPhotosWatcher(): Generator {
   yield takeEvery(SUBMIT_PHOTOS, submitPhotos)
 }
 
-export function* submitPhotos({ payload }) {
+export function* submitPhotos({ payload }: AnyAction) {
   const { data } = payload;
   try {
     yield axios.post(`${API_URL}/submit`,
@@ -64,11 +65,11 @@ export function* submitPhotos({ payload }) {
   }
 }
 
-export function* editComparisonWatcher() {
+export function* editComparisonWatcher(): Generator {
   yield takeEvery(EDIT_COMPARISON, editComparison)
 }
 
-export function* editComparison({ payload }) {
+export function* editComparison({ payload }: AnyAction) {
   const { id, data } = payload;
   console.log('I want edit: ' + id);
   try {
@@ -85,11 +86,11 @@ export function* editComparison({ payload }) {
   }
 }
 
-export function* deleteComparisonWatcher() {
+export function* deleteComparisonWatcher(): Generator {
   yield takeEvery(DELETE_COMPARISON, deleteComparison)
 }
 
-export function* deleteComparison({ payload }) {
+export function* deleteComparison({ payload }: AnyAction): Generator {
   const { id } = payload;
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
@@ -99,7 +100,7 @@ export function* deleteComparison({ payload }) {
   }
 }
 
-export default function* rootSaga() {
+export default function* rootSaga(): Generator {
   yield all([
     fork(getAllWatcher),
     fork(getPhotoDataWatcher),

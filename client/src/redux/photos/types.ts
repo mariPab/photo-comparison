@@ -9,7 +9,7 @@ export const EDIT_COMPARISON: string = 'EDIT_COMPARISON';
 export const DELETE_COMPARISON: string = 'DELETE_COMPARISON';
 
 export interface PhotoState {
-  photo: PhotoInterface
+  photoData: PhotoInterface
   allPhotos: Array<PhotoInterface>
 }
 interface GetPhotosList {

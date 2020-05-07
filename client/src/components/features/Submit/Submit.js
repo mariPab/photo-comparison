@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import styles from './Submit.module.scss';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { Button } from '../../common/Button/Button';
+import { Button } from '../../common/Button';
 const { submitPhotos } = PhotoActions;
 
 class Component extends React.Component {
@@ -22,11 +21,6 @@ class Component extends React.Component {
     },
     isError: false,
   }
-
-  static propTypes = {
-    history: PropTypes.object,
-  }
-
   updateInputValue = ({ target }) => {
     const { photoData } = this.state;
     const { value, name } = target;
@@ -59,20 +53,7 @@ class Component extends React.Component {
       formData.append('before', photoData.images.before);
       formData.append('after', photoData.images.after);
       this.props.submitPhotos(formData);
-      // this.props.history.push('/my-posts');
-      this.setState({
-        photoData: {
-          title: '',
-          description: '',
-          width: 640,
-          height: 480,
-          images: {
-            before: null,
-            after: null
-          },
-        },
-        isError: false,
-      });
+      this.props.history.push('/admin');
     } else this.setState({ isError: true });
 
   };
@@ -165,7 +146,6 @@ const mapDispatchToProps = {
 const Container = connect(null, mapDispatchToProps)(withRouter(Component));
 
 export {
-  // Component as Submit,
   Container as Submit,
   Component as SubmitComponent,
 };

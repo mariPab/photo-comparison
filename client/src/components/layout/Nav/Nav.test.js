@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NavComponent } from './Nav';
+import { NavComponent } from '.';
 
 const mockProps = {
   total: 40,

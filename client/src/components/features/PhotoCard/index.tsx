@@ -1,17 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styles from './PhotoCard.module.scss';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
 import { IMAGES_URL } from '../../../config';
-import { Button } from '../../common/Button/Button';
+import { Button } from '../../common/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
-
+import { PhotoInterface } from '../../../interfaces/photos';
 const { deleteComparison } = PhotoActions;
 
-const Component = ({ photoData, deleteComparison }) => {
+interface MapDispatchToProps {
+  deleteComparison: any
+};
+interface Props extends MapDispatchToProps {
+  photoData: PhotoInterface
+};
+const Component = ({ photoData, deleteComparison }: Props) => {
   return (
     <div className={styles.root}>
       <div className={styles.imageWrapper}>
@@ -32,21 +37,10 @@ const Component = ({ photoData, deleteComparison }) => {
     </div >
   );
 };
-
-Component.propTypes = {
-  photoData: PropTypes.object,
-  deleteComparison: PropTypes.func,
-}
-
-// const mapStateToProps = state => ({
-//   photosList: getList(state),
-// });
-
 const mapDispatchToProps = {
   deleteComparison
 };
 const Container = connect(null, mapDispatchToProps)(Component);
-
 export {
   Container as PhotoCard,
   Component as PhotoCardComponent,
