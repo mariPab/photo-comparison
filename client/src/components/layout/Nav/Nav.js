@@ -21,12 +21,9 @@ const Component = ({ linksList }) => {
     </nav>
   );
 };
-
 Component.propTypes = {
   linksList: PropTypes.arrayOf(PropTypes.object),
 };
-
-
 export {
   Component as Nav,
   Component as NavComponent,

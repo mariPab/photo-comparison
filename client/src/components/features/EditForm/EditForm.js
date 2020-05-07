@@ -10,7 +10,6 @@ import { getPhotoById } from '../../../redux/photos/reducer';
 const { editComparison, getPhotoData } = PhotoActions;
 
 class Component extends React.Component {
-
   state = {
     photoData: {
       title: this.props.photoData.title,
@@ -24,20 +23,17 @@ class Component extends React.Component {
     },
     isError: false,
   }
-
   static propTypes = {
     history: PropTypes.object,
     editComparison: PropTypes.func,
     getPhotoData: PropTypes.func,
     photoData: PropTypes.object,
   }
-
   updateInputValue = ({ target }) => {
     const { photoData } = this.state;
     const { value, name } = target;
     this.setState({ photoData: { ...photoData, [name]: value } });
   }
-
   setImage = ({ target }) => {
     const { name, files } = target;
     const { photoData } = this.state;
@@ -51,7 +47,6 @@ class Component extends React.Component {
       }
     });
   }
-
   submit = async (e) => {
     const { photoData } = this.state;
     const { id } = this.props.match.params;
@@ -66,13 +61,10 @@ class Component extends React.Component {
       this.props.editComparison(id, formData);
       this.props.history.push(`/photos/${id}`);
     } else this.setState({ isError: true });
-
   };
-
   render() {
     const { updateInputValue, submit, setImage } = this;
     const { photoData } = this.state;
-
     return (
       <div className={styles.root}>
         <h2>Edytuj dane do porównania zdjęć</h2>
@@ -150,18 +142,14 @@ class Component extends React.Component {
     );
   }
 }
-
 const mapStateToProps = (state, props) => ({
   photoData: getPhotoById(state, props.match.params.id),
 });
-
 const mapDispatchToProps = {
   editComparison,
   getPhotoData
 };
-
 const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
-
 export {
   Container as EditForm,
   Component as EditFormComponent,

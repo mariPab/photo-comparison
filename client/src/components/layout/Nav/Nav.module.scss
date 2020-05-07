@@ -4,19 +4,14 @@
   width: 35vw;
   overflow: auto;
   border-right: 1px solid lighten($color-border, 20%);
-
   h3 {
     font-size: 1.6rem;
     margin: 20px 0;
     font-weight: 200;
-
     padding: 0 10px;
-    // font-weight: bold;
-    // text-transform: uppercase;
     color: lighten($color-text, 50%);
     letter-spacing: 0.1rem;
   }
-
   ul {
     text-transform: uppercase;
     list-style: none;

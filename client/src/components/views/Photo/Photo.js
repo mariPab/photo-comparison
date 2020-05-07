@@ -10,7 +10,6 @@ import { IMAGES_URL } from '../../../config';
 const { getPhotoData } = PhotoActions;
 
 class Component extends React.Component {
-
   static propTypes = {
     photoData: PropTypes.object,
     loadPhotoDataRequest: PropTypes.func,
@@ -23,7 +22,6 @@ class Component extends React.Component {
   componentDidMount() {
     this.props.getPhotoData(this.props.match.params.id);
   }
-
   render() {
     const { photoData } = this.props;
     return (
@@ -42,19 +40,14 @@ class Component extends React.Component {
     );
   }
 }
-
 const mapStateToProps = state => ({
   photoData: getPhoto(state),
 });
-
 const mapDispatchToProps = {
   getPhotoData
 };
-
 const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
-
 export {
-  // Component as Photo,
   Container as Photo,
   Component as PhotoComponent,
 };
