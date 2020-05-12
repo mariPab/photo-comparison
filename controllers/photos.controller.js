@@ -79,9 +79,10 @@ exports.editPhotoComparison = async (req, res) => {
 };
 
 exports.deleteById = (req, res) => {
+  console.log(req.params.id);
   try {
-    Photo.deleteOne({ _id: req.params.id }, (err) => {
-      err ? res.status(404).json({ message: 'Not found...' }) : res.json({ message: 'Deleted successfully' });
+    Photo.findByIdAndDelete(req.params.id, (err, doc) => {
+      err || !doc ? res.status(404).json({ message: 'Data not found' }) : res.status(200).json({ message: 'Deleted successfully' });
     });
   } catch (err) {
     res.status(500).json(err);
