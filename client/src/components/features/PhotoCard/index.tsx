@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styles from './PhotoCard.module.scss';
 import { NavLink } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { IMAGES_URL } from '../../../config';
 import { Button } from '../../common/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
@@ -11,12 +11,12 @@ import { PhotoInterface } from '../../../interfaces/photos';
 const { deleteComparison } = PhotoActions;
 
 interface MapDispatchToProps {
-  deleteComparison: any
-};
+  deleteComparison: any;
+}
 interface Props extends MapDispatchToProps {
-  photoData: PhotoInterface
-};
-const Component = ({ photoData, deleteComparison }: Props) => {
+  photoData: PhotoInterface;
+}
+const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => {
   return (
     <div className={styles.root}>
       <div className={styles.imageWrapper}>
@@ -30,7 +30,7 @@ const Component = ({ photoData, deleteComparison }: Props) => {
         <NavLink exact to={`/admin/edit/${photoData._id}`}>
           <FontAwesomeIcon icon={faPen} />
         </NavLink>
-        <Button variant='fab' onClick={() => deleteComparison(photoData._id)} >
+        <Button variant='fab' onClick={(): void => deleteComparison(photoData._id)} >
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>
@@ -38,7 +38,7 @@ const Component = ({ photoData, deleteComparison }: Props) => {
   );
 };
 const mapDispatchToProps = {
-  deleteComparison
+  deleteComparison,
 };
 const Container = connect(null, mapDispatchToProps)(Component);
 export {

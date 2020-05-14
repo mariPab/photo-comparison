@@ -14,7 +14,7 @@ import { AnyAction } from 'redux';
 
 /* Saga creator */
 export function* getAllWatcher(): Generator {
-  yield takeEvery(GET_ALL, getAll)
+  yield takeEvery(GET_ALL, getAll);
 }
 export function* getAll() {
   try {
@@ -27,15 +27,16 @@ export function* getAll() {
   catch (err) {
     console.log(err);
   }
-};
+}
 
 export function* getPhotoDataWatcher(): Generator {
-  yield takeEvery(GET_PHOTO, getPhotoData)
+  yield takeEvery(GET_PHOTO, getPhotoData);
 }
 export function* getPhotoData({ payload }: AnyAction) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
+    console.log(res);
     if (res && res.data) {
       yield put({ type: SET_PHOTO, payload: res.data });
     }
@@ -43,10 +44,10 @@ export function* getPhotoData({ payload }: AnyAction) {
   catch (err) {
     console.log(err);
   }
-};
+}
 
 export function* submitPhotosWatcher(): Generator {
-  yield takeEvery(SUBMIT_PHOTOS, submitPhotos)
+  yield takeEvery(SUBMIT_PHOTOS, submitPhotos);
 }
 
 export function* submitPhotos({ payload }: AnyAction) {
@@ -57,7 +58,7 @@ export function* submitPhotos({ payload }: AnyAction) {
       {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
       });
     yield put({ type: GET_ALL });
   } catch (e) {
@@ -66,7 +67,7 @@ export function* submitPhotos({ payload }: AnyAction) {
 }
 
 export function* editComparisonWatcher(): Generator {
-  yield takeEvery(EDIT_COMPARISON, editComparison)
+  yield takeEvery(EDIT_COMPARISON, editComparison);
 }
 
 export function* editComparison({ payload }: AnyAction) {
@@ -78,23 +79,23 @@ export function* editComparison({ payload }: AnyAction) {
       {
         headers: {
           'Content-Type': 'application/json',
-        }
+        },
       });
-    yield put({ type: GET_PHOTO, payload: id })
+    yield put({ type: SET_PHOTO, payload: res });
   } catch (e) {
     console.log(e);
   }
 }
 
 export function* deleteComparisonWatcher(): Generator {
-  yield takeEvery(DELETE_COMPARISON, deleteComparison)
+  yield takeEvery(DELETE_COMPARISON, deleteComparison);
 }
 
 export function* deleteComparison({ payload }: AnyAction): Generator {
   const { id } = payload;
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
-    yield put({ type: GET_ALL })
+    // yield put({ type: GET_ALL });
   } catch (e) {
     console.log(e);
   }

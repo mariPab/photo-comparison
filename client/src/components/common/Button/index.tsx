@@ -3,9 +3,9 @@ import React, { FunctionComponent } from 'react';
 import styles from './Button.module.scss';
 
 interface Props {
-  onClick?: MouseEvent,
-  variant?: string,
-  [key: string]: any,
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  variant?: string;
+  [key: string]: any;
 }
 const Component: FunctionComponent<Props> = ({ onClick, variant = '', ...otherProps }: Props) => {
   return (
