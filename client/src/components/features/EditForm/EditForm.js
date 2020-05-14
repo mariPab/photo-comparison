@@ -57,12 +57,10 @@ class Component extends React.Component {
       for (let key of ['description', 'title', 'height', 'width']) {
         formData.append(key, photoData[key]);
       }
-      console.log(photoData.images.before);
-      console.log(photoData.images.after);
       if (photoData.images.before) formData.append('before', photoData.images.before);
       if (photoData.images.after) formData.append('after', photoData.images.after);
       this.props.editComparison(id, formData);
-      // this.props.history.push(`/photos/${id}`);
+      this.props.history.push(`/photos/${id}`);
     } else this.setState({ isError: true });
   };
   render() {
