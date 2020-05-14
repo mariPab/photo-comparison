@@ -17,8 +17,8 @@ class Component extends React.Component {
       width: this.props.photoData.dimensions ? this.props.photoData.dimensions.width : 100,
       height: this.props.photoData.dimensions ? this.props.photoData.dimensions.height : 100,
       images: {
-        before: this.props.photoData.images ? this.props.photoData.images.before : '',
-        after: this.props.photoData.images ? this.props.photoData.images.after : '',
+        before: null,
+        after: null,
       },
     },
     isError: false,
@@ -50,16 +50,19 @@ class Component extends React.Component {
   submit = async (e) => {
     const { photoData } = this.state;
     const { id } = this.props.match.params;
+    console.log(photoData.images);
     e.preventDefault();
     if (photoData.title && photoData.description) {
       const formData = new FormData();
       for (let key of ['description', 'title', 'height', 'width']) {
         formData.append(key, photoData[key]);
       }
-      formData.append('before', photoData.images.before);
-      formData.append('after', photoData.images.after);
+      console.log(photoData.images.before);
+      console.log(photoData.images.after);
+      if (photoData.images.before) formData.append('before', photoData.images.before);
+      if (photoData.images.after) formData.append('after', photoData.images.after);
       this.props.editComparison(id, formData);
-      this.props.history.push(`/photos/${id}`);
+      // this.props.history.push(`/photos/${id}`);
     } else this.setState({ isError: true });
   };
   render() {
