@@ -6,7 +6,8 @@ import BeforeAfterSlider from 'react-before-after-slider';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { IMAGES_URL } from '../../../config';
 import { PhotoInterface } from '../../../interfaces/photos';
-import { PhotoState } from '../../../redux/photos/types';
+import { RootState } from '../../../redux/store';
+
 const { getPhotoData } = PhotoActions;
 
 interface MapStateToProps {
@@ -43,8 +44,8 @@ class Component extends React.Component<Props> {
     );
   }
 }
-const mapStateToProps = (state: PhotoState): MapStateToProps => ({
-  photoData: getPhoto(state),
+const mapStateToProps = (state: RootState): MapStateToProps => ({
+  photoData: getPhoto(state.Photos),
 });
 const mapDispatchToProps: MapDispatchToProps = {
   getPhotoData

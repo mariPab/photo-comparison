@@ -11,3 +11,15 @@ export interface PhotoInterface {
     after: string,
   },
 }
+
+export interface FormState {
+  photoData: {
+    title: string,
+    description: string,
+    width: number,
+    height: number,
+    before: string,
+    after: string,
+  },
+  isError: boolean,
+};

@@ -7,7 +7,7 @@ import { PhotoActions } from '../../../redux/photos/actions';
 import { NavLink } from 'react-router-dom';
 import { PhotoCard } from '../../features/PhotoCard';
 import { PhotoInterface } from '../../../interfaces/photos';
-import { PhotoState } from '../../../redux/photos/types';
+import { RootState } from '../../../redux/store';
 const { getAllPhotos } = PhotoActions;
 
 interface MapStateToProps {
@@ -24,6 +24,7 @@ class Component extends React.Component<Props> {
   }
   render(): React.ReactElement {
     const { photosList } = this.props;
+    console.log(this.props);
     return (
       <div className={styles.root}>
         <Nav linksList={photosList} />
@@ -32,24 +33,25 @@ class Component extends React.Component<Props> {
             Dodaj nowe porównanie
           </NavLink>
           <div className={styles.manageSection}>
-            {photosList.map(elem => (
+            {photosList ? photosList.map(elem => (
               <PhotoCard key={elem._id} photoData={elem} />
-            ))}
+            )) : null}
           </div>
         </div>
       </div >
     );
   }
 }
-const mapStateToProps = (state: PhotoState): MapStateToProps => ({
-  photosList: getList(state),
+const mapStateToProps = (state: RootState): MapStateToProps => ({
+  photosList: getList(state.Photos),
 });
 const mapDispatchToProps: MapDispatchToProps = {
   getAllPhotos
 };
 const Container = connect(
   mapStateToProps,
-  mapDispatchToProps)(Component);
+  mapDispatchToProps
+)(Component);
 export {
   Container as Admin,
   Component as AdminComponent,

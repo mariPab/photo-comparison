@@ -22,6 +22,7 @@ exports.loadById = async (req, res) => {
 
 exports.submit = async (req, res) => {
   const { title, description, width, height } = req.fields;
+  console.log(req.files);
   try {
     let beforeFile,
       afterFile;

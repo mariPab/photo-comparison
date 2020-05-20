@@ -1,12 +1,13 @@
-import { BasicObject, StringObject } from '../interfaces/global';
+import { PhotoData, FormData } from '../interfaces/global';
 
-export const convertValuesToString = (obj: BasicObject): StringObject => {
-  const stringObj: StringObject = {};
+export const convertToFormData = (obj: PhotoData): FormData => {
+  const stringObj: FormData = {};
   Object.keys(obj).forEach(key => {
-    // stringObj[key] = obj[key].toString();
-    // return stringObj;
-    // }
-    stringObj[key] = '' + obj[key];
+    if (obj[key] instanceof Blob) {
+      stringObj[key] = obj[key] as Blob;
+    } else {
+      stringObj[key] = '' + obj[key];
+    }
   });
   return stringObj;
 };

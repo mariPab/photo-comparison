@@ -18,10 +18,15 @@ export function* getAllWatcher(): Generator {
 }
 export function* getAll() {
   try {
-    const res = yield axios.get(`${API_URL}/all`);
-    if (res && res.data) {
-      console.log(res);
-      yield put({ type: SET_ALL, payload: res.data });
+    const savedList = localStorage.getItem('photos_list');
+    if (savedList) {
+      yield put({ type: SET_ALL, payload: JSON.parse(savedList) });
+    } else {
+      const res = yield axios.get(`${API_URL}/all`);
+      if (res && res.data) {
+        localStorage.setItem('photos_list', JSON.stringify(res.data));
+        yield put({ type: SET_ALL, payload: res.data });
+      }
     }
   }
   catch (err) {
@@ -36,7 +41,7 @@ export function* getPhotoData({ payload }: AnyAction) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
-    console.log(res);
+
     if (res && res.data) {
       yield put({ type: SET_PHOTO, payload: res.data });
     }

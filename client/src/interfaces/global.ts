@@ -1,7 +1,7 @@
-export interface BasicObject {
-  [key: string]: number | string;
+export interface PhotoData {
+  [key: string]: number | string | Blob;
 }
 
-export interface StringObject {
-  [key: string]: string;
+export interface FormData {
+  [key: string]: string | Blob;
 }

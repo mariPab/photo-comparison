@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
-import photoReducer from './photos/reducer';
+import Photos from './photos/reducer';
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from './sagas';
 import { PhotoState } from './photos/types';
 
 const reducers = combineReducers({
-  photoReducer,
+  Photos,
 });
 export interface RootState {
   readonly Photos: PhotoState;
