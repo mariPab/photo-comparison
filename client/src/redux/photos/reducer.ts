@@ -5,8 +5,6 @@ import { PhotoInterface } from '../../interfaces/photos';
 export const getPhoto = ({ photoData }: PhotoState): PhotoInterface => photoData;
 export const getList = ({ allPhotos }: PhotoState): Array<PhotoInterface> => allPhotos;
 export const getPhotoById = ({ allPhotos }: PhotoState, photoId: string): PhotoInterface => {
-  console.log(allPhotos);
-  console.log(photoId);
   const filteredPost = allPhotos.filter((photoData: PhotoInterface) => photoData._id === photoId);
   return filteredPost[0];
 };
