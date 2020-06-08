@@ -63,7 +63,6 @@ class Component extends React.Component<Props, FormState> {
   submit = (e: React.FormEvent): void => {
     const { photoData } = this.state;
     const { id } = this.props.match.params;
-    console.log(photoData.images);
     e.preventDefault();
     if (photoData.title && photoData.description) {
       const data = convertToFormData(photoData);
