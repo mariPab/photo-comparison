@@ -1,9 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './NotFound.module.scss';
 
-const Component = () => (
+const Component: FunctionComponent = () => (
   <div className={styles.root}>
     <p>Strona nie istnieje</p>
     <NavLink exact to={`/`}>
@@ -11,7 +10,6 @@ const Component = () => (
     </NavLink>
   </div>
 );
-
 export {
   Component as NotFound,
   Component as NotFoundComponent,

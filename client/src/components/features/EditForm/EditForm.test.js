@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { EditFormComponent } from './EditForm';
+import { EditFormComponent } from '.';
 
 const mockProps = {
   editComparison: jest.fn(),

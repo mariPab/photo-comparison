@@ -1,25 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
 import styles from './Admin.module.scss';
 import { getList } from '../../../redux/photos/reducer';
-import { Nav } from '../../layout/Nav/Nav';
+import { Nav } from '../../layout/Nav';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { NavLink } from 'react-router-dom';
-import { PhotoCard } from '../../features/PhotoCard/PhotoCard';
+import { PhotoCard } from '../../features/PhotoCard';
+import { PhotoInterface } from '../../../interfaces/photos';
+import { RootState } from '../../../redux/store';
+import { GetPhotosList } from '../../../redux/photos/types';
 const { getAllPhotos } = PhotoActions;
 
-class Component extends React.Component {
-  static propTypes = {
-    getAllPhotos: PropTypes.func,
-    photosList: PropTypes.arrayOf(PropTypes.object)
-  }
-  componentDidMount() {
+interface MapStateToProps {
+  photosList: PhotoInterface[]
+}
+interface MapDispatchToProps {
+  getAllPhotos: () => GetPhotosList;
+}
+type Props = MapStateToProps & MapDispatchToProps;
+
+class Component extends React.Component<Props> {
+  componentDidMount(): void {
     this.props.getAllPhotos();
   }
-
-  render() {
+  render(): React.ReactElement {
     const { photosList } = this.props;
     return (
       <div className={styles.root}>
@@ -29,28 +33,26 @@ class Component extends React.Component {
             Dodaj nowe porównanie
           </NavLink>
           <div className={styles.manageSection}>
-            {photosList.map(elem => (
+            {photosList ? photosList.map(elem => (
               <PhotoCard key={elem._id} photoData={elem} />
-            ))}
+            )) : null}
           </div>
         </div>
       </div >
     );
   }
 }
-
-const mapStateToProps = state => ({
-  photosList: getList(state),
+const mapStateToProps = (state: RootState): MapStateToProps => ({
+  photosList: getList(state.Photos),
 });
-
-const mapDispatchToProps = {
+const mapDispatchToProps: MapDispatchToProps = {
   getAllPhotos
 };
-
-const Container = connect(mapStateToProps, mapDispatchToProps)(withRouter(Component));
-
+const Container = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Component);
 export {
-  // Component as Admin,
   Container as Admin,
   Component as AdminComponent,
 };

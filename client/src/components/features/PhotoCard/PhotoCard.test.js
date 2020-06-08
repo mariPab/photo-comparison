@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PhotoCardComponent } from './PhotoCard';
+import { PhotoCardComponent } from '.';
 
 describe('Component PhotoCard', () => {
   it('should render without crashing', () => {

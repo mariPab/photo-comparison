@@ -1,9 +1,13 @@
 
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styles from './Button.module.scss';
-import PropTypes from 'prop-types';
 
-const Component = ({ onClick, variant = '', ...otherProps }) => {
+interface Props {
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  variant?: string;
+  [key: string]: any;
+}
+const Component: FunctionComponent<Props> = ({ onClick, variant = '', ...otherProps }: Props) => {
   return (
     <button
       {...otherProps}
@@ -11,10 +15,6 @@ const Component = ({ onClick, variant = '', ...otherProps }) => {
       onClick={onClick}
     />
   );
-};
-Component.propTypes = {
-  variant: PropTypes.string,
-  onClick: PropTypes.func,
 };
 export {
   Component as Button,

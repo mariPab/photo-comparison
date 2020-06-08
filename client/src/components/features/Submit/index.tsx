@@ -1,86 +1,64 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 import styles from './Submit.module.scss';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { Button } from '../../common/Button/Button';
+import { FormState } from '../../../interfaces/photos';
+import { Button } from '../../common/Button';
+import { convertToFormData } from '../../../utils/utils';
+import { SubmitPhoto } from '../../../redux/photos/types';
+
 const { submitPhotos } = PhotoActions;
 
-class Component extends React.Component {
+interface MapDispatchToProps {
+  submitPhotos: (data: globalThis.FormData) => SubmitPhoto;
+}
+type Props = MapDispatchToProps & RouteComponentProps
 
-  state = {
-    photoData: {
-      title: '',
-      description: '',
-      width: 640,
-      height: 480,
-      images: {
-        before: null,
-        after: null
+class Component extends React.Component<Props, FormState> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      photoData: {
+        title: '',
+        description: '',
+        width: 640,
+        height: 480,
+        before: '',
+        after: '',
       },
-    },
-    isError: false,
+      isError: false,
+    } as FormState
   }
-
-  static propTypes = {
-    history: PropTypes.object,
+  updateInputValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
+    const { value, name } = e.target;
+    this.setState({ photoData: { ...this.state.photoData, [name]: value } });
   }
-
-  updateInputValue = ({ target }) => {
-    const { photoData } = this.state;
-    const { value, name } = target;
-
-    this.setState({ photoData: { ...photoData, [name]: value } });
-  }
-
-  setImage = ({ target }) => {
-    const { name, files } = target;
-    const { photoData } = this.state;
-
+  setImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, files } = e.target;
     if (files) this.setState({
       photoData: {
-        ...photoData, images: {
-          ...photoData.images,
-          [name]: files[0]
-        }
-      }
+        ...this.state.photoData,
+        [name]: files[0],
+      },
     });
   }
-
-  submit = async (e) => {
+  submit = (e: React.FormEvent): void => {
     const { photoData } = this.state;
     e.preventDefault();
     if (photoData.title && photoData.description) {
+      const data = convertToFormData(photoData);
       const formData = new FormData();
-      for (let key of ['description', 'title', 'height', 'width']) {
-        formData.append(key, photoData[key]);
+      for (const key in data) {
+        formData.append(key, data[key]);
       }
-      formData.append('before', photoData.images.before);
-      formData.append('after', photoData.images.after);
       this.props.submitPhotos(formData);
-      // this.props.history.push('/my-posts');
-      this.setState({
-        photoData: {
-          title: '',
-          description: '',
-          width: 640,
-          height: 480,
-          images: {
-            before: null,
-            after: null
-          },
-        },
-        isError: false,
-      });
+      this.props.history.push('/admin');
     } else this.setState({ isError: true });
-
   };
-
-  render() {
+  render(): React.ReactElement {
     const { updateInputValue, submit, setImage } = this;
     const { photoData } = this.state;
-
     return (
       <div className={styles.root}>
         <h2>Dodaj nowe porównanie zdjęć</h2>
@@ -94,7 +72,8 @@ class Component extends React.Component {
               name="title"
               onChange={updateInputValue}
               value={photoData.title}
-              minLength="10" required
+              minLength={10}
+              required
               type="text"
               placeholder="Tytuł"
             />
@@ -103,7 +82,7 @@ class Component extends React.Component {
             name="description"
             onChange={updateInputValue}
             value={photoData.description}
-            rows="5"
+            rows={5}
             placeholder="Opis zdjęć"
           >
           </textarea>
@@ -126,7 +105,7 @@ class Component extends React.Component {
           <div className={styles.elemWrapper}>
             <label>
               Szerokość
-            <input
+              <input
                 name="width"
                 onChange={updateInputValue}
                 value={photoData.width}
@@ -138,7 +117,7 @@ class Component extends React.Component {
             </label>
             <label>
               Wysokość
-            <input
+              <input
                 min={100}
                 max={800}
                 name="height"
@@ -157,15 +136,11 @@ class Component extends React.Component {
     );
   }
 }
-
-const mapDispatchToProps = {
-  submitPhotos
+const mapDispatchToProps: MapDispatchToProps = {
+  submitPhotos,
 };
-
 const Container = connect(null, mapDispatchToProps)(withRouter(Component));
-
 export {
-  // Component as Submit,
   Container as Submit,
   Component as SubmitComponent,
 };

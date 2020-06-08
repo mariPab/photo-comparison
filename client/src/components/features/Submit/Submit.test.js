@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SubmitComponent } from './Submit';
+import { SubmitComponent } from '.';
 
 const mockProps = {
   submitPhotos: jest.fn()
