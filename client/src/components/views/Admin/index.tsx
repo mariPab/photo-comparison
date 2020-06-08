@@ -8,13 +8,14 @@ import { NavLink } from 'react-router-dom';
 import { PhotoCard } from '../../features/PhotoCard';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
+import { GetPhotosList } from '../../../redux/photos/types';
 const { getAllPhotos } = PhotoActions;
 
 interface MapStateToProps {
-  photosList: Array<PhotoInterface>
+  photosList: PhotoInterface[]
 }
 interface MapDispatchToProps {
-  getAllPhotos: any
+  getAllPhotos: () => GetPhotosList;
 }
 type Props = MapStateToProps & MapDispatchToProps;
 
@@ -24,7 +25,6 @@ class Component extends React.Component<Props> {
   }
   render(): React.ReactElement {
     const { photosList } = this.props;
-    console.log(this.props);
     return (
       <div className={styles.root}>
         <Nav linksList={photosList} />

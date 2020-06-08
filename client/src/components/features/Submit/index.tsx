@@ -6,10 +6,13 @@ import { PhotoActions } from '../../../redux/photos/actions';
 import { FormState } from '../../../interfaces/photos';
 import { Button } from '../../common/Button';
 import { convertToFormData } from '../../../utils/utils';
+import { SubmitPhoto } from '../../../redux/photos/types';
+import { FormData } from '../../../interfaces/global';
+
 const { submitPhotos } = PhotoActions;
 
 interface MapDispatchToProps {
-  submitPhotos: any;
+  submitPhotos: (data: object) => SubmitPhoto;
 }
 type Props = MapDispatchToProps & RouteComponentProps
 

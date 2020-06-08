@@ -6,28 +6,30 @@ import {
   SET_ALL,
   EDIT_COMPARISON,
   DELETE_COMPARISON,
+  GetPhotoData,
+  SubmitPhoto,
+  EditComparison,
+  DeleteComparison,
 } from './types';
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
-import { AnyAction } from 'redux';
 
-/* Saga creator */
 export function* getAllWatcher(): Generator {
   yield takeEvery(GET_ALL, getAll);
 }
 export function* getAll() {
   try {
-    const savedList = localStorage.getItem('photos_list');
-    if (savedList) {
-      yield put({ type: SET_ALL, payload: JSON.parse(savedList) });
-    } else {
-      const res = yield axios.get(`${API_URL}/all`);
-      if (res && res.data) {
-        localStorage.setItem('photos_list', JSON.stringify(res.data));
-        yield put({ type: SET_ALL, payload: res.data });
-      }
+    // const savedList = localStorage.getItem('photos_list');
+    // if (savedList) {
+    // yield put({ type: SET_ALL, payload: JSON.parse(savedList) });
+    // } else {
+    const res = yield axios.get(`${API_URL}/all`);
+    if (res && res.data) {
+      localStorage.setItem('photos_list', JSON.stringify(res.data));
+      yield put({ type: SET_ALL, payload: res.data });
     }
+    // }
   }
   catch (err) {
     console.log(err);
@@ -37,7 +39,7 @@ export function* getAll() {
 export function* getPhotoDataWatcher(): Generator {
   yield takeEvery(GET_PHOTO, getPhotoData);
 }
-export function* getPhotoData({ payload }: AnyAction) {
+export function* getPhotoData({ payload }: GetPhotoData) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
@@ -51,11 +53,18 @@ export function* getPhotoData({ payload }: AnyAction) {
   }
 }
 
+// export function* getDataFromStorageWatcher(): Generator {
+//   yield takeEvery(GET_PHOTO, getDataFromStorage);
+// }
+// export function* getDataFromStorage(): Generator {
+
+// }
+
 export function* submitPhotosWatcher(): Generator {
   yield takeEvery(SUBMIT_PHOTOS, submitPhotos);
 }
 
-export function* submitPhotos({ payload }: AnyAction) {
+export function* submitPhotos({ payload }: SubmitPhoto) {
   const { data } = payload;
   try {
     yield axios.post(`${API_URL}/submit`,
@@ -65,6 +74,8 @@ export function* submitPhotos({ payload }: AnyAction) {
           'Content-Type': 'application/json',
         },
       });
+    // localStorage.setItem('photos_list', JSON.stringify(res.data));
+
     yield put({ type: GET_ALL });
   } catch (e) {
     console.log(e);
@@ -75,9 +86,8 @@ export function* editComparisonWatcher(): Generator {
   yield takeEvery(EDIT_COMPARISON, editComparison);
 }
 
-export function* editComparison({ payload }: AnyAction) {
+export function* editComparison({ payload }: EditComparison) {
   const { id, data } = payload;
-  console.log('I want edit: ' + id);
   try {
     const res = yield axios.put(`${API_URL}/photos/${id}`,
       data,
@@ -96,11 +106,12 @@ export function* deleteComparisonWatcher(): Generator {
   yield takeEvery(DELETE_COMPARISON, deleteComparison);
 }
 
-export function* deleteComparison({ payload }: AnyAction): Generator {
+export function* deleteComparison({ payload }: DeleteComparison): Generator {
   const { id } = payload;
+  console.log('remove', id);
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
-    // yield put({ type: GET_ALL });
+    yield put({ type: GET_ALL });
   } catch (e) {
     console.log(e);
   }

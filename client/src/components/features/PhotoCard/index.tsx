@@ -8,15 +8,17 @@ import { IMAGES_URL } from '../../../config';
 import { Button } from '../../common/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
+import { DeleteComparison } from '../../../redux/photos/types';
 const { deleteComparison } = PhotoActions;
 
 interface MapDispatchToProps {
-  deleteComparison: any;
+  deleteComparison: (id: string) => DeleteComparison;
 }
 interface Props extends MapDispatchToProps {
   photoData: PhotoInterface;
 }
 const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => {
+  console.log(photoData._id);
   return (
     <div className={styles.root}>
       <div className={styles.imageWrapper}>
@@ -30,7 +32,10 @@ const Component = ({ photoData, deleteComparison }: Props): React.ReactElement =
         <NavLink exact to={`/admin/edit/${photoData._id}`}>
           <FontAwesomeIcon icon={faPen} />
         </NavLink>
-        <Button variant='fab' onClick={(): void => deleteComparison(photoData._id)} >
+        <Button
+          variant='fab'
+          onClick={deleteComparison.bind(null, photoData._id)}
+        >
           <FontAwesomeIcon icon={faTrash} />
         </Button>
       </div>

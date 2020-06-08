@@ -12,7 +12,7 @@ const Component: FunctionComponent<Props> = ({ onClick, variant = '', ...otherPr
     <button
       {...otherProps}
       className={styles.component + variant.split(' ').map(name => ' ' + (styles[name] || name)).join('')}
-      onClick={() => onClick}
+      onClick={onClick}
     />
   );
 };

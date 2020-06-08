@@ -7,6 +7,7 @@ import { PhotoActions } from '../../../redux/photos/actions';
 import { IMAGES_URL } from '../../../config';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
+import { GetPhotoData } from '../../../redux/photos/types';
 
 const { getPhotoData } = PhotoActions;
 
@@ -14,7 +15,7 @@ interface MapStateToProps {
   photoData: PhotoInterface
 }
 interface MapDispatchToProps {
-  getPhotoData: any
+  getPhotoData: (id: string) => GetPhotoData;
 }
 interface Props extends MapStateToProps, MapDispatchToProps {
   match: {
