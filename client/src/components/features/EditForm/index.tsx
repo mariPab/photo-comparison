@@ -9,11 +9,10 @@ import { PhotoInterface, FormState } from '../../../interfaces/photos';
 import { convertToFormData } from '../../../utils/utils';
 import { RootState } from '../../../redux/store';
 import {
-  GetPhotosList,
   GetPhotoData,
-  SubmitPhoto,
   EditComparison,
 } from '../../../redux/photos/types';
+
 const { editComparison, getPhotoData } = PhotoActions;
 
 interface MapStateToProps {
@@ -21,7 +20,7 @@ interface MapStateToProps {
 }
 interface MapDispatchToProps {
   getPhotoData: (id: string) => GetPhotoData;
-  editComparison: (id: string, data: object) => EditComparison;
+  editComparison: (id: string, data: globalThis.FormData) => EditComparison;
 }
 interface MatchProps {
   id: string;

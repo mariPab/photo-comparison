@@ -1,3 +1,4 @@
+import { FormData } from '../../interfaces/global';
 import {
   GET_PHOTO,
   SUBMIT_PHOTOS,
@@ -20,11 +21,11 @@ export const PhotoActions = {
     type: GET_PHOTO,
     payload: { id },
   }),
-  submitPhotos: (data: object): SubmitPhoto => ({
+  submitPhotos: (data: globalThis.FormData): SubmitPhoto => ({
     type: SUBMIT_PHOTOS,
     payload: { data },
   }),
-  editComparison: (id: string, data: object): EditComparison => ({
+  editComparison: (id: string, data: globalThis.FormData): EditComparison => ({
     type: EDIT_COMPARISON,
     payload: { id, data },
   }),

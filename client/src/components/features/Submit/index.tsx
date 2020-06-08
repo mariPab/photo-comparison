@@ -7,12 +7,11 @@ import { FormState } from '../../../interfaces/photos';
 import { Button } from '../../common/Button';
 import { convertToFormData } from '../../../utils/utils';
 import { SubmitPhoto } from '../../../redux/photos/types';
-import { FormData } from '../../../interfaces/global';
 
 const { submitPhotos } = PhotoActions;
 
 interface MapDispatchToProps {
-  submitPhotos: (data: object) => SubmitPhoto;
+  submitPhotos: (data: globalThis.FormData) => SubmitPhoto;
 }
 type Props = MapDispatchToProps & RouteComponentProps
 
@@ -32,16 +31,14 @@ class Component extends React.Component<Props, FormState> {
     } as FormState
   }
   updateInputValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    const { photoData } = this.state;
     const { value, name } = e.target;
-    this.setState({ photoData: { ...photoData, [name]: value } });
+    this.setState({ photoData: { ...this.state.photoData, [name]: value } });
   }
   setImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, files } = e.target;
-    const { photoData } = this.state;
     if (files) this.setState({
       photoData: {
-        ...photoData,
+        ...this.state.photoData,
         [name]: files[0],
       },
     });

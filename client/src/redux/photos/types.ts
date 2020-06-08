@@ -1,4 +1,5 @@
 import { PhotoInterface } from '../../interfaces/photos';
+import { FormData } from '../../interfaces/global';
 
 export const GET_PHOTO: string = 'GET_PHOTO';
 // export const READ_BINARY_DATA: string = 'READ_BINARY_DATA';
@@ -40,14 +41,14 @@ export interface SetPhotoData {
 export interface SubmitPhoto {
   type: typeof SUBMIT_PHOTOS,
   payload: {
-    data: object, /* FormData? */
+    data: globalThis.FormData,
   }
 }
 export interface EditComparison {
   type: typeof EDIT_COMPARISON,
   payload: {
     id: string,
-    data: object, /* FormData? */
+    data: globalThis.FormData,
   }
 }
 export interface DeleteComparison {
