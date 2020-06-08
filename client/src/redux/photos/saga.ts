@@ -96,7 +96,7 @@ export function* editComparison({ payload }: EditComparison) {
           'Content-Type': 'application/json',
         },
       });
-    yield put({ type: SET_PHOTO, payload: res });
+    yield put({ type: SET_PHOTO, payload: res.data });
   } catch (e) {
     console.log(e);
   }
