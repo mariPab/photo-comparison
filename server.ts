@@ -1,22 +1,30 @@
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const mongoose = require('mongoose');
-const formidable = require('express-formidable');
-const randomID = require('@maripab/id-generator');
+import { Response, Request } from 'express/index';
+// import * as express from 'express';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import mongoose from 'mongoose';
+// const express = require('express');
+// const cors = require('cors');
+// const path = require('path');
+// const mongoose = require('mongoose');
+
+// import formidable from 'express-formidable';
+
+// const app = express.default();
 const app = express();
 
 /* MIDDLEWARE */
 app.use(cors());
 
-app.use(formidable({ uploadDir: './public/uploads/' }, [{
-  event: 'fileBegin', // on every file upload...
-  action: (req, res, next, name, file) => {
-    const fileName = randomID(10) + '.' + file.name.split('.')[1];
-    file.path = __dirname + '/public/images/photo_' + fileName;
-  }
-},
-]));
+// app.use(formidable({ uploadDir: './public/uploads/' }, [{
+//   event: 'fileBegin',
+//   action: (_req: Request, _res: Response, _next: any, _name, file) => {
+//     const fileName = randomID(10) + '.' + file.name.split('.')[1];
+//     file.path = __dirname + '/public/images/photo_' + fileName;
+//   }
+// },
+// ]));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -28,13 +36,13 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 
 /* REACT WEBSITE */
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'), err => {
+app.get('*', (_req: Request, res: Response) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'), (err: Error) => {
     if (err) res.status(500).send(err);
   });
 });
 
-app.use((req, res) => {
+app.use((_req: Request, res: Response) => {
   res.status(404).send({ message: 'not found...' });
 });
 process.env.NODE_ENV === "production" ?
@@ -45,7 +53,7 @@ const db = mongoose.connection;
 db.once('open', () => {
   console.log('Successfully connected to the database');
 });
-db.on('error', err => console.log('Error: ' + err));
+db.on('error', (err: Error): void => console.log('Error: ' + err));
 
 /* START SERVER */
 const port = process.env.PORT || 8000;

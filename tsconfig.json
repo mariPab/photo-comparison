@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    // "target": "es5",
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin"
+      }
+    ],
+    "lib": [
+      "es2018",
+      "dom",
+      // "dom.iterable",
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react",
+    "outDir": "generated"
+  },
+  "include": [
+    "./*.ts",
+    "./**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
