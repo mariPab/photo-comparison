@@ -1,17 +1,10 @@
 import { Response, Request } from 'express/index';
-// import * as express from 'express';
 import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
-// const express = require('express');
-// const cors = require('cors');
-// const path = require('path');
-// const mongoose = require('mongoose');
-
 // import formidable from 'express-formidable';
 
-// const app = express.default();
 const app = express();
 
 /* MIDDLEWARE */
@@ -36,13 +29,13 @@ app.use(express.static(path.join(__dirname + '/public')));
 
 
 /* REACT WEBSITE */
-app.get('*', (_req: Request, res: Response) => {
+app.get('*', (_req: Request, res: Response): void => {
   res.sendFile(path.join(__dirname + '/client/build/index.html'), (err: Error) => {
     if (err) res.status(500).send(err);
   });
 });
 
-app.use((_req: Request, res: Response) => {
+app.use((_req: Request, res: Response): void => {
   res.status(404).send({ message: 'not found...' });
 });
 process.env.NODE_ENV === "production" ?
@@ -50,14 +43,14 @@ process.env.NODE_ENV === "production" ?
   mongoose.connect('mongodb://localhost:27017/photo-comparison', { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 
-db.once('open', () => {
+db.once('open', (): void => {
   console.log('Successfully connected to the database');
 });
 db.on('error', (err: Error): void => console.log('Error: ' + err));
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
-const server = app.listen(port, () => {
+const server = app.listen(port, (): void => {
   console.log('Server is running on port: ' + port);
 });
 
