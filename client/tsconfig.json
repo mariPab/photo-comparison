@@ -28,5 +28,8 @@
   "include": [
     "src",
     "__mocks__"
+  ],
+  "exclude": [
+    "node_modules"
   ]
 }
