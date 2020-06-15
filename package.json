@@ -4,9 +4,9 @@
   "description": "",
   "main": "server.ts",
   "scripts": {
-    "start": "set NODE_ENV='production' && ts-node server.ts",
+    "start": "set NODE_ENV='production' && ts-node-dev --respawn --transpileOnly server.ts",
     "start-dev": "npm-run-all -l -p start:*",
-    "start:server": "set NODE_ENV='dev' && ts-node server.ts",
+    "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpileOnly server.ts",
     "start:client": "cd client && yarn start",
     "build": "cd client && yarn install && yarn build"
   },
@@ -30,6 +30,7 @@
     "multer": "^1.4.2",
     "nodemon": "^2.0.2",
     "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.48",
     "typescript": "^3.9.5",
     "typescript-tslint-plugin": "^0.5.5"
   },
