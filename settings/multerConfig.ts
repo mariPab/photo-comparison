@@ -19,11 +19,18 @@ const availableImageFormats = [
 const fileFilter = (_req: Request, file: any, clbck: any) => {
   availableImageFormats.includes(file.mimetype) ? clbck(null, true) : clbck(null, false);
 };
-export const upload = multer({
+const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
-export const photosFields = [
+const photosFields = [
   { name: 'before', maxCount: 1 },
   { name: 'after', maxCount: 1 },
 ];
+
+const multerConfig = {
+  upload,
+  photosFields,
+};
+
+module.exports = multerConfig;
