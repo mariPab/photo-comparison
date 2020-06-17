@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import styles from './Submit.module.scss';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { FormState } from '../../../interfaces/photos';
 import { Button } from '../../common/Button';
 import { convertToFormData } from '../../../utils/utils';
 import { SubmitPhoto } from '../../../redux/photos/types';
+import { FormContainer, FormElement } from '../../../styles/StyledForm';
 
 const { submitPhotos } = PhotoActions;
 
@@ -60,24 +60,27 @@ class Component extends React.Component<Props, FormState> {
     const { updateInputValue, submit, setImage } = this;
     const { photoData } = this.state;
     return (
-      <div className={styles.root}>
+      <FormContainer>
         <h2>Dodaj nowe porównanie zdjęć</h2>
-        <form className={styles.form} onSubmit={submit}>
-          <div className={styles.elemWrapper}>
-            <label htmlFor="title">
-              Tytuł
+        <FormElement onSubmit={submit}>
+          <label htmlFor="title">
+            Tytuł
             </label>
-            <input
-              id="title"
-              name="title"
-              onChange={updateInputValue}
-              value={photoData.title}
-              minLength={10}
-              required
-              type="text"
-              placeholder="Tytuł"
-            />
-          </div>
+          <input
+            id="title"
+            name="title"
+            onChange={updateInputValue}
+            value={photoData.title}
+            minLength={10}
+            required
+            type="text"
+            placeholder="Tytuł"
+          />
+          <label
+            htmlFor="description"
+          >
+            Opis zdjęć
+            </label>
           <textarea
             name="description"
             onChange={updateInputValue}
@@ -86,24 +89,29 @@ class Component extends React.Component<Props, FormState> {
             placeholder="Opis zdjęć"
           >
           </textarea>
-          <div className={styles.elemWrapper}>
-            <label htmlFor="before">Zdjęcie Przed</label>
+          <h3>Wybierz zdjęcia do porównania</h3>
+          <div className="flexContainer">
+            <label>Zdjęcie Przed
             <input
-              id="before"
-              name="before"
-              onChange={setImage}
-              type="file"
-            />
-            <label htmlFor="after">Zdjęcie Po</label>
-            <input
-              id="after"
-              name="after"
-              onChange={setImage}
-              type="file"
-            />
-          </div>
-          <div className={styles.elemWrapper}>
+                id="before"
+                name="before"
+                onChange={setImage}
+                type="file"
+              />
+            </label>
             <label>
+              Zdjęcie Po
+            <input
+                id="after"
+                name="after"
+                onChange={setImage}
+                type="file"
+              />
+            </label>
+          </div>
+          <h3>Określ rozmiary zdjęć</h3>
+          <div className="flexContainer">
+            <label className="label__dimensions">
               Szerokość
               <input
                 name="width"
@@ -115,7 +123,7 @@ class Component extends React.Component<Props, FormState> {
               />
               px
             </label>
-            <label>
+            <label className="label__dimensions">
               Wysokość
               <input
                 min={100}
@@ -131,8 +139,8 @@ class Component extends React.Component<Props, FormState> {
           <Button>
             Dodaj
           </Button>
-        </form>
-      </div >
+        </FormElement>
+      </FormContainer>
     );
   }
 }
