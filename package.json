@@ -8,7 +8,7 @@
     "npm": "6.x"
   },
   "scripts": {
-    "start": "set NODE_ENV='production' && ts-node server.ts",
+    "start": "set NODE_ENV='production' && node server.ts",
     "start-dev": "npm-run-all -l -p start:*",
     "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpileOnly server.ts",
     "start:client": "cd client && yarn start",
