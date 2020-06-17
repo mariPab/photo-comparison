@@ -4,22 +4,11 @@ import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
 import router from "./routes/photos.routes";
-// import formidable from 'express-formidable';
 
 const app = express();
 
 /* MIDDLEWARE */
 app.use(cors());
-
-// app.use(formidable({ uploadDir: './public/uploads/' }, [{
-//   event: 'fileBegin',
-//   action: (_req: Request, _res: Response, _next: any, _name, file) => {
-//     const fileName = randomID(10) + '.' + file.name.split('.')[1];
-//     file.path = __dirname + '/public/images/photo_' + fileName;
-//   }
-// },
-// ]));
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname + '/client/build')));
