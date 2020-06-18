@@ -7,6 +7,9 @@ import { getPhotoById } from '../../../redux/photos/reducer';
 import { PhotoInterface, FormState } from '../../../interfaces/photos';
 import { convertToFormData } from '../../../utils/utils';
 import { RootState } from '../../../redux/store';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';
 import {
   GetPhotoData,
   EditComparison,
@@ -79,7 +82,15 @@ class Component extends React.Component<Props, FormState> {
     const { photoData } = this.state;
     return (
       <FormContainer>
+        <NavLink exact to={`/admin`}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+            Powrót do panelu administracyjnego
+          </NavLink>
         <h2>Edytuj dane</h2>
+        <FontAwesomeIcon
+          className="icon__background"
+          icon={faImages}
+        />
         <FormElement onSubmit={submit}>
           <label htmlFor="title">
             Tytuł

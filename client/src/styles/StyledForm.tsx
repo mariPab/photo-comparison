@@ -1,15 +1,37 @@
-import React from 'react';
 import styled from 'styled-components';
 import variables from './variables';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 
 export const FormContainer = styled.div`
   max-width: 600px;
   margin: 0 auto;
+  position: relative;
   h2 {
     font-size: 3.5rem;
     margin-top: 70px;
     text-transform: uppercase;
+  }
+  a {
+    font-size: 2rem;
+    text-decoration: none;
+    color: ${darken(0.2, variables.colorNeutral)};
+    > svg {
+      margin-top: 20px;
+      margin-right: 20px;
+    }
+    &:hover {
+      color: ${variables.colorNeutral}
+    }
+  }
+  svg.icon__background {
+    opacity: 0.5;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding-right: 50px;
+    color: ${variables.colorBorderLight};
+    z-index: -2;
   }
 `;
 

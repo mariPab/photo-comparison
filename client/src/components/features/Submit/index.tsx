@@ -7,6 +7,9 @@ import { Button } from '../../common/Button';
 import { convertToFormData } from '../../../utils/utils';
 import { SubmitPhoto } from '../../../redux/photos/types';
 import { FormContainer, FormElement } from '../../../styles/StyledForm';
+import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';
 
 const { submitPhotos } = PhotoActions;
 
@@ -61,7 +64,16 @@ class Component extends React.Component<Props, FormState> {
     const { photoData } = this.state;
     return (
       <FormContainer>
+        <NavLink exact to={`/admin`}>
+          <FontAwesomeIcon icon={faArrowLeft} />
+            Powrót do panelu administracyjnego
+          </NavLink>
         <h2>Dodaj nowe porównanie zdjęć</h2>
+        <FontAwesomeIcon
+          className="icon__background"
+          icon={faImages}
+        />
+
         <FormElement onSubmit={submit}>
           <label htmlFor="title">
             Tytuł
