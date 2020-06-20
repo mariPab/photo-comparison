@@ -1,8 +1,7 @@
 import React, { FunctionComponent } from 'react';
-import styles from './Homepage.module.scss';
 
 const Component: FunctionComponent = () => (
-  <div className={styles.root}>
+  <div>
   </div>
 );
 export {
