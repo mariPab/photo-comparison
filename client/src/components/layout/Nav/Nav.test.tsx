@@ -30,12 +30,5 @@ describe('Component Nav', () => {
       expect(component).toBeTruthy();
     });
   });
-  describe('without required props', () => {
-    it('should throw error', () => {
-      expect(shallow(
-        <NavComponent {...mockProps} />
-      )).toEqual({});
-    });
-  });
 });
 
