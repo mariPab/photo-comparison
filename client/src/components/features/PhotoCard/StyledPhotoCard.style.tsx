@@ -31,7 +31,8 @@ export const InfoWrapper = styled.div`
   }
   a,
   button {
-    padding: 0 20px;
+    font-size: 2.6rem;
+    padding: 0 20px 0 0;
     margin-top: 30px;
     color: ${darken(0.3, variables.colorSupplemental)};
   }
