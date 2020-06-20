@@ -3,7 +3,7 @@ import variables from '../../../styles/variables';
 import { lighten } from 'polished';
 import { NavLink } from 'react-router-dom';
 
-const NavContainer = styled.div`
+const NavContainer = styled.nav`
   width: 35vw;
   overflow: auto;
   border-right: 1px solid ${lighten(0.2, variables.colorBorder)};

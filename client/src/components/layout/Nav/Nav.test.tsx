@@ -19,7 +19,6 @@ const photoData = {
 
 const mockProps: Props = {
   linksList: [photoData, photoData],
-
 };
 
 describe('Component Nav', () => {
