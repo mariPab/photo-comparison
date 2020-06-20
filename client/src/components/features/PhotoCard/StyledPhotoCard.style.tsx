@@ -1,12 +1,14 @@
-@import "../../../styles/settings.scss";
+import styled from 'styled-components';
+import variables from '../../../styles/variables';
+import { darken } from 'polished';
 
-.root {
+export const PhotoCardRoot = styled.div`
   display: flex;
   margin: 10px;
   margin: 20px;
-}
+`;
 
-.imageWrapper {
+export const ImageWrapper = styled.div`
   height: 100px;
   width: 100px;
   overflow: hidden;
@@ -18,8 +20,9 @@
     height: 100%;
     vertical-align: middle;
   }
-}
-.details {
+`;
+
+export const InfoWrapper = styled.div`
   padding: 0 20px;
   p {
     font-size: 2rem;
@@ -30,6 +33,6 @@
   button {
     padding: 0 20px;
     margin-top: 30px;
-    color: darken($color-supplemental, 30%);
+    color: ${darken(0.3, variables.colorSupplemental)};
   }
-}
+`;

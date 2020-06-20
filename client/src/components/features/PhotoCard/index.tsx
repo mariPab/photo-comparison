@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styles from './PhotoCard.module.scss';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
@@ -9,6 +8,7 @@ import { Button } from '../../common/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { DeleteComparison } from '../../../redux/photos/types';
+import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
 const { deleteComparison } = PhotoActions;
 
 interface MapDispatchToProps {
@@ -17,35 +17,36 @@ interface MapDispatchToProps {
 interface Props extends MapDispatchToProps {
   photoData: PhotoInterface;
 }
-const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => {
-  console.log(photoData._id);
-  return (
-    <div className={styles.root}>
-      <div className={styles.imageWrapper}>
-        <img
-          src={`${IMAGES_URL}/${photoData.images.before}`}
-          alt={photoData.title}
-        />
-      </div>
-      <div className={styles.details} >
-        <p>{photoData.title}</p>
-        <NavLink exact to={`/admin/edit/${photoData._id}`}>
-          <FontAwesomeIcon icon={faPen} />
-        </NavLink>
-        <Button
-          variant='fab'
-          onClick={deleteComparison.bind(null, photoData._id)}
-        >
-          <FontAwesomeIcon icon={faTrash} />
-        </Button>
-      </div>
-    </div >
-  );
-};
+const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => (
+  <PhotoCardRoot>
+    <ImageWrapper>
+      <img
+        src={`${IMAGES_URL}/${photoData.images.before}`}
+        alt={photoData.title}
+      />
+    </ImageWrapper>
+    <InfoWrapper>
+      <p>{photoData.title}</p>
+      <NavLink exact to={`/admin/edit/${photoData._id}`}>
+        <FontAwesomeIcon icon={faPen} />
+      </NavLink>
+      <Button
+        variant='fab'
+        onClick={deleteComparison.bind(null, photoData._id)}
+      >
+        <FontAwesomeIcon icon={faTrash} />
+      </Button>
+    </InfoWrapper>
+  </PhotoCardRoot>
+);
 const mapDispatchToProps = {
   deleteComparison,
 };
-const Container = connect(null, mapDispatchToProps)(Component);
+const Container = connect(
+  null,
+  mapDispatchToProps
+)(Component);
+
 export {
   Container as PhotoCard,
   Component as PhotoCardComponent,
