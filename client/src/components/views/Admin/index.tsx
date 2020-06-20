@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import styles from './Admin.module.scss';
 import { getList } from '../../../redux/photos/reducer';
 import { Nav } from '../../layout/Nav';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { NavLink } from 'react-router-dom';
 import { PhotoCard } from '../../features/PhotoCard';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
 import { GetPhotosList } from '../../../redux/photos/types';
+import { AdminContainer, LinksPanel, ManageSection, NavLink } from './StyledAdmin.style';
 const { getAllPhotos } = PhotoActions;
 
 interface MapStateToProps {
@@ -26,19 +25,19 @@ class Component extends React.Component<Props> {
   render(): React.ReactElement {
     const { photosList } = this.props;
     return (
-      <div className={styles.root}>
+      <AdminContainer>
         <Nav linksList={photosList} />
-        <div className={styles.panel}>
+        <LinksPanel>
           <NavLink exact to={`/admin/submit`}>
             Dodaj nowe porównanie
           </NavLink>
-          <div className={styles.manageSection}>
-            {photosList ? photosList.map(elem => (
+          <ManageSection>
+            {photosList.map(elem => (
               <PhotoCard key={elem._id} photoData={elem} />
-            )) : null}
-          </div>
-        </div>
-      </div >
+            ))}
+          </ManageSection>
+        </LinksPanel>
+      </AdminContainer>
     );
   }
 }
