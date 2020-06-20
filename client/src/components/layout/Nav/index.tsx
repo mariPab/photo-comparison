@@ -1,27 +1,24 @@
 import React, { FunctionComponent } from 'react';
-import { NavLink } from 'react-router-dom';
-import styles from './Nav.module.scss';
 import { PhotoInterface } from '../../../interfaces/photos';
+import { NavContainer, NavLink } from './StyledNav.style';
 
-interface Props {
+export interface Props {
   linksList: Array<PhotoInterface>
 }
 const Component: FunctionComponent<Props> = ({ linksList }: Props) => {
   return (
-    <nav className={styles.nav}>
+    <NavContainer>
       <h3>Przejdź do podglądu</h3>
-      {linksList && linksList.length ? (
-        <ul>
-          {linksList.map(link => (
-            <li key={link._id}>
-              <NavLink className={styles.navlink} exact to={`/photos/${link._id}`}>
-                {link.title}
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      ) : null}
-    </nav>
+      <ul>
+        {linksList.map(link => (
+          <li key={link._id}>
+            <NavLink exact to={`/photos/${link._id}`}>
+              {link.title}
+            </NavLink>
+          </li>
+        ))}
+      </ul>
+    </NavContainer>
   );
 };
 export {
