@@ -73,7 +73,6 @@ class Component extends React.Component<Props, FormState> {
           className="icon__background"
           icon={faImages}
         />
-
         <FormElement onSubmit={submit}>
           <label htmlFor="title">
             Tytuł
@@ -159,7 +158,13 @@ class Component extends React.Component<Props, FormState> {
 const mapDispatchToProps: MapDispatchToProps = {
   submitPhotos,
 };
-const Container = connect(null, mapDispatchToProps)(withRouter(Component));
+const Container = connect(
+  null,
+  mapDispatchToProps
+)(
+  withRouter(
+    Component
+  ));
 export {
   Container as Submit,
   Component as SubmitComponent,
