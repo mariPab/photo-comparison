@@ -1,14 +1,14 @@
 import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
-import styles from './NotFound.module.scss';
+import { NotFoundPage } from './StyledNotFound.style';
 
 const Component: FunctionComponent = () => (
-  <div className={styles.root}>
+  <NotFoundPage>
     <p>Strona nie istnieje</p>
     <NavLink exact to={`/`}>
       Powrót do strony głównej
     </NavLink>
-  </div>
+  </NotFoundPage>
 );
 export {
   Component as NotFound,
