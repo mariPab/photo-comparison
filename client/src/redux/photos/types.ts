@@ -1,5 +1,4 @@
 import { PhotoInterface } from '../../interfaces/photos';
-import { FormData } from '../../interfaces/global';
 
 export const GET_PHOTO: string = 'GET_PHOTO';
 // export const READ_BINARY_DATA: string = 'READ_BINARY_DATA';
@@ -11,8 +10,8 @@ export const EDIT_COMPARISON: string = 'EDIT_COMPARISON';
 export const DELETE_COMPARISON: string = 'DELETE_COMPARISON';
 
 export interface PhotoState {
-  photoData: PhotoInterface
-  allPhotos: PhotoInterface[]
+  photoData: PhotoInterface;
+  allPhotos: PhotoInterface[];
 }
 export interface GetPhotosList {
   type: typeof GET_ALL;

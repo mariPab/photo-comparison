@@ -1,4 +1,3 @@
-import { FormData } from '../../interfaces/global';
 import {
   GET_PHOTO,
   SUBMIT_PHOTOS,
