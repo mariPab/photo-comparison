@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { RouteComponentProps } from 'react-router-dom';
 import { getPhoto } from '../../../redux/photos/reducer';
-import styles from './Photo.module.scss';
+import { PhotoPage } from './StyledPhoto.style';
 import BeforeAfterSlider from 'react-before-after-slider';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { IMAGES_URL } from '../../../config';
@@ -17,13 +18,11 @@ interface MapStateToProps {
 interface MapDispatchToProps {
   getPhotoData: (id: string) => GetPhotoData;
 }
-interface Props extends MapStateToProps, MapDispatchToProps {
-  match: {
-    params: {
-      id: string
-    }
-  }
+interface MatchProps {
+  id: string;
 }
+type Props = MapStateToProps & MapDispatchToProps & RouteComponentProps<MatchProps>;
+
 class Component extends React.Component<Props> {
   componentDidMount(): void {
     this.props.getPhotoData(this.props.match.params.id);
@@ -31,8 +30,7 @@ class Component extends React.Component<Props> {
   render(): React.ReactElement {
     const { photoData } = this.props;
     return (
-
-      <div className={styles.wrapper}>
+      <PhotoPage>
         <h3>{photoData.title}</h3>
         <BeforeAfterSlider
           before={`${IMAGES_URL}/${photoData.images.before}`}
@@ -41,7 +39,7 @@ class Component extends React.Component<Props> {
           height={photoData.dimensions.height}
         />
         <p>{photoData.description}</p>
-      </div>
+      </PhotoPage>
     );
   }
 }

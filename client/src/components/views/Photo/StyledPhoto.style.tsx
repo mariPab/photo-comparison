@@ -1,6 +1,6 @@
-@import "../../../styles/settings.scss";
+import styled from 'styled-components';
 
-.wrapper {
+export const PhotoPage = styled.div`
   padding: 100px 0;
   display: flex;
   align-items: center;
@@ -16,4 +16,4 @@
     font-size: 3.2rem;
     font-weight: 200;
   }
-}
+`;
