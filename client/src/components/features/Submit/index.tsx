@@ -81,6 +81,7 @@ class Component extends React.Component<Props, FormState> {
             id="title"
             name="title"
             onChange={updateInputValue}
+            autoComplete="off"
             value={photoData.title}
             minLength={10}
             required
