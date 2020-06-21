@@ -3,12 +3,15 @@ import {
   getAll,
   getPhotoData,
   submitPhotos,
+  deleteComparison
 } from '../saga';
 import {
   SET_ALL,
   GET_PHOTO,
   SET_PHOTO,
   SUBMIT_PHOTOS,
+  DELETE_COMPARISON,
+  GET_ALL,
 } from '../types';
 import axios from 'axios';
 import { API_URL } from '../../../config';
@@ -63,6 +66,29 @@ describe('Photos Saga - ', () => {
         type: SET_PHOTO,
         payload: { ...mockRes.data },
       }));
+    });
+    it('and then nothing', result => {
+      expect(result).toBeUndefined();
+    });
+  });
+
+  describe('deleteComparison', () => {
+    const payload = { id: mockPhotoData._id };
+    const mockArgs = {
+      type: DELETE_COMPARISON,
+      payload: payload
+    };
+    const it = sagaHelper(deleteComparison(mockArgs));
+    it('Should request for desired API call', apiReq => {
+      expect(apiReq).toEqual(axios.delete(`${API_URL}/photos/${payload.id}`));
+    });
+    it('then trigger GET_ALL action', result => {
+      expect(result).toEqual(put({
+        type: GET_ALL,
+      }));
+    });
+    it('and then nothing', result => {
+      expect(result).toBeUndefined();
     });
   });
 

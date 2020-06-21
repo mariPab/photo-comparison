@@ -104,7 +104,6 @@ export function* deleteComparisonWatcher(): Generator {
 
 export function* deleteComparison({ payload }: DeleteComparison): Generator {
   const { id } = payload;
-  console.log('remove', id);
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
     yield put({ type: GET_ALL });
