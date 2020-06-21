@@ -26,7 +26,7 @@ export function* getAll() {
     // } else {
     const res = yield axios.get(`${API_URL}/all`);
     if (res && res.data) {
-      localStorage.setItem('photos_list', JSON.stringify(res.data));
+      // localStorage.setItem('photos_list', JSON.stringify(res.data));
       yield put({ type: SET_ALL, payload: res.data });
     }
     // }
@@ -43,7 +43,6 @@ export function* getPhotoData({ payload }: GetPhotoData) {
   const { id } = payload;
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
-
     if (res && res.data) {
       yield put({ type: SET_PHOTO, payload: res.data });
     }
@@ -63,7 +62,6 @@ export function* getPhotoData({ payload }: GetPhotoData) {
 export function* submitPhotosWatcher(): Generator {
   yield takeEvery(SUBMIT_PHOTOS, submitPhotos);
 }
-
 export function* submitPhotos({ payload }: SubmitPhoto) {
   const { data } = payload;
   try {
@@ -74,8 +72,6 @@ export function* submitPhotos({ payload }: SubmitPhoto) {
           'Content-Type': 'application/json',
         },
       });
-    // localStorage.setItem('photos_list', JSON.stringify(res.data));
-
     yield put({ type: GET_ALL });
   } catch (e) {
     console.log(e);

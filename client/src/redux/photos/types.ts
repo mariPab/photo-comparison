@@ -1,7 +1,6 @@
 import { PhotoInterface } from '../../interfaces/photos';
 
 export const GET_PHOTO = 'GET_PHOTO';
-// export const READ_BINARY_DATA: string = 'READ_BINARY_DATA';
 export const SET_PHOTO = 'SET_PHOTO';
 export const GET_ALL = 'GET_ALL';
 export const SET_ALL = 'SET_ALL';
@@ -13,48 +12,35 @@ export interface PhotoState {
   photoData: PhotoInterface;
   allPhotos: PhotoInterface[];
 }
-export interface GetPhotosList {
-  type: typeof GET_ALL;
+/* Basic Interfaces/Types */
+export interface BasicAction {
+  type: string
 }
-// export interface ReadPhotoData {
-//   type: typeof READ_BINARY_DATA;
-//   payload: {
-//     data: PhotoInterface
-//   }
-// }
-export interface SetList {
-  type: typeof SET_ALL;
-  payload: PhotoInterface;
+type IdPayload = {
+  id: string;
 }
-export interface GetPhotoData {
-  type: typeof GET_PHOTO;
-  payload: {
-    id: string;
-  };
+export type FormDataPayload = {
+  data: globalThis.FormData
 }
-export interface SetPhotoData {
-  type: typeof SET_PHOTO;
-  payload: PhotoInterface;
+interface ActionWithIDPayload extends BasicAction {
+  payload: IdPayload;
 }
+/* Interfaces for every action */
+export type GetPhotosList = BasicAction;
 
-export interface SubmitPhoto {
-  type: typeof SUBMIT_PHOTOS;
-  payload: {
-    data: globalThis.FormData;
-  };
+export interface SetList extends BasicAction {
+  payload: PhotoInterface;
 }
-export interface EditComparison {
-  type: typeof EDIT_COMPARISON;
-  payload: {
-    id: string;
-    data: globalThis.FormData;
-  };
+export type GetPhotoData = ActionWithIDPayload;
+export interface SetPhotoData extends BasicAction {
+  payload: PhotoInterface;
 }
-export interface DeleteComparison {
-  type: typeof DELETE_COMPARISON;
-  payload: {
-    id: string;
-  };
+export interface SubmitPhoto extends BasicAction {
+  payload: FormDataPayload;
 }
+export interface EditComparison extends BasicAction {
+  payload: FormDataPayload & IdPayload;
+}
+export type DeleteComparison = ActionWithIDPayload;
 
 export type PhotosReducerTypes = SetList | SetPhotoData;
