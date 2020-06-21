@@ -33,5 +33,5 @@ export {
   AdminContainer,
   LinksPanel,
   StyledNavLink as NavLink,
-  ManageSection
+  ManageSection,
 };

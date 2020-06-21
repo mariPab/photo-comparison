@@ -12,7 +12,7 @@ const mockPhotoData = {
   },
   images: {
     before: 'before.jpg',
-    after: 'after.jpg'
+    after: 'after.jpg',
   },
 };
 

@@ -14,10 +14,10 @@ const mockProps = {
     },
     images: {
       before: 'before.jpg',
-      after: 'after.jpg'
+      after: 'after.jpg',
     },
   },
-}
+};
 describe('PhotoCard pure component', () => {
   it('should render without crashing', () => {
     const component = shallow(<PhotoCardComponent {...mockProps} />);

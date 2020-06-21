@@ -38,5 +38,5 @@ const StyledNavLink = styled(NavLink)`
 
 export {
   StyledNavLink as NavLink,
-  NavContainer
-}
+  NavContainer,
+};

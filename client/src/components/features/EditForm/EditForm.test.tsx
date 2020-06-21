@@ -10,7 +10,7 @@ const customMatch: match<{ id: string }> = {
   isExact: false,
   path,
   url: path.replace(':id', '635736yb4574'),
-  params: { id: '635736yb4574' }
+  params: { id: '635736yb4574' },
 };
 const location = createLocation(customMatch.url);
 
@@ -27,7 +27,7 @@ const mockProps = {
     },
     images: {
       before: 'before.jpg',
-      after: 'after.jpg'
+      after: 'after.jpg',
     },
   },
   match: customMatch,

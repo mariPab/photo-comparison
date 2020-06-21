@@ -11,7 +11,7 @@ import { AdminContainer, LinksPanel, ManageSection, NavLink } from './StyledAdmi
 const { getAllPhotos } = PhotoActions;
 
 interface MapStateToProps {
-  photosList: PhotoInterface[]
+  photosList: PhotoInterface[];
 }
 interface MapDispatchToProps {
   getAllPhotos: () => GetPhotosList;
@@ -45,7 +45,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
   photosList: getList(state.Photos),
 });
 const mapDispatchToProps: MapDispatchToProps = {
-  getAllPhotos
+  getAllPhotos,
 };
 const Container = connect(
   mapStateToProps,

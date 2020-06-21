@@ -8,7 +8,7 @@ import { Submit } from './components/features/Submit';
 import { EditForm } from './components/features/EditForm';
 import { NotFound } from './components/views/NotFound';
 
-function App() {
+function App(): JSX.Element {
   return (
     <MainLayout>
       <Switch>

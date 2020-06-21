@@ -8,10 +8,9 @@ import {
   GetPhotoData,
   SubmitPhoto,
   EditComparison,
-  DeleteComparison
+  DeleteComparison,
 } from './types';
 
-/* action creator */
 export const PhotoActions = {
   getAllPhotos: (): GetPhotosList => ({
     type: GET_ALL,

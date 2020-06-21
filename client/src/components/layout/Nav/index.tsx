@@ -3,7 +3,7 @@ import { PhotoInterface } from '../../../interfaces/photos';
 import { NavContainer, NavLink } from './StyledNav.style';
 
 export interface Props {
-  linksList: Array<PhotoInterface>
+  linksList: Array<PhotoInterface>;
 }
 const Component: FunctionComponent<Props> = ({ linksList }: Props) => {
   return (

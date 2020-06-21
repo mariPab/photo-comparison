@@ -85,7 +85,7 @@ class Component extends React.Component<Props, FormState> {
         <NavLink exact to={`/admin`}>
           <FontAwesomeIcon icon={faArrowLeft} />
             Powrót do panelu administracyjnego
-          </NavLink>
+        </NavLink>
         <h2>Edytuj dane</h2>
         <FontAwesomeIcon
           className="icon__background"
@@ -94,7 +94,7 @@ class Component extends React.Component<Props, FormState> {
         <FormElement onSubmit={submit}>
           <label htmlFor="title">
             Tytuł
-            </label>
+          </label>
           <input
             id="title"
             name="title"
@@ -108,7 +108,7 @@ class Component extends React.Component<Props, FormState> {
             htmlFor="description"
           >
             Opis zdjęć
-            </label>
+          </label>
           <textarea
             name="description"
             onChange={updateInputValue}
@@ -121,7 +121,7 @@ class Component extends React.Component<Props, FormState> {
           <div className="flexContainer">
             <label>
               Zdjęcie Przed
-            <input
+              <input
                 id="before"
                 name="before"
                 onChange={setImage}
@@ -130,7 +130,7 @@ class Component extends React.Component<Props, FormState> {
             </label>
             <label>
               Zdjęcie Po
-            <input
+              <input
                 id="after"
                 name="after"
                 onChange={setImage}
@@ -184,10 +184,9 @@ const mapDispatchToProps: MapDispatchToProps = {
 const Container = connect(
   mapStateToProps,
   mapDispatchToProps
-)
-  (withRouter(
-    Component
-  ));
+)(withRouter(
+  Component
+));
 
 export {
   Container as EditForm,

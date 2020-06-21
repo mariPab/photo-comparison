@@ -13,7 +13,7 @@ import { GetPhotoData } from '../../../redux/photos/types';
 const { getPhotoData } = PhotoActions;
 
 interface MapStateToProps {
-  photoData: PhotoInterface
+  photoData: PhotoInterface;
 }
 interface MapDispatchToProps {
   getPhotoData: (id: string) => GetPhotoData;
@@ -47,7 +47,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
   photoData: getPhoto(state.Photos),
 });
 const mapDispatchToProps: MapDispatchToProps = {
-  getPhotoData
+  getPhotoData,
 };
 const Container = connect(
   mapStateToProps,

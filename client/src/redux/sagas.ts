@@ -3,6 +3,6 @@ import photosSaga from './photos/saga';
 
 export default function* rootSaga(): Generator {
   yield all([
-    photosSaga()
-  ])
+    photosSaga(),
+  ]);
 }
