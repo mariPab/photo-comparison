@@ -13,5 +13,6 @@ const photoSchema = new mongoose.Schema({
   },
 }, { versionKey: false },
 );
-
-module.exports = mongoose.model('Photo', photoSchema);
+const Photo = mongoose.model('Photo', photoSchema);
+// module.exports = mongoose.model('Photo', photoSchema);
+export default Photo;
