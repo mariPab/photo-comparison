@@ -1,22 +1,21 @@
 
 import React, { FunctionComponent } from 'react';
-import styles from './Button.module.scss';
+import { Button } from './StyledButton.style';
 
 interface Props {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant?: string;
   [key: string]: any;
 }
-const Component: FunctionComponent<Props> = ({ onClick, variant = '', ...otherProps }: Props) => {
-  return (
-    <button
-      {...otherProps}
-      className={styles.component + variant.split(' ').map(name => ' ' + (styles[name] || name)).join('')}
+const Component: FunctionComponent<Props> = (
+  { onClick, variant = '', ...otherProps }: Props) => (
+    <Button
+      variant={variant}
       onClick={onClick}
+      {...otherProps}
     />
   );
-};
+
 export {
   Component as Button,
-  Component as ButtonComponent,
 };
