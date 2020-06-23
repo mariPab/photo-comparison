@@ -1,9 +1,9 @@
 
 import { expect } from 'chai';
-import Photo from '../photo.model';
+import Photo, { PhotoData } from '../photo.model';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import { describe, before, after } from 'mocha';
+import { describe, before, after, beforeEach, afterEach } from 'mocha';
 
 const mockBasicData = {
   description: 'description',
@@ -61,6 +61,35 @@ describe('Photo', () => {
         try {
           const photo = await Photo.findOne({ title: 'Photo#3' });
           expect(photo).to.be.null;
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    });
+    describe('Updating data', () => {
+      it('should properly update one document with "save" method', async () => {
+        try {
+          const photo: PhotoData | null = await Photo.findOne({ title: 'Photo#1' });
+          if (photo) {
+            photo.title = 'Photo#3';
+            await photo.save();
+          }
+          const updatedDepartment = await Photo.findOne({ title: 'Photo#3' });
+          expect(updatedDepartment).to.not.be.null;
+        } catch (e) {
+          console.log(e);
+        }
+      });
+    });
+    describe('Removing data', () => {
+      it('should properly remove one document with "findByIdAndDelete" method', async () => {
+        try {
+          const photo: PhotoData | null = await Photo.findOne({ title: 'Photo#1' });
+          if (photo) {
+            await Photo.findByIdAndDelete(photo._id);
+          }
+          const removedDepartment = await Photo.findOne({ title: 'Photo #1' });
+          expect(removedDepartment).to.be.null;
         } catch (e) {
           console.log(e);
         }

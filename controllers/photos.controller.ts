@@ -1,4 +1,4 @@
-import Photo from '../models/photo.model';
+import Photo, { PhotoData } from '../models/photo.model';
 import { Response, Request } from 'express/index';
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
@@ -89,7 +89,7 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
 
 const deleteById = (req: Request, res: Response): void => {
   try {
-    Photo.findByIdAndDelete(req.params.id, (err: Error, doc: typeof Photo) => {
+    Photo.findByIdAndDelete(req.params.id, (err: any, doc: PhotoData | null): void => {
       err || !doc ?
         res.status(404).json({ message: 'Data not found' }) :
         res.status(200).json({ message: 'Deleted successfully' });
