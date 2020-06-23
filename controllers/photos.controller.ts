@@ -99,12 +99,10 @@ const deleteById = (req: Request, res: Response): void => {
   }
 };
 
-const photos = {
+export const photos = {
   deleteById,
   editPhotoComparison,
   submit,
   loadById,
   loadAll,
 };
-
-module.exports = photos;

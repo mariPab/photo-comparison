@@ -5,7 +5,6 @@ import uniqueString from 'unique-string';
 type Callback = (err: Error | null, dest: string) => void;
 
 const storage = multer.diskStorage({
-  // FIXME: na pewno Request express?
   destination: (_req: Request, _file: Express.Multer.File, clbck: Callback) => {
     clbck(null, './public/images/');
   },
@@ -21,18 +20,11 @@ const availableImageFormats = [
 const fileFilter = (_req: Request, file: Express.Multer.File, clbck: multer.FileFilterCallback) => {
   availableImageFormats.includes(file.mimetype) ? clbck(null, true) : clbck(null, false);
 };
-const upload = multer({
+export const upload = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
-const photosFields = [
+export const photosFields = [
   { name: 'before', maxCount: 1 },
   { name: 'after', maxCount: 1 },
 ];
-
-const multerConfig = {
-  upload,
-  photosFields,
-};
-
-module.exports = multerConfig;

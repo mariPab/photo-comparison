@@ -17,8 +17,7 @@
     "@typescript-eslint"
   ],
   "extends": [
-    "eslint:recommended",
-    "plugin:node/recommended"
+    "eslint:recommended"
   ],
   "rules": {
     "indent": [

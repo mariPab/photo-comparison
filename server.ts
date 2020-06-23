@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
-import router from "./routes/photos.routes";
+import { router } from './routes/photos.routes';
 
 const app = express();
 
@@ -29,8 +29,18 @@ app.use((_req: Request, res: Response): void => {
   res.status(404).send({ message: 'not found...' });
 });
 process.env.NODE_ENV === 'production' ?
-  mongoose.connect(`mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/PhotoComparison?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true }) :
-  mongoose.connect('mongodb://localhost:27017/photo-comparison', { useNewUrlParser: true, useUnifiedTopology: true });
+  mongoose.connect(
+    `mongodb+srv://${process.env.MONGO_USERNAME}:${process.env.MONGO_PW}@cluster0-314sb.mongodb.net/PhotoComparison?retryWrites=true&w=majority`,
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }) :
+  mongoose.connect(
+    'mongodb://localhost:27017/photo-comparison',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 const db = mongoose.connection;
 
 db.once('open', (): void => {
@@ -40,8 +50,6 @@ db.on('error', (err: Error): void => console.log('Error: ' + err));
 
 /* START SERVER */
 const port = process.env.PORT || 8000;
-const server = app.listen(port, (): void => {
+export const server = app.listen(port, (): void => {
   console.log('Server is running on port: ' + port);
 });
-
-module.exports = server;

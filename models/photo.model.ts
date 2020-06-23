@@ -26,6 +26,5 @@ const photoSchema = new mongoose.Schema({
   },
 }, { versionKey: false },
 );
-const Photo = mongoose.model<PhotoData>('Photo', photoSchema);
-// module.exports = mongoose.model('Photo', photoSchema);
-export default Photo;
+// const Photo = ;
+export default mongoose.model<PhotoData>('Photo', photoSchema);
