@@ -1,4 +1,4 @@
-import { Request } from 'express/index';
+import { Request } from 'express';
 import multer from 'multer';
 import uniqueString from 'unique-string';
 

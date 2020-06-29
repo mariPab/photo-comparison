@@ -1,5 +1,5 @@
 import * as express from 'express';
-import { upload, photosFields } from '../settings/multerConfig';
+import { upload, photosFields } from '../config/multer';
 import { photos } from '../controllers/photos.controller';
 
 export const router = express.Router();
