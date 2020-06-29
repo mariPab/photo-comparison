@@ -8,11 +8,13 @@
     "npm": "6.x"
   },
   "scripts": {
-    "start": "set NODE_ENV='production' && node server.ts",
+    "start": "set NODE_ENV='production' && node lib/server.js",
     "start-dev": "npm-run-all -l -p start:*",
     "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpileOnly server.ts",
     "start:client": "cd client && yarn start",
-    "build": "cd client && npm install && npm run build",
+    "build": "npm-run-all -l -p build:*",
+    "build:server": "tsc",
+    "build:client": "cd client && npm install && npm run build",
     "test": "mocha -r ts-node/register \"./{,!(node_modules|client)/**/}*.test.ts\"",
     "test-dev": "onchange \"./**/*.ts\" -i -k -- npm run test"
   },
@@ -42,6 +44,7 @@
     "mongodb-memory-server": "^6.6.1",
     "multer": "^1.4.2",
     "onchange": "^7.0.2",
+    "ts-loader": "^7.0.5",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.48",
     "typescript": "^3.9.5",

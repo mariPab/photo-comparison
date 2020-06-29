@@ -20,7 +20,7 @@ const availableImageFormats = [
 const fileFilter = (_req: Request, file: Express.Multer.File, clbck: multer.FileFilterCallback) => {
   availableImageFormats.includes(file.mimetype) ? clbck(null, true) : clbck(null, false);
 };
-export const upload = multer({
+export const upload: any = multer({
   storage: storage,
   fileFilter: fileFilter,
 });
