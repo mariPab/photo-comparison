@@ -10,7 +10,7 @@ interface Props {
 const handleVariantStyles = (variant: string): FlattenSimpleInterpolation => {
   switch (variant) {
     case 'fab': {
-      const fabStyle = css`
+      return css`
         background: none;
         border-radius: 50%;
         border: 0;
@@ -18,16 +18,14 @@ const handleVariantStyles = (variant: string): FlattenSimpleInterpolation => {
         display: inline-block;
         font-size: 2.5rem;
       `;
-      return fabStyle;
     }
     default: {
-      const defaultStyle = css`
+      return css`
         background: ${variables.colorSupplemental};
         font-size: 1.8rem;
         padding: 1.2rem 1.8rem;
         border: 1px solid ${variables.colorBorder};
       `;
-      return defaultStyle;
     }
   }
 };
