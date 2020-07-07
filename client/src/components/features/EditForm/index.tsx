@@ -44,8 +44,6 @@ class Component extends React.Component<Props> {
       this.props.getPhotoData(this.props.match.params.id);
     }
   }
-  componentDidUpdate() {
-  }
   submit = (e: React.FormEvent): void => {
     const { formFillData } = this.props;
     const { id } = this.props.match.params;

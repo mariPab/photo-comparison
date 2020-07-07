@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { SubmitComponent } from '.';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
+import { mockedHOCFunctions } from '../../../../__mocks__/photoData';
 
 const history = createMemoryHistory();
 const path = `/route/:id`;
@@ -19,6 +20,7 @@ const mockProps = {
   match: customMatch,
   history: history,
   location: location,
+  ...mockedHOCFunctions,
 };
 
 describe('Component Submit', () => {

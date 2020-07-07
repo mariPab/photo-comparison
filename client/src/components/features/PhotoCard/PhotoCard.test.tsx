@@ -1,14 +1,14 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { PhotoCardComponent } from '.';
-import { photoData } from '../../../../__mocks__/photoData';
+import { mockedPhotoData } from '../../../../__mocks__/photoData';
 import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
 import { NavLink } from 'react-router-dom';
 import { Button } from '../../common/Button';
 
 const mockProps = {
   deleteComparison: jest.fn(),
-  photoData: { ...photoData },
+  photoData: { ...mockedPhotoData },
 };
 describe('PhotoCard pure component', () => {
   let component: ShallowWrapper<{}>
