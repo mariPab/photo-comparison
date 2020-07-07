@@ -2,66 +2,38 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { FormState } from '../../../interfaces/photos';
+import { WithFormLogicHOC } from '../../../interfaces/global';
 import { Button } from '../../common/Button';
-import { convertToFormData } from '../../../utils/utils';
 import { SubmitPhoto } from '../../../redux/photos/types';
 import { FormContainer, FormElement } from '../../../styles/StyledForm';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';
+import { compose } from 'redux';
+import withFormLogic from '../../../HOC/withFormLogic';
 
 const { submitPhotos } = PhotoActions;
 
 interface MapDispatchToProps {
   submitPhotos: (data: globalThis.FormData) => SubmitPhoto;
 }
-type Props = MapDispatchToProps & RouteComponentProps
+type Props =
+  MapDispatchToProps &
+  RouteComponentProps &
+  WithFormLogicHOC;
 
-class Component extends React.Component<Props, FormState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      photoData: {
-        title: '',
-        description: '',
-        width: 640,
-        height: 480,
-        before: '',
-        after: '',
-      },
-      isError: false,
-    } as FormState;
-  }
-  updateInputValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    const { value, name } = e.target;
-    this.setState({ photoData: { ...this.state.photoData, [name]: value } });
-  }
-  setImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, files } = e.target;
-    if (files) this.setState({
-      photoData: {
-        ...this.state.photoData,
-        [name]: files[0],
-      },
-    });
-  }
+class Component extends React.Component<Props> {
   submit = (e: React.FormEvent): void => {
-    const { photoData } = this.state;
+    const { formFillData } = this.props;
     e.preventDefault();
-    if (photoData.title && photoData.description) {
-      const data = convertToFormData(photoData);
-      const formData = new FormData();
-      for (const key in data) {
-        formData.append(key, data[key]);
-      }
-      this.props.submitPhotos(formData);
+    if (formFillData.title && formFillData.description) {
+      const data = this.props.convertToFormData(formFillData);
+      this.props.submitPhotos(data);
       this.props.history.push('/admin');
-    } else this.setState({ isError: true });
+    } else this.props.handleError();
   };
   render(): React.ReactElement {
-    const { updateInputValue, submit, setImage } = this;
-    const { photoData } = this.state;
+    const { updateInputValue, setImage, formFillData } = this.props;
     return (
       <FormContainer>
         <NavLink exact to={`/admin`}>
@@ -73,7 +45,7 @@ class Component extends React.Component<Props, FormState> {
           className="icon__background"
           icon={faImages}
         />
-        <FormElement onSubmit={submit}>
+        <FormElement onSubmit={this.submit}>
           <label htmlFor="title">
             Tytuł
           </label>
@@ -82,7 +54,7 @@ class Component extends React.Component<Props, FormState> {
             name="title"
             onChange={updateInputValue}
             autoComplete="off"
-            value={photoData.title}
+            value={formFillData.title}
             minLength={10}
             required
             type="text"
@@ -96,7 +68,7 @@ class Component extends React.Component<Props, FormState> {
           <textarea
             name="description"
             onChange={updateInputValue}
-            value={photoData.description}
+            value={formFillData.description}
             rows={5}
             placeholder="Opis zdjęć"
           >
@@ -128,7 +100,7 @@ class Component extends React.Component<Props, FormState> {
               <input
                 name="width"
                 onChange={updateInputValue}
-                value={photoData.width}
+                value={formFillData.width}
                 type="number"
                 min={100}
                 max={800}
@@ -142,7 +114,7 @@ class Component extends React.Component<Props, FormState> {
                 max={800}
                 name="height"
                 onChange={updateInputValue}
-                value={photoData.height}
+                value={formFillData.height}
                 type="number"
               />
               px
@@ -159,13 +131,15 @@ class Component extends React.Component<Props, FormState> {
 const mapDispatchToProps: MapDispatchToProps = {
   submitPhotos,
 };
-const Container = connect(
-  null,
-  mapDispatchToProps
-)(
-  withRouter(
-    Component
-  ));
+const Container = compose<any>(
+  connect(
+    null,
+    mapDispatchToProps
+  ),
+  withRouter,
+  withFormLogic,
+)(Component) as React.ComponentClass<Props>;
+
 export {
   Container as Submit,
   Component as SubmitComponent,

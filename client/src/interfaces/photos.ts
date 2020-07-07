@@ -1,25 +1,32 @@
-export interface PhotoInterface {
-  _id: string;
-  title: string;
-  description: string;
-  dimensions: {
-    width: number;
-    height: number;
-  };
-  images: {
-    before: string;
-    after: string;
-  };
+import { PhotoData } from './global';
+
+export interface Images {
+  before: string | Blob;
+  after: string | Blob;
 }
 
+export interface Dimensions {
+  width: number;
+  height: number;
+}
+
+interface BasicPhotoData {
+  title: string;
+  description: string;
+}
+export interface PhotoInterface extends BasicPhotoData {
+  _id: string;
+  dimensions: Dimensions;
+  images: Images;
+}
+
+export type FormFillData = PhotoData & BasicPhotoData & Images & Dimensions;
+
 export interface FormState {
-  photoData: {
-    title: string;
-    description: string;
-    width: number;
-    height: number;
-    before: string;
-    after: string;
-  };
+  formFillData: FormFillData;
   isError: boolean;
 }
+
+
+
+

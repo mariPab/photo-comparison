@@ -1,15 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { compose } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { Button } from '../../common/Button';
 import { getPhotoById } from '../../../redux/photos/reducer';
-import { PhotoInterface, FormState } from '../../../interfaces/photos';
-import { convertToFormData } from '../../../utils/utils';
+import { PhotoInterface } from '../../../interfaces/photos';
+import { WithFormLogicHOC } from '../../../interfaces/global';
 import { RootState } from '../../../redux/store';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';
+import withFormLogic from '../../../HOC/withFormLogic';
 import {
   GetPhotoData,
   EditComparison,
@@ -28,58 +30,35 @@ interface MapDispatchToProps {
 interface MatchProps {
   id: string;
 }
-type Props = MapStateToProps & MapDispatchToProps & RouteComponentProps<MatchProps>;
+type Props =
+  MapStateToProps &
+  MapDispatchToProps &
+  RouteComponentProps<MatchProps> &
+  WithFormLogicHOC;
 
-class Component extends React.Component<Props, FormState> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      photoData: {
-        title: this.props.photoData ? this.props.photoData.title : '',
-        description: this.props.photoData ? this.props.photoData.description : '',
-        width: this.props.photoData ? this.props.photoData.dimensions.width : 0,
-        height: this.props.photoData ? this.props.photoData.dimensions.height : 0,
-        before: '',
-        after: '',
-      },
-      isError: false,
-    } as FormState;
-  }
+class Component extends React.Component<Props> {
   componentDidMount(): void {
-    this.props.getPhotoData(this.props.match.params.id);
+    if (this.props.photoData) {
+      this.props.updateFormFill(this.props.photoData);
+    } else {
+      this.props.getPhotoData(this.props.match.params.id);
+    }
   }
-  updateInputValue = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>): void => {
-    const { photoData } = this.state;
-    const { value, name } = e.target;
-    this.setState({ photoData: { ...photoData, [name]: value } });
-  }
-  setImage = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const { name, files } = e.target;
-    const { photoData } = this.state;
-    if (files) this.setState({
-      photoData: {
-        ...photoData,
-        [name]: files[0],
-      },
-    });
+  componentDidUpdate() {
   }
   submit = (e: React.FormEvent): void => {
-    const { photoData } = this.state;
+    const { formFillData } = this.props;
     const { id } = this.props.match.params;
     e.preventDefault();
-    if (photoData.title && photoData.description) {
-      const data = convertToFormData(photoData);
-      const formData = new FormData();
-      for (const key in data) {
-        formData.append(key, data[key]);
-      }
-      this.props.editComparison(id, formData);
+    if (formFillData.title && formFillData.description) {
+      const data = this.props.convertToFormData(formFillData);
+      this.props.editComparison(id, data);
       this.props.history.push(`/photos/${id}`);
-    } else this.setState({ isError: true });
+    } else this.props.handleError();
   };
   render(): React.ReactElement {
-    const { updateInputValue, submit, setImage } = this;
-    const { photoData } = this.state;
+    console.log(this.props.photoData);
+    const { updateInputValue, setImage, formFillData } = this.props;
     return (
       <FormContainer>
         <NavLink exact to={`/admin`}>
@@ -91,7 +70,7 @@ class Component extends React.Component<Props, FormState> {
           className="icon__background"
           icon={faImages}
         />
-        <FormElement onSubmit={submit}>
+        <FormElement onSubmit={this.submit}>
           <label htmlFor="title">
             Tytuł
           </label>
@@ -100,7 +79,7 @@ class Component extends React.Component<Props, FormState> {
             name="title"
             autoComplete="off"
             onChange={updateInputValue}
-            value={photoData.title}
+            value={formFillData.title}
             minLength={10}
             type="text"
             placeholder="Tytuł"
@@ -113,7 +92,7 @@ class Component extends React.Component<Props, FormState> {
           <textarea
             name="description"
             onChange={updateInputValue}
-            value={photoData.description}
+            value={formFillData.description}
             rows={5}
             placeholder="Opis zdjęć"
           >
@@ -147,7 +126,7 @@ class Component extends React.Component<Props, FormState> {
               <input
                 name="width"
                 onChange={updateInputValue}
-                value={photoData.width}
+                value={formFillData.width}
                 type="number"
                 min={100}
                 max={800}
@@ -161,7 +140,7 @@ class Component extends React.Component<Props, FormState> {
                 max={800}
                 name="height"
                 onChange={updateInputValue}
-                value={photoData.height}
+                value={formFillData.height}
                 type="number"
               />
               px
@@ -182,12 +161,14 @@ const mapDispatchToProps: MapDispatchToProps = {
   editComparison,
   getPhotoData,
 };
-const Container = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withRouter(
-  Component
-));
+const Container = compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withRouter,
+  withFormLogic,
+)(Component) as React.ComponentClass<Props>;
 
 export {
   Container as EditForm,
