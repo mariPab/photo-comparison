@@ -23,6 +23,23 @@ const loadById: ServerRequest = async (req, res) => {
   }
 };
 
+const loadRandom: ServerRequest = async (req, res) => {
+  console.log('here');
+
+  try {
+    const count = await Photo.countDocuments();
+    console.log(count);
+    const rand = Math.floor(Math.random() * count);
+    const photo = await Photo.findOne().skip(rand);
+    console.log(photo);
+
+    if (!photo) res.status(404).json({ message: 'Not found' });
+    else res.json(photo);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+
 const submit: ServerRequest = async (req, res) => {
   if (req.body && req.files) {
     const { title, description, width, height } = req.body;
@@ -105,4 +122,5 @@ export const photos = {
   submit,
   loadById,
   loadAll,
+  loadRandom,
 };

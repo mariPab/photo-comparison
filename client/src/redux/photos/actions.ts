@@ -4,11 +4,13 @@ import {
   GET_ALL,
   EDIT_COMPARISON,
   DELETE_COMPARISON,
+  REDIRECT_TO_RANDOM_PHOTO,
   GetPhotosList,
   GetPhotoData,
   SubmitPhoto,
   EditComparison,
   DeleteComparison,
+  RedirectToRandomPhoto,
 } from './types';
 
 export const PhotoActions = {
@@ -30,5 +32,9 @@ export const PhotoActions = {
   deleteComparison: (id: string): DeleteComparison => ({
     type: DELETE_COMPARISON,
     payload: { id },
+  }),
+  redirectToRandomPhoto: (history: any): RedirectToRandomPhoto => ({
+    type: REDIRECT_TO_RANDOM_PHOTO,
+    payload: { history },
   }),
 };

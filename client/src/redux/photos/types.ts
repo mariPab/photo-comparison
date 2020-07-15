@@ -7,6 +7,7 @@ export const SET_ALL = 'SET_ALL';
 export const SUBMIT_PHOTOS = 'SUBMIT_PHOTOS';
 export const EDIT_COMPARISON = 'EDIT_COMPARISON';
 export const DELETE_COMPARISON = 'DELETE_COMPARISON';
+export const REDIRECT_TO_RANDOM_PHOTO = 'REDIRECT_TO_RANDOM_PHOTO';
 
 export interface PhotoState {
   photoData: PhotoInterface;
@@ -25,7 +26,8 @@ export type FormDataPayload = {
 interface ActionWithIDPayload extends BasicAction {
   payload: IdPayload;
 }
-/* Interfaces for every action */
+
+/* Interfaces/types for every action */
 export type GetPhotosList = BasicAction;
 
 export interface SetList extends BasicAction {
@@ -42,5 +44,9 @@ export interface EditComparison extends BasicAction {
   payload: FormDataPayload & IdPayload;
 }
 export type DeleteComparison = ActionWithIDPayload;
-
+export interface RedirectToRandomPhoto extends BasicAction {
+  payload: {
+    history: any
+  };
+};
 export type PhotosReducerTypes = SetList | SetPhotoData;

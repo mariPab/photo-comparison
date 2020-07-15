@@ -6,6 +6,7 @@ import {
   SET_ALL,
   EDIT_COMPARISON,
   DELETE_COMPARISON,
+  REDIRECT_TO_RANDOM_PHOTO,
   GetPhotoData,
   SubmitPhoto,
   EditComparison,
@@ -20,16 +21,10 @@ export function* getAllWatcher(): Generator {
 }
 export function* getAll() {
   try {
-    // const savedList = localStorage.getItem('photos_list');
-    // if (savedList) {
-    // yield put({ type: SET_ALL, payload: JSON.parse(savedList) });
-    // } else {
     const res = yield axios.get(`${API_URL}/all`);
     if (res && res.data) {
-      // localStorage.setItem('photos_list', JSON.stringify(res.data));
       yield put({ type: SET_ALL, payload: res.data });
     }
-    // }
   }
   catch (err) {
     console.log(err);
@@ -51,13 +46,6 @@ export function* getPhotoData({ payload }: GetPhotoData) {
     console.log(err);
   }
 }
-
-// export function* getDataFromStorageWatcher(): Generator {
-//   yield takeEvery(GET_PHOTO, getDataFromStorage);
-// }
-// export function* getDataFromStorage(): Generator {
-
-// }
 
 export function* submitPhotosWatcher(): Generator {
   yield takeEvery(SUBMIT_PHOTOS, submitPhotos);
@@ -81,7 +69,6 @@ export function* submitPhotos({ payload }: SubmitPhoto) {
 export function* editComparisonWatcher(): Generator {
   yield takeEvery(EDIT_COMPARISON, editComparison);
 }
-
 export function* editComparison({ payload }: EditComparison) {
   const { id, data } = payload;
   try {
@@ -101,12 +88,24 @@ export function* editComparison({ payload }: EditComparison) {
 export function* deleteComparisonWatcher(): Generator {
   yield takeEvery(DELETE_COMPARISON, deleteComparison);
 }
-
 export function* deleteComparison({ payload }: DeleteComparison): Generator {
   const { id } = payload;
   try {
     yield axios.delete(`${API_URL}/photos/${id}`);
     yield put({ type: GET_ALL });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export function* redirectToRandomPhotoWatcher(): Generator {
+  yield takeEvery(REDIRECT_TO_RANDOM_PHOTO, redirectToRandomPhoto);
+}
+export function* redirectToRandomPhoto({ payload }: any): Generator {
+  try {
+    const response: any = yield axios.get(`${API_URL}/random`);
+    const id = response.data._id;
+    payload.history.push(`/photos/${id}`);
   } catch (e) {
     console.log(e);
   }
@@ -119,5 +118,6 @@ export default function* rootSaga(): Generator {
     fork(submitPhotosWatcher),
     fork(editComparisonWatcher),
     fork(deleteComparisonWatcher),
+    fork(redirectToRandomPhotoWatcher),
   ]);
 }

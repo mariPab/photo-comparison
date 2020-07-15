@@ -1,10 +1,36 @@
-import React, { FunctionComponent } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { PhotoActions } from '../../../redux/photos/actions';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-const Component: FunctionComponent = () => (
-  <div>
-  </div>
-);
+const { redirectToRandomPhoto } = PhotoActions;
+
+interface MapDispatchToProps {
+  redirectToRandomPhoto: (history: any) => void;
+}
+
+type Props = MapDispatchToProps & RouteComponentProps;
+
+const Component = (props: Props): React.ReactElement => {
+  const redirect = () => {
+    props.redirectToRandomPhoto(props.history);
+  };
+  useEffect(() => redirect(), []);
+  return <div></div>;
+};
+
+const mapDispatchToProps: MapDispatchToProps = {
+  redirectToRandomPhoto,
+};
+const Container = compose(
+  connect(
+    null,
+    mapDispatchToProps),
+  withRouter,
+)(Component) as React.ComponentType<Props>;
+
 export {
-  Component as Homepage,
+  Container as Homepage,
   Component as HomepageComponent,
 };
