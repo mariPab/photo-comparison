@@ -1,9 +1,9 @@
 import { Response, Request } from 'express/index';
 import express from 'express';
 import cors from 'cors';
-import path from 'path';
+import * as path from 'path';
 import mongoose from 'mongoose';
-import { router } from './routes/photos.routes';
+import router from './routes/photos.routes';
 
 const app = express();
 

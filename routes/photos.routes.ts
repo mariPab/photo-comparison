@@ -1,12 +1,14 @@
 import * as express from 'express';
-import { upload, photosFields } from '../config/multer';
-import { photos } from '../controllers/photos.controller';
+import multer from '../config/multer';
+import photos from '../controllers/photos.controller';
 
-export const router = express.Router();
+const router = express.Router();
 
 router.get('/all', photos.loadAll);
 router.get('/photos/:id', photos.loadById);
 router.get('/random', photos.loadRandom);
-router.post('/submit', upload.fields(photosFields), photos.submit);
+router.post('/submit', multer.upload.fields(multer.photosFields), photos.submit);
 router.delete('/photos/:id', photos.deleteById);
-router.put('/photos/:id', upload.fields(photosFields), photos.editPhotoComparison);
+router.put('/photos/:id', multer.upload.fields(multer.photosFields), photos.editPhotoComparison);
+
+export default router;

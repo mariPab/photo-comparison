@@ -24,15 +24,10 @@ const loadById: ServerRequest = async (req, res) => {
 };
 
 const loadRandom: ServerRequest = async (req, res) => {
-  console.log('here');
-
   try {
     const count = await Photo.countDocuments();
-    console.log(count);
     const rand = Math.floor(Math.random() * count);
     const photo = await Photo.findOne().skip(rand);
-    console.log(photo);
-
     if (!photo) res.status(404).json({ message: 'Not found' });
     else res.json(photo);
   } catch (err) {
@@ -116,7 +111,7 @@ const deleteById = (req: Request, res: Response): void => {
   }
 };
 
-export const photos = {
+export default {
   deleteById,
   editPhotoComparison,
   submit,
