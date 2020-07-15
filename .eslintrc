@@ -16,9 +16,6 @@
   "plugins": [
     "@typescript-eslint"
   ],
-  "extends": [
-    "eslint:recommended"
-  ],
   "rules": {
     "indent": [
       "error",
