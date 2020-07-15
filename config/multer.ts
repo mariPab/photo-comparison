@@ -1,6 +1,6 @@
 import { Request } from 'express';
-import multer from 'multer';
-import uniqueString from 'unique-string';
+import multer = require('multer');
+import uniqueString = require('unique-string');
 
 type Callback = (err: Error | null, dest: string) => void;
 

@@ -1,4 +1,5 @@
-import mongoose, { Document } from 'mongoose';
+import mongoose = require('mongoose');
+import { Document } from 'mongoose';
 
 export interface PhotoData extends Document {
   title: string;
