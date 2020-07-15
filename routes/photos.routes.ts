@@ -1,4 +1,4 @@
-import * as express from 'express';
+import express = require('express');
 import multer from '../config/multer';
 import photos from '../controllers/photos.controller';
 

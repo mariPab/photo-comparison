@@ -1,11 +1,11 @@
-import { Response, Request } from 'express/index';
-import express from 'express';
-import cors from 'cors';
-import * as path from 'path';
-import mongoose from 'mongoose';
+import { Response, Request, Application } from 'express/index';
+import express = require('express');
+import cors = require('cors');
+import path = require('path');
+import mongoose = require('mongoose');
 import router from './routes/photos.routes';
 
-const app = express();
+const app: Application = express();
 
 /* MIDDLEWARE */
 app.use(cors());
