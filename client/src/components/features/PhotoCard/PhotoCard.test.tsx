@@ -4,7 +4,7 @@ import { PhotoCardComponent } from '.';
 import { mockedPhotoData } from '../../../../__mocks__/photoData';
 import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
 import { NavLink } from 'react-router-dom';
-import { Button } from '../../common/Button';
+import { Button } from '../../UI/Button';
 
 const mockProps = {
   deleteComparison: jest.fn(),

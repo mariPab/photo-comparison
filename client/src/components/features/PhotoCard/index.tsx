@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
 import { IMAGES_URL } from '../../../config';
-import { Button } from '../../common/Button';
+import { Button } from '../../UI/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { DeleteComparison } from '../../../redux/photos/types';

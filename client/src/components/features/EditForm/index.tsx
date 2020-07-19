@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { Button } from '../../common/Button';
+import { Button } from '../../UI/Button';
 import { getPhotoById } from '../../../redux/photos/reducer';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { WithFormLogicHOC } from '../../../interfaces/global';
