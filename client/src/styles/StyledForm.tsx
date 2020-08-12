@@ -37,14 +37,6 @@ export const FormContainer = styled.div`
 
 export const FormElement = styled.form`
   width: 100%;
-  label {
-    text-transform: uppercase;
-    display: block;
-    font-size: 2.5rem;
-    padding: 15px 0;
-  }
-
-  input:not([type="file"]),
   textarea {
     border: 1px solid ${variables.colorBorderLight};
     background-color: ${variables.colorSupplemental};
@@ -65,22 +57,6 @@ export const FormElement = styled.form`
       opacity: 0.3;
     }
   }
-  input[type="number"] {
-    width: 100px;
-    padding: 10px;
-    margin: 0 10px;
-    font-weight: 900;
-    font-size: 2rem;
-  }
-  .flexContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-  }
-  .label__dimensions {
-    text-transform: unset;
-    font-weight: 400;
-  }
   button {
     float: right;
     margin: 20px 0;
@@ -90,17 +66,21 @@ export const FormElement = styled.form`
     opacity: 0.2;
     margin: 0;
     margin-top: 40px;
+    padding: 0 15px;
   }
   h4 {
     color: ${variables.colorNeutral};
     font-size: 1.5rem;
     margin: 7px 0;
   }
-  @media (max-width: 576px) {
-  .flexContainer {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-}
 `;
 
+export const FlexContainer = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    @media (max-width: 576px) {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+`;

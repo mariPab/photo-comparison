@@ -16,7 +16,9 @@ import {
   GetPhotoData,
   EditComparison,
 } from '../../../redux/photos/types';
-import { FormContainer, FormElement } from '../../../styles/StyledForm';
+import { FormContainer, FormElement, FlexContainer } from '../../../styles/StyledForm';
+import { Label } from '../../UI/Input/Input.style';
+import { Input } from '../../UI/Input';
 
 const { editComparison, getPhotoData } = PhotoActions;
 
@@ -55,7 +57,6 @@ class Component extends React.Component<Props> {
     } else this.props.handleError();
   };
   render(): React.ReactElement {
-    console.log(this.props.photoData);
     const { updateInputValue, setImage, formFillData } = this.props;
     return (
       <FormContainer>
@@ -69,24 +70,17 @@ class Component extends React.Component<Props> {
           icon={faImages}
         />
         <FormElement onSubmit={this.submit}>
-          <label htmlFor="title">
-            Tytuł
-          </label>
-          <input
-            id="title"
+          <Input
             name="title"
-            autoComplete="off"
             onChange={updateInputValue}
             value={formFillData.title}
-            minLength={10}
             type="text"
-            placeholder="Tytuł"
           />
-          <label
+          <Label
             htmlFor="description"
           >
             Opis zdjęć
-          </label>
+          </Label>
           <textarea
             name="description"
             onChange={updateInputValue}
@@ -96,54 +90,34 @@ class Component extends React.Component<Props> {
           >
           </textarea>
           <h3>Wybierz zdjęcia do porównania</h3>
-          <div className="flexContainer">
-            <label>
-              Zdjęcie Przed
-              <input
-                id="before"
-                name="before"
-                onChange={setImage}
-                type="file"
-              />
-            </label>
-            <label>
-              Zdjęcie Po
-              <input
-                id="after"
-                name="after"
-                onChange={setImage}
-                type="file"
-              />
-            </label>
-          </div>
+          <FlexContainer>
+            <Input
+              name="before"
+              onChange={setImage}
+              type="file"
+            />
+            <Input
+              name="after"
+              onChange={setImage}
+              type="file"
+            />
+          </FlexContainer>
           <h3>Określ rozmiary zdjęć</h3>
-          <h4>* Jeśli nie chcesz zmieniać wybranego zdjęcia - zostaw to pole puste</h4>
-          <div className="flexContainer">
-            <label className="label__dimensions">
-              Szerokość
-              <input
-                name="width"
-                onChange={updateInputValue}
-                value={formFillData.width}
-                type="number"
-                min={100}
-                max={800}
-              />
-              px
-            </label>
-            <label className="label__dimensions">
-              Wysokość
-              <input
-                min={100}
-                max={800}
-                name="height"
-                onChange={updateInputValue}
-                value={formFillData.height}
-                type="number"
-              />
-              px
-            </label>
-          </div>
+
+          <FlexContainer>
+            <Input
+              name="width"
+              onChange={updateInputValue}
+              value={formFillData.width}
+              type="number"
+            />
+            <Input
+              name="height"
+              onChange={updateInputValue}
+              value={formFillData.height}
+              type="number"
+            />
+          </FlexContainer>
           <Button>
             Zaktualizuj
           </Button>
