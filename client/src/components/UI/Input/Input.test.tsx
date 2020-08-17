@@ -66,10 +66,6 @@ describe('Component Input', () => {
     });
   });
   describe('with unknown type', () => {
-    let component: ShallowWrapper<InputProps>;
-    beforeEach(() => {
-      component = shallow(<Input {...mockProps} type="unknown" />);
-    });
     it('should render null', () => {
       const component: ShallowWrapper<InputProps> = shallow(
         <Input {...mockProps} type="unknown" />
