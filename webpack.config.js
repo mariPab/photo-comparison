@@ -8,13 +8,13 @@ module.exports = {
         test: /\.(tsx|ts)?$/,
         loader: ['babel-loader', 'ts-loader'],
         include: path.resolve(__dirname, '.'),
-        exclude: /node_modules|client|lib/,
+        exclude: /node_modules|client|build/,
       },
       {
         test: /\.(js)?$/,
         loader: ['babel-loader'],
         include: path.resolve(__dirname, '.'),
-        exclude: /node_modules|client|lib/,
+        exclude: /node_modules|client|build/,
       },
       {
         test: /\.(png|gif|jpg|svg)$/,
@@ -31,7 +31,7 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.scss', '.js', '.json', '.png', '.gif', '.jpg', '.svg'],
   },
   output: {
-    path: path.resolve(__dirname, 'lib/'),
+    path: path.resolve(__dirname, 'build/'),
     publicPath: '',
     filename: 'output.js',
     libraryTarget: 'umd',
