@@ -11,16 +11,16 @@ const app: Application = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'client', 'build')));
+app.use(express.static(path.join(__dirname + '/client/build')));
 
 /* API ENDPOINTS */
 app.use('/api', router);
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname + '/public')));
 
 
 /* REACT WEBSITE */
 app.get('*', (_req: Request, res: Response): void => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'), (err: Error) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'), (err: Error) => {
     if (err) res.status(500).send(err);
   });
 });
