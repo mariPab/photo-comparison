@@ -19,11 +19,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 
 
 /* REACT WEBSITE */
-app.get('*', (_req: Request, res: Response): void => {
-  res.sendFile(path.join(__dirname, '/client/build/index.html'), (err: Error) => {
-    if (err) res.status(500).send(err);
+if (process.env.NODE_ENV === 'production') {
+  app.get('*', (_req: Request, res: Response): void => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'), (err: Error) => {
+      if (err) res.status(500).send(err);
+    });
   });
-});
+}
 
 app.use((_req: Request, res: Response): void => {
   res.status(404).send({ message: 'not found...' });
