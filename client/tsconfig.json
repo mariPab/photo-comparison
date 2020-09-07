@@ -26,14 +26,15 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "isolatedModules": true,
-    "noEmit": true
+    "isolatedModules": true
   },
+  "include": [
+    "src",
+    "public"
+  ],
   "exclude": [
     "node_modules",
-    "lib",
-  ],
-  "include": [
-    "src"
+    "coverage",
+    "./src/**/*.test.ts"
   ]
 }
