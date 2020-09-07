@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "server.ts",
-  "engines": {
-    "node": "10.x",
-    "npm": "6.x"
-  },
   "scripts": {
     "start": "set NODE_ENV='production' && ts-node server.ts",
     "start-dev": "npm-run-all -l -p start:*",
