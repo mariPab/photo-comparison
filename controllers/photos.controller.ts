@@ -1,5 +1,6 @@
 import Photo, { PhotoData } from '../models/photo.model';
 import { Response, Request } from 'express/index';
+import ImgHandler from '../helpers/ImgHandler';
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
 
@@ -44,8 +45,11 @@ const submit: ServerRequest = async (req, res) => {
       let beforeFile,
         afterFile;
       if (before && after) {
-        beforeFile = before[0].path.split('\\').slice(-1)[0];
-        afterFile = after[0].path.split('\\').slice(-1)[0];
+        // beforeFile = before[0].path.split('\\').slice(-1)[0];
+        // afterFile = after[0].path.split('\\').slice(-1)[0];
+        beforeFile = ImgHandler.encodeImage(before[0]);
+        afterFile = ImgHandler.encodeImage(after[0]);
+        console.log(beforeFile);
       } else throw new Error('Missing images');
       if (title && description && width && height) {
         const newPhoto = new Photo({
