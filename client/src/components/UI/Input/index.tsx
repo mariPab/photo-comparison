@@ -23,7 +23,7 @@ const Component: FunctionComponent<InputProps> = ({ name, type, onChange, value 
             id={name}
             name={name}
             type={type}
-            onChange={onChange.bind(null)}
+            onChange={onChange}
             value={value}
             autoComplete="off"
             minLength={10}
@@ -36,7 +36,7 @@ const Component: FunctionComponent<InputProps> = ({ name, type, onChange, value 
           <Input
             name={name}
             type={type}
-            onChange={onChange.bind(null)}
+            onChange={onChange}
             value={value}
             min={100}
             max={800}
