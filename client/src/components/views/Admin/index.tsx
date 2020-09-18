@@ -23,16 +23,15 @@ class Component extends React.Component<Props> {
     this.props.getAllPhotos();
   }
   render(): React.ReactElement {
-    const { photosList } = this.props;
     return (
       <AdminContainer>
-        <Nav linksList={photosList} />
+        <Nav linksList={this.props.photosList} />
         <LinksPanel>
           <NavLink exact to={`/admin/submit`}>
             Dodaj nowe porównanie
           </NavLink>
           <ManageSection>
-            {photosList.map(elem => (
+            {this.props.photosList.map(elem => (
               <PhotoCard key={elem._id} photoData={elem} />
             ))}
           </ManageSection>

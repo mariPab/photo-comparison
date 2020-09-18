@@ -5,7 +5,6 @@ import { getPhoto } from '../../../redux/photos/reducer';
 import { PhotoPage } from './StyledPhoto.style';
 import BeforeAfterSlider from 'react-before-after-slider';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { IMAGES_URL } from '../../../config';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
 import { GetPhotoData } from '../../../redux/photos/types';
@@ -32,12 +31,13 @@ class Component extends React.Component<Props> {
     return (
       <PhotoPage>
         <h3>{photoData.title}</h3>
-        <BeforeAfterSlider
-          before={`${IMAGES_URL}/${photoData.images.before}`}
-          after={`${IMAGES_URL}/${photoData.images.after}`}
-          width={photoData.dimensions.width}
-          height={photoData.dimensions.height}
-        />
+        {photoData.images.before && photoData.images.after ?
+          <BeforeAfterSlider
+            before={`data:${photoData.images.before.contentType};base64, ${photoData.images.before.data}`}
+            after={`data:${photoData.images.after.contentType};base64, ${photoData.images.after.data}`}
+            width={photoData.dimensions.width}
+            height={photoData.dimensions.height}
+          /> : null}
         <p>{photoData.description}</p>
       </PhotoPage>
     );

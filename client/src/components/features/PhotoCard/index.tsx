@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faPen } from '@fortawesome/free-solid-svg-icons';
-import { IMAGES_URL } from '../../../config';
 import { Button } from '../../UI/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
@@ -20,10 +19,11 @@ interface Props extends MapDispatchToProps {
 const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => (
   <PhotoCardRoot>
     <ImageWrapper>
-      <img
-        src={`${IMAGES_URL}/${photoData.images.before}`}
-        alt={photoData.title}
-      />
+      {photoData.images.before ?
+        <img
+          src={`data:${photoData.images.before.contentType};base64, ${photoData.images.before.data}`}
+          alt={photoData.title}
+        /> : null}
     </ImageWrapper>
     <InfoWrapper>
       <p>{photoData.title}</p>

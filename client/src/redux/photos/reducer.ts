@@ -19,8 +19,8 @@ const initialState: PhotoState = {
       height: 0,
     },
     images: {
-      before: '',
-      after: '',
+      before: null,
+      after: null,
     },
   },
   allPhotos: [],

@@ -8,7 +8,13 @@ const loadAll: ServerRequest = async (req, res) => {
   try {
     const photos = await Photo.find();
     if (!photos) res.status(404).json({ photo: 'Not Found' });
-    else res.json(photos);
+    else {
+      const decodedData = photos.map(photo => ({
+        ...photo,
+        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+      }));
+      res.json(decodedData);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -18,7 +24,13 @@ const loadById: ServerRequest = async (req, res) => {
   try {
     const photo = await Photo.findOne({ _id: req.params.id });
     if (!photo) res.status(404).json({ photo: 'Not Found' });
-    else res.json(photo);
+    else {
+      const decodedData = {
+        ...photo,
+        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+      };
+      res.json(decodedData);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -30,7 +42,13 @@ const loadRandom: ServerRequest = async (req, res) => {
     const rand = Math.floor(Math.random() * count);
     const photo = await Photo.findOne().skip(rand);
     if (!photo) res.status(404).json({ message: 'Not found' });
-    else res.json(photo);
+    else {
+      const decodedData = {
+        ...photo,
+        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+      };
+      res.json(decodedData);
+    }
   } catch (err) {
     res.status(500).json(err);
   }
@@ -45,11 +63,8 @@ const submit: ServerRequest = async (req, res) => {
       let beforeFile,
         afterFile;
       if (before && after) {
-        // beforeFile = before[0].path.split('\\').slice(-1)[0];
-        // afterFile = after[0].path.split('\\').slice(-1)[0];
         beforeFile = ImgHandler.encodeImage(before[0]);
         afterFile = ImgHandler.encodeImage(after[0]);
-        console.log(beforeFile);
       } else throw new Error('Missing images');
       if (title && description && width && height) {
         const newPhoto = new Photo({
@@ -83,8 +98,8 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
       const { before, after } = files;
       let beforeFile = null;
       let afterFile = null;
-      if (before) beforeFile = before[0].path.split('\\').slice(-1)[0];
-      if (after) afterFile = after[0].path.split('\\').slice(-1)[0];
+      if (before) beforeFile = ImgHandler.encodeImage(before[0]);
+      if (after) afterFile = ImgHandler.encodeImage(after[0]);
       const photo = await Photo.findOne({ _id: req.params.id });
       if (!photo) res.status(404).json({ photo: 'Not Found' });
       else if (title && description && width && height) {

@@ -6,6 +6,10 @@ export interface Image {
   data: Buffer;
 }
 
+export interface DecodedImage {
+  contentType: string;
+  data: String;
+}
 export interface PhotoData extends Document {
   title: string;
   description: string;

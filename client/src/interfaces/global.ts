@@ -1,7 +1,7 @@
 import { FormFillData, PhotoInterface } from './photos';
 
 export interface PhotoData {
-  [key: string]: number | string | Blob;
+  [key: string]: number | string | Blob | null;
 }
 
 export interface FormDataType {

@@ -12,8 +12,8 @@ function withFormLogic(Cmp: ComponentType<any>): any {
           description: '',
           width: 640,
           height: 480,
-          before: '',
-          after: '',
+          before: null,
+          after: null,
         },
         isError: false,
       } as FormState;

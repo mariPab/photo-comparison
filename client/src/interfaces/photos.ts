@@ -1,8 +1,17 @@
 import { PhotoData } from './global';
 
+export interface Image {
+  contentType: string;
+  data: Blob;
+}
 export interface Images {
-  before: string | Blob;
-  after: string | Blob;
+  before: Image | null;
+  after: Image | null;
+}
+
+export interface ImagesInForm {
+  before: Blob | null;
+  after: Blob | null;
 }
 
 export interface Dimensions {
@@ -20,7 +29,7 @@ export interface PhotoInterface extends BasicPhotoData {
   images: Images;
 }
 
-export type FormFillData = PhotoData & BasicPhotoData & Images & Dimensions;
+export type FormFillData = PhotoData & BasicPhotoData & ImagesInForm & Dimensions;
 
 export interface FormState {
   formFillData: FormFillData;
