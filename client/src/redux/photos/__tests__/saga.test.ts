@@ -7,9 +7,9 @@ import {
   deleteComparison
 } from '../saga';
 import {
-  SET_ALL,
+  GET_ALL_SUCCESS,
   GET_PHOTO,
-  SET_PHOTO,
+  GET_PHOTO_SUCCESS,
   SUBMIT_PHOTOS,
   EDIT_COMPARISON,
   DELETE_COMPARISON,
@@ -41,9 +41,9 @@ describe('Photos Saga - ', () => {
       expect(apiReq).toEqual(axios.get(`${API_URL}/all`));
       return mockRes;
     });
-    it('then trigger SET_ALL action', result => {
+    it('then trigger GET_ALL_SUCCESS action', result => {
       expect(result).toEqual(put({
-        type: SET_ALL,
+        type: GET_ALL_SUCCESS,
         payload: mockRes.data,
       }));
     });
@@ -63,9 +63,9 @@ describe('Photos Saga - ', () => {
       expect(apiReq).toEqual(axios.get(`${API_URL}/photos/${payload.id}`));
       return mockRes;
     });
-    it('then trigger SET_PHOTO action', result => {
+    it('then trigger GET_PHOTO_SUCCESS action', result => {
       expect(result).toEqual(put({
-        type: SET_PHOTO,
+        type: GET_PHOTO_SUCCESS,
         payload: { ...mockRes.data },
       }));
     });
@@ -116,9 +116,9 @@ describe('Photos Saga - ', () => {
           },
         }))
     });
-    it('then trigger SET_PHOTO action', result => {
+    it('then trigger GET_PHOTO_SUCCESS action', result => {
       expect(result).toEqual(put({
-        type: SET_PHOTO,
+        type: GET_PHOTO_SUCCESS,
         payload: { ...mockPhotoData },
       }));
     });

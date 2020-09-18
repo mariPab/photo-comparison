@@ -1,4 +1,13 @@
-import { PhotoState, SET_ALL, SET_PHOTO, PhotosReducerTypes } from './types';
+import {
+  PhotoState,
+  GET_ALL_SUCCESS,
+  GET_ALL_FAIL,
+  GET_ALL,
+  GET_PHOTO,
+  GET_PHOTO_SUCCESS,
+  GET_PHOTO_FAIL,
+  PhotosReducerTypes,
+} from './types';
 import { PhotoInterface } from '../../interfaces/photos';
 
 /* selectors */
@@ -21,6 +30,8 @@ const initialState: PhotoState = {
       after: null,
     },
   },
+  loading: false,
+  error: false,
   allPhotos: [],
 };
 
@@ -28,15 +39,41 @@ export default function reducer(
   statePart: PhotoState = initialState,
   action: PhotosReducerTypes) {
   switch (action.type) {
-    case SET_PHOTO:
+    case GET_PHOTO: {
+      return {
+        ...statePart,
+        loading: true,
+      }
+    }
+    case GET_PHOTO_SUCCESS:
       return {
         ...statePart,
         photoData: action.payload,
+        loading: false,
       };
-    case SET_ALL:
+    case GET_PHOTO_FAIL:
+      return {
+        ...statePart,
+        error: true,
+        loading: false,
+      };
+    case GET_ALL: {
+      return {
+        ...statePart,
+        loading: true,
+      }
+    }
+    case GET_ALL_SUCCESS:
       return {
         ...statePart,
         allPhotos: action.payload,
+        loading: false,
+      };
+    case GET_ALL_FAIL:
+      return {
+        ...statePart,
+        error: true,
+        loading: false,
       };
     default:
       return statePart;

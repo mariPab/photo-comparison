@@ -1,9 +1,11 @@
 import {
   GET_PHOTO,
-  SET_PHOTO,
+  GET_PHOTO_SUCCESS,
+  GET_PHOTO_FAIL,
   SUBMIT_PHOTOS,
   GET_ALL,
-  SET_ALL,
+  GET_ALL_SUCCESS,
+  GET_ALL_FAIL,
   EDIT_COMPARISON,
   DELETE_COMPARISON,
   REDIRECT_TO_RANDOM_PHOTO,
@@ -23,10 +25,14 @@ export function* getAll() {
   try {
     const res = yield axios.get(`${API_URL}/all`);
     if (res && res.data) {
-      yield put({ type: SET_ALL, payload: res.data });
+      console.log(res);
+      yield put({ type: GET_ALL_SUCCESS, payload: res.data });
     }
   }
   catch (err) {
+    yield put({
+      type: GET_ALL_FAIL,
+    })
     console.log(err);
   }
 }
@@ -39,10 +45,13 @@ export function* getPhotoData({ payload }: GetPhotoData) {
   try {
     const res = yield axios.get(`${API_URL}/photos/${id}`);
     if (res && res.data) {
-      yield put({ type: SET_PHOTO, payload: res.data });
+      yield put({ type: GET_PHOTO_SUCCESS, payload: res.data });
     }
   }
   catch (err) {
+    yield put({
+      type: GET_PHOTO_FAIL,
+    })
     console.log(err);
   }
 }
@@ -79,7 +88,7 @@ export function* editComparison({ payload }: EditComparison) {
           'Content-Type': 'application/json',
         },
       });
-    yield put({ type: SET_PHOTO, payload: res.data });
+    yield put({ type: GET_PHOTO_SUCCESS, payload: res.data });
   } catch (e) {
     console.log(e);
   }
