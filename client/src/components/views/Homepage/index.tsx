@@ -13,11 +13,8 @@ interface MapDispatchToProps {
 type Props = MapDispatchToProps & RouteComponentProps;
 
 const Component = (props: Props): React.ReactElement => {
-  const redirect = () => {
-    props.redirectToRandomPhoto(props.history);
-  };
-  useEffect(() => redirect(), []);
-  return <div></div>;
+  useEffect(() => props.redirectToRandomPhoto(props.history), []);
+  return <></>;
 };
 
 const mapDispatchToProps: MapDispatchToProps = {

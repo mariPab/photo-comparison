@@ -14,7 +14,7 @@ export interface InputProps {
 const Component: FunctionComponent<InputProps> = ({ name, type, onChange, value }: InputProps) => {
   const generateTitle = useCallback((name: string): string | null => {
     return formInputTitles.hasOwnProperty(name) ? formInputTitles[name] : null;
-  }, [name]);
+  }, []);
   const renderInput = useCallback(() => {
     switch (type) {
       case 'text':
