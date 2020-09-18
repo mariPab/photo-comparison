@@ -10,13 +10,15 @@ export interface DecodedImage {
   contentType: string;
   data: String;
 }
-export interface PhotoData extends Document {
+export interface BasicData {
   title: string;
   description: string;
   dimensions: {
     width: number;
     height: number;
   };
+}
+export interface PhotoData extends BasicData, Document {
   images: {
     before: Image;
     after: Image;

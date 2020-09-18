@@ -9,7 +9,7 @@ interface DecodedImagesData {
 }
 type EncodeImage = (image: Express.Multer.File) => Image;
 type DecodeImage = (image: ArrayBuffer) => string;
-type ReturnDecodedObject = (binaryBefore: Image, binaryAfter: Image) => DecodedImagesData;
+type ReturnDecodedObject = (before: Image, after: Image) => DecodedImagesData;
 
 class ImgHandler {
   public encodeImage: EncodeImage = image => {
@@ -30,11 +30,11 @@ class ImgHandler {
     return {
       images: {
         before: {
-          ...before,
+          contentType: before.contentType,
           data: decodedBefore,
         },
         after: {
-          ...after,
+          contentType: after.contentType,
           data: decodedAfter,
         },
       },

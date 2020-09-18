@@ -1,6 +1,7 @@
 import Photo, { PhotoData } from '../models/photo.model';
 import { Response, Request } from 'express/index';
 import ImgHandler from '../helpers/ImgHandler';
+import DataHandler from '../helpers/DataHandler';
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
 
@@ -9,10 +10,12 @@ const loadAll: ServerRequest = async (req, res) => {
     const photos = await Photo.find();
     if (!photos) res.status(404).json({ photo: 'Not Found' });
     else {
-      const decodedData = photos.map(photo => ({
-        ...photo,
-        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
-      }));
+      const decodedData = photos.map(photo => {
+        return {
+          ...DataHandler.returnPhotoData(photo),
+          ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+        };
+      });
       res.json(decodedData);
     }
   } catch (err) {
@@ -25,11 +28,10 @@ const loadById: ServerRequest = async (req, res) => {
     const photo = await Photo.findOne({ _id: req.params.id });
     if (!photo) res.status(404).json({ photo: 'Not Found' });
     else {
-      const decodedData = {
-        ...photo,
+      res.json({
+        ...DataHandler.returnPhotoData(photo),
         ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
-      };
-      res.json(decodedData);
+      });
     }
   } catch (err) {
     res.status(500).json(err);
@@ -43,11 +45,10 @@ const loadRandom: ServerRequest = async (req, res) => {
     const photo = await Photo.findOne().skip(rand);
     if (!photo) res.status(404).json({ message: 'Not found' });
     else {
-      const decodedData = {
-        ...photo,
+      res.json({
+        ...DataHandler.returnPhotoData(photo),
         ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
-      };
-      res.json(decodedData);
+      });
     }
   } catch (err) {
     res.status(500).json(err);
