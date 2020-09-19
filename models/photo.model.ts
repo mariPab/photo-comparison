@@ -1,13 +1,16 @@
 import mongoose = require('mongoose');
 import { Document } from 'mongoose';
 
-export interface Image {
+export interface BasicImageData {
+  filename: string;
   contentType: string;
+}
+
+export interface Image extends BasicImageData {
   data: Buffer;
 }
 
-export interface DecodedImage {
-  contentType: string;
+export interface DecodedImage extends BasicImageData {
   data: String;
 }
 export interface BasicData {
@@ -29,8 +32,8 @@ const photoSchema = new mongoose.Schema({
   title: { type: String, required: true },
   description: { type: String },
   images: {
-    before: { data: Buffer, contentType: String },
-    after: { data: Buffer, contentType: String },
+    before: { filename: String, data: Buffer, contentType: String },
+    after: { filename: String, data: Buffer, contentType: String },
   },
   dimensions: {
     width: { type: Number, required: true },

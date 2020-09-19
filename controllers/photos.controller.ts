@@ -5,7 +5,7 @@ import DataHandler from '../helpers/DataHandler';
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
 
-const loadAll: ServerRequest = async (req, res) => {
+const loadAll: ServerRequest = async (_req, res) => {
   try {
     const photos = await Photo.find();
     if (!photos) res.status(404).json({ photo: 'Not Found' });
@@ -13,7 +13,7 @@ const loadAll: ServerRequest = async (req, res) => {
       const decodedData = photos.map(photo => {
         return {
           ...DataHandler.returnPhotoData(photo),
-          ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+          images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
         };
       });
       res.json(decodedData);
@@ -30,7 +30,7 @@ const loadById: ServerRequest = async (req, res) => {
     else {
       res.json({
         ...DataHandler.returnPhotoData(photo),
-        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+        images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
       });
     }
   } catch (err) {
@@ -38,7 +38,7 @@ const loadById: ServerRequest = async (req, res) => {
   }
 };
 
-const loadRandom: ServerRequest = async (req, res) => {
+const loadRandom: ServerRequest = async (_req, res) => {
   try {
     const count = await Photo.countDocuments();
     const rand = Math.floor(Math.random() * count);
@@ -47,7 +47,7 @@ const loadRandom: ServerRequest = async (req, res) => {
     else {
       res.json({
         ...DataHandler.returnPhotoData(photo),
-        ...ImgHandler.returnDecodedObject(photo.images.before, photo.images.after),
+        images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
       });
     }
   } catch (err) {

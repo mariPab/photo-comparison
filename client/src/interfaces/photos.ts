@@ -1,6 +1,7 @@
 import { PhotoData } from './global';
 
 export interface Image {
+  filename: string;
   contentType: string;
   data: Blob;
 }
