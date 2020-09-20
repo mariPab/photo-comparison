@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
-import { NotFoundPage } from './StyledNotFound.style';
+import { NotFoundPage } from './NotFound.style';
 
 const Component: FunctionComponent = () => (
   <NotFoundPage>
