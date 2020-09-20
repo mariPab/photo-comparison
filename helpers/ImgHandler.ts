@@ -26,7 +26,7 @@ class ImgHandler {
     return encryptetBytes.toString('base64');
   }
   public saveInRawFormat: SaveInRawFormat = image => {
-    fs.writeFileSync(image.filename, image.data);
+    fs.writeFileSync(`public/images/${image.filename}`, image.data);
   }
   public buildObject: BuildObject = image => {
     this.saveInRawFormat(image);

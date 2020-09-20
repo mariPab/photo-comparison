@@ -8,6 +8,7 @@ import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
 import { GetPhotoData } from '../../../redux/photos/types';
+import { IMAGES_URL } from '../../../config';
 
 const { getPhotoData } = PhotoActions;
 
@@ -33,8 +34,8 @@ class Component extends React.Component<Props> {
         <h3>{photoData.title}</h3>
         {photoData.images.before && photoData.images.after ?
           <BeforeAfterSlider
-            before={`data:${photoData.images.before.contentType};base64, ${photoData.images.before.data}`}
-            after={`data:${photoData.images.after.contentType};base64, ${photoData.images.after.data}`}
+            before={`${IMAGES_URL}/${photoData.images.before.filename}`}
+            after={`${IMAGES_URL}/${photoData.images.after.filename}`}
             width={photoData.dimensions.width}
             height={photoData.dimensions.height}
           /> : null}
