@@ -13,6 +13,7 @@ type DecodeImage = (image: ArrayBuffer) => string;
 type SaveInRawFormat = (image: BuffImg) => void;
 type BuildObject = (image: BuffImg) => DecodedImg;
 type ReturnDecodedObject = (before: BuffImg, after: BuffImg) => DecodedImagesData;
+type DeleteImageFromDir = (filename: string) => void;
 
 class ImgHandler {
   public encodeImage: EncodeImage = image => {
@@ -44,6 +45,11 @@ class ImgHandler {
       before: this.buildObject(before),
       after: this.buildObject(after),
     };
+  }
+  public deleteImageFromDir: DeleteImageFromDir = filename => {
+    fs.unlink(`public/images/${filename}`, err => {
+      if (err) throw err;
+    });
   }
 }
 

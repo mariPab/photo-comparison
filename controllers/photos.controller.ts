@@ -121,10 +121,13 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
 
 const deleteById = (req: Request, res: Response): void => {
   try {
-    Photo.findByIdAndDelete(req.params.id, (err: any, doc: PhotoData | null): void => {
-      err || !doc ?
-        res.status(404).json({ message: 'Data not found' }) :
+    Photo.findByIdAndDelete(req.params.id, (err: Error, doc: PhotoData | null): void => {
+      if (err || !doc) res.status(404).json({ message: 'Data not found' });
+      else {
+        ImgHandler.deleteImageFromDir(doc.images.before.filename);
+        ImgHandler.deleteImageFromDir(doc.images.after.filename);
         res.status(200).json({ message: 'Deleted successfully' });
+      }
     });
   } catch (err) {
     res.status(500).json(err);
