@@ -8,7 +8,7 @@ import { Button } from '../../UI/Button';
 
 const mockProps = {
   deleteComparison: jest.fn(),
-  photoData: { ...mockedPhotoData },
+  photoData: mockedPhotoData,
 };
 describe('PhotoCard pure component', () => {
   let component: ShallowWrapper<{}>

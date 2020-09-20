@@ -7,8 +7,16 @@ export const mockedPhotoData = {
     height: 356,
   },
   images: {
-    before: 'before.jpg',
-    after: 'after.jpg',
+    before: {
+      filename: 'before.jpg',
+      contentType: 'image.jpg',
+      data: '',
+    },
+    after: {
+      filename: 'after.jpg',
+      contentType: 'image.jpg',
+      data: '',
+    },
   },
 };
 
@@ -21,8 +29,8 @@ export const mockedHOCFunctions = {
     description: 'description',
     width: 425,
     height: 356,
-    before: 'before.jpg',
-    after: 'after.jpg',
+    before: null,
+    after: null,
   },
   handleError: jest.fn(),
   updateFormFill: jest.fn(),

@@ -1,23 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { AdminComponent } from '.';
-
-const mockPhotoData = {
-  _id: '635736yb4574',
-  title: 'title',
-  description: 'description',
-  dimensions: {
-    width: 425,
-    height: 356,
-  },
-  images: {
-    before: 'before.jpg',
-    after: 'after.jpg',
-  },
-};
+import { mockedPhotoData } from '../../../../__mocks__/photoData';
 
 const mockProps = {
-  photosList: [mockPhotoData, mockPhotoData],
+  photosList: [mockedPhotoData, mockedPhotoData],
   getAllPhotos: jest.fn(),
 };
 

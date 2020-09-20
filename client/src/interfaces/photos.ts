@@ -3,7 +3,7 @@ import { PhotoData } from './global';
 export interface Image {
   filename: string;
   contentType: string;
-  data: Blob;
+  data: string;
 }
 export interface Images<T> {
   before: T | null;

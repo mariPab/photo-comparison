@@ -3,6 +3,7 @@ import { shallow } from 'enzyme';
 import { PhotoComponent } from '.';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
+import { mockedPhotoData } from '../../../../__mocks__/photoData';
 
 const history = createMemoryHistory();
 const path = `/route/:id`;
@@ -15,19 +16,7 @@ const customMatch: match<{ id: string }> = {
 const location = createLocation(customMatch.url);
 const mockProps = {
   getPhotoData: jest.fn(),
-  photoData: {
-    _id: '635736yb4574',
-    title: 'title',
-    description: 'description',
-    dimensions: {
-      width: 425,
-      height: 356,
-    },
-    images: {
-      before: 'before.jpg',
-      after: 'after.jpg',
-    },
-  },
+  photoData: mockedPhotoData,
   match: customMatch,
   history: history,
   location: location,
