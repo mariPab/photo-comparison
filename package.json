@@ -9,8 +9,10 @@
     "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpileOnly server.ts",
     "start:client": "cd client && yarn start",
     "build": "npm-run-all -l -p build:*",
-    "build:server": "rm -rf build && tsc",
+    "build:clear": "rm -rf build",
+    "build:server": "tsc && npm run copy",
     "build:client": "cd client && npm install && npm run build",
+    "copy": "cp --recursive ./public build/",
     "test": "mocha -r ts-node/register \"./{,!(node_modules|client)/**/}*.test.ts\"",
     "test-dev": "onchange \"./**/*.ts\" -i -k -- npm run test"
   },
