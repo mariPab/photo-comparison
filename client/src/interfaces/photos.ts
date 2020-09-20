@@ -5,14 +5,9 @@ export interface Image {
   contentType: string;
   data: Blob;
 }
-export interface Images {
-  before: Image | null;
-  after: Image | null;
-}
-
-export interface ImagesInForm {
-  before: Blob | null;
-  after: Blob | null;
+export interface Images<T> {
+  before: T | null;
+  after: T | null;
 }
 
 export interface Dimensions {
@@ -27,10 +22,10 @@ interface BasicPhotoData {
 export interface PhotoInterface extends BasicPhotoData {
   _id: string;
   dimensions: Dimensions;
-  images: Images;
+  images: Images<Image>;
 }
 
-export type FormFillData = PhotoData & BasicPhotoData & ImagesInForm & Dimensions;
+export type FormFillData = PhotoData & BasicPhotoData & Images<Blob> & Dimensions;
 
 export interface FormState {
   formFillData: FormFillData;

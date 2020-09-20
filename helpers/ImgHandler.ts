@@ -1,15 +1,18 @@
 import fs = require('fs');
-import { Image, DecodedImage } from '../models/photo.model';
+import { ImageData } from '../models/photo.model';
+
+type BuffImg = ImageData<Buffer>;
+type DecodedImg = ImageData<string>;
 
 interface DecodedImagesData {
-  before: DecodedImage;
-  after: DecodedImage;
+  before: DecodedImg;
+  after: DecodedImg;
 }
-type EncodeImage = (image: Express.Multer.File) => Image;
+type EncodeImage = (image: Express.Multer.File) => BuffImg;
 type DecodeImage = (image: ArrayBuffer) => string;
-type SaveInRawFormat = (image: Image) => void;
-type BuildObject = (image: Image) => DecodedImage;
-type ReturnDecodedObject = (before: Image, after: Image) => DecodedImagesData;
+type SaveInRawFormat = (image: BuffImg) => void;
+type BuildObject = (image: BuffImg) => DecodedImg;
+type ReturnDecodedObject = (before: BuffImg, after: BuffImg) => DecodedImagesData;
 
 class ImgHandler {
   public encodeImage: EncodeImage = image => {
@@ -18,7 +21,7 @@ class ImgHandler {
     return {
       filename: image.path.split('\\').slice(-1)[0],
       contentType: image.mimetype,
-      data: new Buffer(encoded, 'base64'),
+      data: Buffer.from(encoded, 'base64'),
     };
   }
   public decodeImage: DecodeImage = image => {

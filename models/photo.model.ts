@@ -1,18 +1,12 @@
 import mongoose = require('mongoose');
 import { Document } from 'mongoose';
 
-export interface BasicImageData {
+export interface ImageData<T> {
   filename: string;
   contentType: string;
+  data: T;
 }
 
-export interface Image extends BasicImageData {
-  data: Buffer;
-}
-
-export interface DecodedImage extends BasicImageData {
-  data: String;
-}
 export interface BasicData {
   title: string;
   description: string;
@@ -23,8 +17,8 @@ export interface BasicData {
 }
 export interface PhotoData extends BasicData, Document {
   images: {
-    before: Image;
-    after: Image;
+    before: ImageData<Buffer>;
+    after: ImageData<Buffer>;
   };
 }
 
