@@ -6,8 +6,8 @@
   "scripts": {
     "start": "set NODE_ENV='production' && ts-node server.ts",
     "start-dev": "npm-run-all -l -p start:*",
-    "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpileOnly server.ts",
-    "start:client": "cd client && yarn start",
+    "start:server": "set NODE_ENV='dev' && ts-node-dev --respawn --transpile-only server.ts",
+    "start:client": "cd client && npm start",
     "build": "npm-run-all -l -p build:*",
     "build:clear": "rm -rf build",
     "build:server": "tsc && npm run copy",
