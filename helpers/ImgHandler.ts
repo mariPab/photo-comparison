@@ -17,10 +17,11 @@ type DeleteImageFromDir = (filename: string) => void;
 
 class ImgHandler {
   public encodeImage: EncodeImage = image => {
+    console.log(image);
     const img = fs.readFileSync(image.path);
     const encoded = img.toString('base64');
     return {
-      filename: image.path.split('\\').slice(-1)[0],
+      filename: image.filename,
       contentType: image.mimetype,
       data: Buffer.from(encoded, 'base64'),
     };
