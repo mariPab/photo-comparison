@@ -1,19 +1,23 @@
 import styled from 'styled-components';
 
 export const PhotoPage = styled.div`
-  padding: 100px 0;
+  height: 100%;
+  padding: 7rem 10rem 0;
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  div[class^="styles_handle"] {
+    width: 4px;
+  }
   h3 {
-    font-size: 4rem;
-    text-transform: uppercase;
+    font-size: 3rem;
     font-weight: 300;
-    margin-bottom: 50px;
+    margin: 0 0 4rem;
   }
   p {
-    font-size: 3.2rem;
+    font-size: 2rem;
     font-weight: 200;
+    opacity: 0.6;
+    margin: 0 0 4rem;
   }
 `;

@@ -1,14 +1,11 @@
 import React from 'react';
+import { NotificationContainer } from 'react-notifications';
+import { LayoutContainer } from './MainLayout.style';
 
-interface Props {
-  children: React.ReactElement;
-}
-const Component: React.FunctionComponent<Props> = ({ children }: Props) => (
-  <div>
+const MainLayout: React.FunctionComponent = ({ children }) => (
+  <LayoutContainer>
+    <NotificationContainer />
     {children}
-  </div>
+  </LayoutContainer>
 );
-export {
-  Component as MainLayout,
-  Component as MainLayoutComponent,
-};
+export default MainLayout;

@@ -1,4 +1,5 @@
 const variables = {
+  colorWhite: '#fff',
   colorSupplemental: '#fafafa',
   colorBorder: '#bdbdbd',
   colorText: '#212121',

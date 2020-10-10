@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getList } from '../../../redux/photos/reducer';
-import { Nav } from '../../layout/Nav';
 import { PhotoActions } from '../../../redux/photos/actions';
-import { PhotoCard } from '../../features/PhotoCard';
+import PhotoCard from '../../features/PhotoCard';
+import { Button } from '../../UI/Button';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { RootState } from '../../../redux/store';
 import { GetPhotosList } from '../../../redux/photos/types';
-import { AdminContainer, LinksPanel, ManageSection, NavLink } from './StyledAdmin.style';
+import { AdminContainer, ManageSection, NavLink, ActionsContainer } from './Admin.style';
 const { getAllPhotos } = PhotoActions;
 
 interface MapStateToProps {
@@ -25,17 +25,18 @@ class Component extends React.Component<Props> {
   render(): React.ReactElement {
     return (
       <AdminContainer>
-        <Nav linksList={this.props.photosList} />
-        <LinksPanel>
+        <ManageSection>
+          {this.props.photosList.map(elem => (
+            <PhotoCard key={elem._id} photoData={elem} />
+          ))}
+        </ManageSection>
+        <ActionsContainer>
           <NavLink exact to={`/admin/submit`}>
-            Dodaj nowe porównanie
+            <Button>
+              Dodaj nowe porównanie
+            </Button>
           </NavLink>
-          <ManageSection>
-            {this.props.photosList.map(elem => (
-              <PhotoCard key={elem._id} photoData={elem} />
-            ))}
-          </ManageSection>
-        </LinksPanel>
+        </ActionsContainer>
       </AdminContainer>
     );
   }

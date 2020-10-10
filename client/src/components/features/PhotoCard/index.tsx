@@ -16,7 +16,7 @@ interface MapDispatchToProps {
 interface Props extends MapDispatchToProps {
   photoData: PhotoInterface;
 }
-const Component = ({ photoData, deleteComparison }: Props): React.ReactElement => (
+export const PhotoCard = ({ photoData, deleteComparison }: Props): React.ReactElement => (
   <PhotoCardRoot>
     <ImageWrapper>
       {photoData.images.before ?
@@ -26,8 +26,10 @@ const Component = ({ photoData, deleteComparison }: Props): React.ReactElement =
         /> : null}
     </ImageWrapper>
     <InfoWrapper>
-      <p>{photoData.title}</p>
-      <NavLink exact to={`/admin/edit/${photoData._id}`}>
+      <NavLink className="title" exact to={`/photos/${photoData._id}`}>
+        {photoData.title}
+      </NavLink>
+      <NavLink className="fab" exact to={`/admin/edit/${photoData._id}`}>
         <FontAwesomeIcon icon={faPen} />
       </NavLink>
       <Button
@@ -39,15 +41,10 @@ const Component = ({ photoData, deleteComparison }: Props): React.ReactElement =
     </InfoWrapper>
   </PhotoCardRoot>
 );
-const mapDispatchToProps = {
+const mapDispatchToProps: MapDispatchToProps = {
   deleteComparison,
 };
-const Container = connect(
+export default connect(
   null,
   mapDispatchToProps
-)(Component);
-
-export {
-  Container as PhotoCard,
-  Component as PhotoCardComponent,
-};
+)(PhotoCard);

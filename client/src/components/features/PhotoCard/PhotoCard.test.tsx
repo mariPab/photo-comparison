@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
-import { PhotoCardComponent } from '.';
+import { PhotoCard } from '.';
 import { mockedPhotoData } from '../../../../__mocks__/photoData';
 import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
 import { NavLink } from 'react-router-dom';
@@ -13,7 +13,7 @@ const mockProps = {
 describe('PhotoCard pure component', () => {
   let component: ShallowWrapper<{}>
   beforeEach(() => {
-    component = shallow(<PhotoCardComponent {...mockProps} />);
+    component = shallow(<PhotoCard {...mockProps} />);
   });
   it('should render without crashing', () => {
     expect(component).toBeTruthy();

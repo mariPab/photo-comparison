@@ -15,5 +15,6 @@ export const GlobalStyle = createGlobalStyle`
 body {
   font-family: ${variables.fontMain};
   background-color: ${variables.colorSupplemental};
+  margin: 0;
 }
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { MainLayout } from './components/layout/MainLayout';
+import MainLayout from './components/layout/MainLayout';
 import { Homepage } from './components/views/Homepage';
 import { Photo } from './components/views/Photo';
 import { Admin } from './components/views/Admin';

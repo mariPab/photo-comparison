@@ -21,10 +21,12 @@ const handleVariantStyles = (variant: string): FlattenSimpleInterpolation => {
     }
     default: {
       return css`
-        background: ${variables.colorSupplemental};
+        background: ${variables.colorNeutral};
         font-size: 1.8rem;
-        padding: 1.2rem 1.8rem;
-        border: 1px solid ${variables.colorBorder};
+        padding: 1.6rem 2.4rem;
+        border-radius: 24px;
+        color: ${variables.colorWhite};
+        border: 1px solid ${variables.colorNeutral};
       `;
     }
   }

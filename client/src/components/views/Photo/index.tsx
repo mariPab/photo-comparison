@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import { getPhoto } from '../../../redux/photos/reducer';
-import { PhotoPage } from './StyledPhoto.style';
+import { PhotoPage } from './Photo.style';
 import BeforeAfterSlider from 'react-before-after-slider';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
@@ -32,6 +32,7 @@ class Component extends React.Component<Props> {
     return (
       <PhotoPage>
         <h3>{photoData.title}</h3>
+        <p>{photoData.description}</p>
         {photoData.images.before && photoData.images.after ?
           <BeforeAfterSlider
             before={`${IMAGES_URL}/${photoData.images.before.filename}`}
@@ -39,7 +40,6 @@ class Component extends React.Component<Props> {
             width={photoData.dimensions.width}
             height={photoData.dimensions.height}
           /> : null}
-        <p>{photoData.description}</p>
       </PhotoPage>
     );
   }

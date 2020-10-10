@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import App from './App';
-import { MainLayout } from './components/layout/MainLayout';
+import MainLayout from './components/layout/MainLayout';
 import { Switch, Route } from 'react-router-dom';
 import { Homepage } from './components/views/Homepage';
 import { Photo } from './components/views/Photo';
