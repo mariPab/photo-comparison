@@ -17,25 +17,29 @@ const handleVariantStyles = (variant: string): FlattenSimpleInterpolation => {
         padding: 0.5rem;
         display: inline-block;
         font-size: 2.5rem;
+        color: ${darken(0.15, variables.colorBorder)};
       `;
     }
     default: {
       return css`
         background: ${variables.colorNeutral};
-        font-size: 1.8rem;
-        padding: 1.6rem 2.4rem;
+        font-size: 1.6rem;
+        padding: 1.4rem 2.2rem;
         border-radius: 24px;
         color: ${variables.colorWhite};
         border: 1px solid ${variables.colorNeutral};
+        @media(max-width: 668px) {
+          font-size: 1.4rem;
+          padding: 1rem 1.6rem;
+      }
       `;
     }
   }
 };
-const StyledButton: React.FunctionComponent<Props> = styled.button<Props>`
+export const CustomButton: React.FunctionComponent<Props> = styled.button<Props>`
   ${({ variant }: Props): FlattenSimpleInterpolation => handleVariantStyles(variant)}
   cursor: pointer;
   text-transform: uppercase;
-  color: ${darken(0.15, variables.colorBorder)};
   outline: none;
   text-align: center;
   letter-spacing: 0.1rem;
@@ -51,7 +55,3 @@ const StyledButton: React.FunctionComponent<Props> = styled.button<Props>`
     color: ${variables.colorText};
   }
 `;
-
-export {
-  StyledButton as Button,
-};

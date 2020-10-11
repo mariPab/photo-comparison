@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow, ShallowWrapper } from 'enzyme';
 import { PhotoCard } from '.';
 import { mockedPhotoData } from '../../../../__mocks__/photoData';
-import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
+import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './PhotoCard.style';
 import { NavLink } from 'react-router-dom';
 import { Button } from '../../UI/Button';
 

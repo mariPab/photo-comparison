@@ -10,7 +10,7 @@ const nonFileInputType = (isNonFileType: boolean) => {
     background-color: ${variables.colorSupplemental};
     font-family: ${variables.fontMain};
     outline: none;
-    font-size: 2.5rem;
+    font-size: 2rem;
     border-radius: 4px;
     width: 100%;
     padding: 20px;
@@ -21,7 +21,7 @@ const nonFileInputType = (isNonFileType: boolean) => {
     background-color: ${lighten(0.5, variables.colorNeutral)};
     }
     &::placeholder {
-      font-size: 2.5rem;
+      font-size: 2rem;
       opacity: 0.3;
     }
   `;
@@ -46,10 +46,8 @@ interface LabelProps {
   [key: string]: any;
 }
 const StyledLabel = styled(({ flex, ...others }: LabelProps) => <label {...others} />)`
-  text-transform: ${({ flex }) => flex ? 'unset' : 'uppercase'};
-  font-weight: ${({ flex }) => flex ? 400 : 'normal'};
-  font-size: 2.5rem;
-  margin: 15px;
+  font-size: 2rem;
+  margin: 15px 0;
   display: block;
 `;
 

@@ -7,12 +7,11 @@ export const FormContainer = styled.div`
   margin: 0 auto;
   position: relative;
   h2 {
-    font-size: 3.5rem;
-    margin-top: 70px;
-    text-transform: uppercase;
+    font-size: 2.5rem;
+    margin-top: 5rem;
   }
   a {
-    font-size: 2rem;
+    font-size: 1.6rem;
     text-decoration: none;
     color: ${darken(0.2, variables.colorNeutral)};
     > svg {
@@ -42,10 +41,11 @@ export const FormElement = styled.form`
     background-color: ${variables.colorSupplemental};
     font-family: ${variables.fontMain};
     outline: none;
-    font-size: 2.5rem;
+    font-size: 2rem;
     border-radius: 4px;
     width: 100%;
     padding: 20px;
+    resize: none;
 
     &:active,
     &:focus {
@@ -53,7 +53,7 @@ export const FormElement = styled.form`
     background-color: ${lighten(0.5, variables.colorNeutral)};
     }
     &::placeholder {
-      font-size: 2.5rem;
+      font-size: 2rem;
       opacity: 0.3;
     }
   }
@@ -62,11 +62,11 @@ export const FormElement = styled.form`
     margin: 20px 0;
   }
   h3 {
-    font-size: 2rem;
+    font-size: 1.6rem;
     opacity: 0.2;
     margin: 0;
     margin-top: 40px;
-    padding: 0 15px;
+    /* padding: 0 15px; */
   }
   h4 {
     color: ${variables.colorNeutral};

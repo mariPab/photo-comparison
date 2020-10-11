@@ -5,7 +5,7 @@ import { PhotoActions } from '../../../redux/photos/actions';
 import { WithFormLogicHOC } from '../../../interfaces/global';
 import { Button } from '../../UI/Button';
 import { SubmitPhoto } from '../../../redux/photos/types';
-import { FormContainer, FormElement, FlexContainer } from '../../../styles/StyledForm';
+import { FormContainer, FormElement, FlexContainer } from '../../../styles/Form.style';
 import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';

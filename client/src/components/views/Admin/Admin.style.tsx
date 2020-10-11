@@ -6,13 +6,15 @@ import { NavLink } from 'react-router-dom';
 export const AdminContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 5rem;
+  padding: 5rem 5rem 0;
+  @media(max-width: 668px) {
+    padding: 2rem 2rem 0;
+  }
 `;
 
 const CustomNavLink = styled(NavLink)`
   font-size: 2rem;
   text-decoration: none;
-  /* color: ${variables.colorText}; */
   letter-spacing: 0.1rem;
   padding: 30px 0;
   &:hover {
@@ -22,7 +24,7 @@ const CustomNavLink = styled(NavLink)`
 
 export const ManageSection = styled.div`
   overflow: auto;
-  height: calc(100% - 12rem);
+  height: calc(100% - 13rem);
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 4px;
@@ -31,6 +33,9 @@ export const ManageSection = styled.div`
   }
   &::-webkit-scrollbar-thumb {
     background: ${lighten(0.1, variables.colorBorder)};
+  }
+  @media(max-width: 668px) {
+    height: calc(100% - 10rem);
   }
 `;
 
@@ -43,6 +48,9 @@ export const ActionsContainer = styled.div`
   align-content: center;
   height: 12rem;
   width: 100%;
+  @media(max-width: 668px) {
+    height: 10rem;
+  }
 `;
 export {
   CustomNavLink as NavLink,

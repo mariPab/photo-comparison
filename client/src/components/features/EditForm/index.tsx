@@ -16,7 +16,7 @@ import {
   GetPhotoData,
   EditComparison,
 } from '../../../redux/photos/types';
-import { FormContainer, FormElement, FlexContainer } from '../../../styles/StyledForm';
+import { FormContainer, FormElement, FlexContainer } from '../../../styles/Form.style';
 import { Label } from '../../UI/Input/Input.style';
 import { Input } from '../../UI/Input';
 

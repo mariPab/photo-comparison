@@ -7,7 +7,7 @@ import { Button } from '../../UI/Button';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { DeleteComparison } from '../../../redux/photos/types';
-import { PhotoCardRoot, ImageWrapper, InfoWrapper } from './StyledPhotoCard.style';
+import { PhotoCardRoot, ImageWrapper, InfoWrapper, ActionsBox } from './PhotoCard.style';
 const { deleteComparison } = PhotoActions;
 
 interface MapDispatchToProps {
@@ -29,15 +29,17 @@ export const PhotoCard = ({ photoData, deleteComparison }: Props): React.ReactEl
       <NavLink className="title" exact to={`/photos/${photoData._id}`}>
         {photoData.title}
       </NavLink>
-      <NavLink className="fab" exact to={`/admin/edit/${photoData._id}`}>
-        <FontAwesomeIcon icon={faPen} />
-      </NavLink>
-      <Button
-        variant='fab'
-        onClick={deleteComparison.bind(null, photoData._id)}
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </Button>
+      <ActionsBox>
+        <NavLink className="fab" exact to={`/admin/edit/${photoData._id}`}>
+          <FontAwesomeIcon icon={faPen} />
+        </NavLink>
+        <Button
+          variant='fab'
+          onClick={deleteComparison.bind(null, photoData._id)}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </Button>
+      </ActionsBox>
     </InfoWrapper>
   </PhotoCardRoot>
 );
