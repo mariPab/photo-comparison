@@ -13,4 +13,6 @@ export const errorCodes: Codes = {
 
 export const actionCodes: Codes = {
   DOC_DELETED_SUCCESSFULLY: 2101,
+  DOC_SUBMITTED_SUCCESSFULLY: 2102,
+  DOC_UPDATED_SUCCESSFULLY: 2103,
 };

@@ -20,11 +20,19 @@ export function* executeActionCodeWatcher(): Generator {
 }
 export function* executeActionCode({ payload }: ExecuteActionCode) {
   const { code } = payload;
+  console.log(payload)
   switch (code) {
     case (actionCodes.DOC_DELETED_SUCCESSFULLY):
       yield NotificationManager.success('Dane zostały usunięte poprawnie');
       break;
+    case (actionCodes.DOC_SUBMITTED_SUCCESSFULLY):
+      yield NotificationManager.success('Dane zostały dodane poprawnie');
+      break;
+    case (actionCodes.DOC_UPDATED_SUCCESSFULLY):
+      yield NotificationManager.success('Dane zostały zaktualizowane');
+      break;
   }
+
 }
 
 export default function* rootSaga(): Generator {

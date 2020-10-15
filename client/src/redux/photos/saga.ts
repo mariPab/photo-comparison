@@ -64,7 +64,7 @@ export function* submitPhotosWatcher(): Generator {
 export function* submitPhotos({ payload }: SubmitPhoto) {
   const { data } = payload;
   try {
-    yield axios.post(`${API_URL}/submit`,
+    const res: any = yield axios.post(`${API_URL}/submit`,
       data,
       {
         headers: {
@@ -72,6 +72,7 @@ export function* submitPhotos({ payload }: SubmitPhoto) {
         },
       });
     yield put({ type: GET_ALL });
+    if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
   } catch (e) {
     console.log(e);
   }
@@ -90,7 +91,8 @@ export function* editComparison({ payload }: EditComparison) {
           'Content-Type': 'application/json',
         },
       });
-    yield put({ type: GET_PHOTO_SUCCESS, payload: res.data });
+    yield put({ type: GET_PHOTO_SUCCESS, payload: res.data.photoData });
+    if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
   } catch (e) {
     console.log(e);
   }

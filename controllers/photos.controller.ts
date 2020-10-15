@@ -82,7 +82,7 @@ const submit: ServerRequest = async (req, res) => {
           },
         });
         await newPhoto.save();
-        res.json(newPhoto);
+        res.status(200).json({ status: 'success', actionCode: actionCodes.DOC_SUBMITTED_SUCCESSFULLY });
       } else {
         throw new Error('Wrong input!');
       }
@@ -112,7 +112,7 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
         if (beforeFile) photo.images.before = beforeFile;
         if (afterFile) photo.images.after = afterFile;
         await photo.save();
-        res.json(photo);
+        res.status(200).json({ status: 'success', actionCode: actionCodes.DOC_UPDATED_SUCCESSFULLY, photoData: photo });
       } else throw new Error('Wrong input!');
     } catch (err) {
       res.status(500).json(err);
