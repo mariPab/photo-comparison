@@ -9,13 +9,13 @@ export const mockedPhotoData = {
   images: {
     before: {
       filename: 'before.jpg',
-      contentType: 'image.jpg',
-      data: '',
+      contentType: 'image/jpg',
+      data: 'mockedBuff',
     },
     after: {
       filename: 'after.jpg',
-      contentType: 'image.jpg',
-      data: '',
+      contentType: 'image/jpg',
+      data: 'mockedBuff',
     },
   },
 };

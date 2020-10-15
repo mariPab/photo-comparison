@@ -1,13 +1,13 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { MainLayoutComponent } from '.';
+import MainLayout from '.';
 
 describe('MainLayout pure component', () => {
   it('should render without crashing', () => {
     const component = shallow(
-      <MainLayoutComponent>
+      <MainLayout>
         <div></div>
-      </MainLayoutComponent>);
+      </MainLayout>);
     expect(component).toBeTruthy();
   });
 });

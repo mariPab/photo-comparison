@@ -27,22 +27,15 @@ describe('PhotoCard pure component', () => {
   it('should render image', () => {
     const img = component.find('img');
     expect(img.length).toBe(1);
-    expect(img.prop('src')).toEqual('http://localhost:8000/images/before.jpg');
+    expect(img.prop('src')).toEqual('data:image/jpg;base64, mockedBuff');
     expect(img.prop('alt')).toEqual('title');
   });
   it('should render InfoWrapper', () => {
     expect(component.find(InfoWrapper).length).toBe(1);
   });
-  it('should render paragraph with appropriate properties', () => {
-    const paragraph = component.find('p');
-    expect(paragraph.length).toBe(1);
-    expect(paragraph.text()).toEqual('title');
-  });
   it('should render NavLink with appropriate properties', () => {
-    const link = component.find(NavLink);
-    expect(link.length).toBe(1);
-    expect(link.prop('to')).toEqual('/admin/edit/635736yb4574');
-    expect(link.prop('exact')).toBe(true);
+    const links = component.find(NavLink);
+    expect(links.length).toBe(2);
   });
   it('should render Button with appropriate properties', () => {
     const button = component.find(Button);
@@ -54,5 +47,4 @@ describe('PhotoCard pure component', () => {
     button.simulate('click');
     expect(mockProps.deleteComparison).toHaveBeenCalledTimes(1);
   });
-
 });

@@ -1,3 +1,4 @@
+import axios from 'axios';
 import sagaHelper from 'redux-saga-testing';
 import {
   getAll,
@@ -15,28 +16,14 @@ import {
   DELETE_COMPARISON,
   GET_ALL,
 } from '../types';
-import axios from 'axios';
 import { API_URL } from '../../../config';
 import { put } from 'redux-saga/effects';
-
-const mockPhotoData = {
-  _id: '635736yb4574',
-  title: 'title',
-  description: 'description',
-  dimensions: {
-    width: 425,
-    height: 356,
-  },
-  images: {
-    before: 'before.jpg',
-    after: 'after.jpg',
-  },
-};
+import { mockedPhotoData } from "../../../../__mocks__/photoData";
 
 describe('Photos Saga - ', () => {
   describe('getAll', () => {
     const it = sagaHelper(getAll());
-    const mockRes = { data: [mockPhotoData] };
+    const mockRes = { data: [mockedPhotoData] };
     it('Should request for desired API call', apiReq => {
       expect(apiReq).toEqual(axios.get(`${API_URL}/all`));
       return mockRes;
@@ -52,12 +39,12 @@ describe('Photos Saga - ', () => {
     });
   });
   describe('getPhotoData', () => {
-    const payload = { id: mockPhotoData._id };
+    const payload = { id: mockedPhotoData._id };
     const mockArgs = {
       type: GET_PHOTO,
       payload: payload
     };
-    const mockRes = { data: mockPhotoData };
+    const mockRes = { data: mockedPhotoData };
     const it = sagaHelper(getPhotoData(mockArgs));
     it('Should request for desired API call', apiReq => {
       expect(apiReq).toEqual(axios.get(`${API_URL}/photos/${payload.id}`));
@@ -66,7 +53,7 @@ describe('Photos Saga - ', () => {
     it('then trigger GET_PHOTO_SUCCESS action', result => {
       expect(result).toEqual(put({
         type: GET_PHOTO_SUCCESS,
-        payload: { ...mockRes.data },
+        payload: mockRes.data,
       }));
     });
     it('and then nothing', result => {
@@ -101,11 +88,12 @@ describe('Photos Saga - ', () => {
   });
   describe('editComparison', () => {
     const formData = new FormData();
-    const payload = { data: formData, id: mockPhotoData._id };
+    const payload = { data: formData, id: mockedPhotoData._id };
     const mockArgs = {
       type: EDIT_COMPARISON,
       payload: payload
     };
+    const mockRes = { data: mockedPhotoData };
     const it = sagaHelper(editComparison(mockArgs));
     it('Should request for desired API call', apiReq => {
       expect(apiReq).toEqual(
@@ -114,12 +102,13 @@ describe('Photos Saga - ', () => {
           headers: {
             'Content-Type': 'application/json',
           },
-        }))
+        }));
+      return mockRes;
     });
     it('then trigger GET_PHOTO_SUCCESS action', result => {
       expect(result).toEqual(put({
         type: GET_PHOTO_SUCCESS,
-        payload: { ...mockPhotoData },
+        payload: mockRes.data,
       }));
     });
     it('and then nothing', result => {
@@ -128,14 +117,16 @@ describe('Photos Saga - ', () => {
   });
 
   describe('deleteComparison', () => {
-    const payload = { id: mockPhotoData._id };
+    const payload = { id: mockedPhotoData._id };
     const mockArgs = {
       type: DELETE_COMPARISON,
       payload: payload
     };
+    // const mockRes = { actionCode: 9999};
     const it = sagaHelper(deleteComparison(mockArgs));
     it('Should request for desired API call', apiReq => {
       expect(apiReq).toEqual(axios.delete(`${API_URL}/photos/${payload.id}`));
+      // return mockRes;
     });
     it('then trigger GET_ALL action', result => {
       expect(result).toEqual(put({
