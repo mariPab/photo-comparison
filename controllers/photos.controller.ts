@@ -2,13 +2,14 @@ import Photo, { PhotoData } from '../models/photo.model';
 import { Response, Request } from 'express/index';
 import ImgHandler from '../helpers/ImgHandler';
 import DataHandler from '../helpers/DataHandler';
+import { errorCodes, actionCodes } from '../client/src/settings/codes';
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
 
 const loadAll: ServerRequest = async (_req, res) => {
   try {
     const photos = await Photo.find();
-    if (!photos) res.status(404).json({ photo: 'Not Found' });
+    if (!photos) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
     else {
       const decodedData = photos.map(photo => {
         return {
@@ -26,7 +27,7 @@ const loadAll: ServerRequest = async (_req, res) => {
 const loadById: ServerRequest = async (req, res) => {
   try {
     const photo = await Photo.findOne({ _id: req.params.id });
-    if (!photo) res.status(404).json({ photo: 'Not Found' });
+    if (!photo) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
     else {
       res.json({
         ...DataHandler.returnPhotoData(photo),
@@ -43,7 +44,7 @@ const loadRandom: ServerRequest = async (_req, res) => {
     const count = await Photo.countDocuments();
     const rand = Math.floor(Math.random() * count);
     const photo = await Photo.findOne().skip(rand);
-    if (!photo) res.status(404).json({ message: 'Not found' });
+    if (!photo) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
     else {
       res.json({
         ...DataHandler.returnPhotoData(photo),
@@ -66,7 +67,7 @@ const submit: ServerRequest = async (req, res) => {
       if (before && after) {
         beforeFile = ImgHandler.encodeImage(before[0]);
         afterFile = ImgHandler.encodeImage(after[0]);
-      } else throw new Error('Missing images');
+      } else res.status(404).json({ error: true, errorCode: errorCodes.MISSING_IMAGE });
       if (title && description && width && height) {
         const newPhoto = new Photo({
           title,
@@ -102,7 +103,7 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
       if (before) beforeFile = ImgHandler.encodeImage(before[0]);
       if (after) afterFile = ImgHandler.encodeImage(after[0]);
       const photo = await Photo.findOne({ _id: req.params.id });
-      if (!photo) res.status(404).json({ photo: 'Not Found' });
+      if (!photo) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
       else if (title && description && width && height) {
         photo.title = title;
         photo.description = description;
@@ -122,11 +123,11 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
 const deleteById = (req: Request, res: Response): void => {
   try {
     Photo.findByIdAndDelete(req.params.id, (err: Error, doc: PhotoData | null): void => {
-      if (err || !doc) res.status(404).json({ message: 'Data not found' });
+      if (err || !doc) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
       else {
         ImgHandler.deleteImageFromDir(doc.images.before.filename);
         ImgHandler.deleteImageFromDir(doc.images.after.filename);
-        res.status(200).json({ message: 'Deleted successfully' });
+        res.status(200).json({ status: 'success', actionCode: actionCodes.DOC_DELETED_SUCCESSFULLY });
       }
     });
   } catch (err) {

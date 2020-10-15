@@ -17,6 +17,9 @@ import {
 import axios from 'axios';
 import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
+import codesHandlerActions from '../codesHandler/actions';
+
+const { executeActionCode } = codesHandlerActions;
 
 export function* getAllWatcher(): Generator {
   yield takeEvery(GET_ALL, getAll);
@@ -25,7 +28,6 @@ export function* getAll() {
   try {
     const res = yield axios.get(`${API_URL}/all`);
     if (res && res.data) {
-      console.log(res);
       yield put({ type: GET_ALL_SUCCESS, payload: res.data });
     }
   }
@@ -100,8 +102,13 @@ export function* deleteComparisonWatcher(): Generator {
 export function* deleteComparison({ payload }: DeleteComparison): Generator {
   const { id } = payload;
   try {
-    yield axios.delete(`${API_URL}/photos/${id}`);
-    yield put({ type: GET_ALL });
+    /* FIXME: any */
+    const res: any = yield axios.delete(`${API_URL}/photos/${id}`);
+    if (res) {
+      yield put({ type: GET_ALL });
+      console.log(res)
+      if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
+    }
   } catch (e) {
     console.log(e);
   }
