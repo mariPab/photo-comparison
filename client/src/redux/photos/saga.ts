@@ -3,6 +3,7 @@ import {
   GET_PHOTO_SUCCESS,
   GET_PHOTO_FAIL,
   SUBMIT_PHOTOS,
+  SUBMIT_PHOTOS_FAIL,
   GET_ALL,
   GET_ALL_SUCCESS,
   GET_ALL_FAIL,
@@ -19,7 +20,7 @@ import { API_URL } from '../../config';
 import { all, fork, takeEvery, put } from 'redux-saga/effects';
 import codesHandlerActions from '../codesHandler/actions';
 
-const { executeActionCode } = codesHandlerActions;
+const { executeActionCode, executeErrorCode } = codesHandlerActions;
 
 export function* getAllWatcher(): Generator {
   yield takeEvery(GET_ALL, getAll);
@@ -34,7 +35,7 @@ export function* getAll() {
   catch (err) {
     yield put({
       type: GET_ALL_FAIL,
-    })
+    });
     console.log(err);
   }
 }
@@ -53,8 +54,8 @@ export function* getPhotoData({ payload }: GetPhotoData) {
   catch (err) {
     yield put({
       type: GET_PHOTO_FAIL,
-    })
-    console.log(err);
+    });
+    if (err.response.data.errorCode) yield put(executeErrorCode(err.response.data.errorCode));
   }
 }
 
@@ -73,8 +74,9 @@ export function* submitPhotos({ payload }: SubmitPhoto) {
       });
     yield put({ type: GET_ALL });
     if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    yield put({ type: SUBMIT_PHOTOS_FAIL });
+    if (err.response.data.errorCode) yield put(executeErrorCode(err.response.data.errorCode));
   }
 }
 
@@ -93,8 +95,8 @@ export function* editComparison({ payload }: EditComparison) {
       });
     yield put({ type: GET_PHOTO_SUCCESS, payload: res.data.photoData });
     if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    if (err.response.data.errorCode) yield put(executeErrorCode(err.response.data.errorCode));
   }
 }
 
@@ -108,11 +110,10 @@ export function* deleteComparison({ payload }: DeleteComparison): Generator {
     const res: any = yield axios.delete(`${API_URL}/photos/${id}`);
     if (res) {
       yield put({ type: GET_ALL });
-      console.log(res)
       if (res.data.actionCode) yield put(executeActionCode(res.data.actionCode));
     }
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    if (err.response.data.errorCode) yield put(executeErrorCode(err.response.data.errorCode));
   }
 }
 
@@ -124,8 +125,8 @@ export function* redirectToRandomPhoto({ payload }: any): Generator {
     const response: any = yield axios.get(`${API_URL}/random`);
     const id = response.data._id;
     payload.history.push(`/photos/${id}`);
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    if (err.response.data.errorCode) yield put(executeErrorCode(err.response.data.errorCode));
   }
 }
 

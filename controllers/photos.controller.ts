@@ -3,6 +3,7 @@ import { Response, Request } from 'express/index';
 import ImgHandler from '../helpers/ImgHandler';
 import DataHandler from '../helpers/DataHandler';
 import { errorCodes, actionCodes } from '../client/src/settings/codes';
+import mongoose = require('mongoose');
 
 type ServerRequest = (req: Request, res: Response) => Promise<void>;
 
@@ -11,31 +12,32 @@ const loadAll: ServerRequest = async (_req, res) => {
     const photos = await Photo.find();
     if (!photos) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
     else {
-      const decodedData = photos.map(photo => {
-        return {
-          ...DataHandler.returnPhotoData(photo),
-          images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
-        };
-      });
+      const decodedData = photos.map(photo => ({
+        ...DataHandler.returnPhotoData(photo),
+        images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
+      }));
       res.json(decodedData);
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: true, errorCode: 9999 });
   }
 };
 
 const loadById: ServerRequest = async (req, res) => {
   try {
-    const photo = await Photo.findOne({ _id: req.params.id });
-    if (!photo) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
+    const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
+    if (!isValidId) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
     else {
-      res.json({
-        ...DataHandler.returnPhotoData(photo),
-        images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
-      });
+      const photo = await Photo.findOne({ _id: req.params.id });
+      if (photo) {
+        res.json({
+          ...DataHandler.returnPhotoData(photo),
+          images: ImgHandler.returnDecodedImages(photo.images.before, photo.images.after),
+        });
+      }
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: true, errorCode: 9999 });
   }
 };
 
@@ -52,7 +54,7 @@ const loadRandom: ServerRequest = async (_req, res) => {
       });
     }
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: true, errorCode: 9999 });
   }
 };
 
@@ -87,7 +89,7 @@ const submit: ServerRequest = async (req, res) => {
         throw new Error('Wrong input!');
       }
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ error: true, errorCode: 9999 });
     }
   }
 };
@@ -102,20 +104,23 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
       let afterFile = null;
       if (before) beforeFile = ImgHandler.encodeImage(before[0]);
       if (after) afterFile = ImgHandler.encodeImage(after[0]);
-      const photo = await Photo.findOne({ _id: req.params.id });
-      if (!photo) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
-      else if (title && description && width && height) {
-        photo.title = title;
-        photo.description = description;
-        photo.dimensions.width = width;
-        photo.dimensions.height = height;
-        if (beforeFile) photo.images.before = beforeFile;
-        if (afterFile) photo.images.after = afterFile;
-        await photo.save();
-        res.status(200).json({ status: 'success', actionCode: actionCodes.DOC_UPDATED_SUCCESSFULLY, photoData: photo });
-      } else throw new Error('Wrong input!');
+      const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
+      if (!isValidId) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
+      else {
+        const photo = await Photo.findOne({ _id: isValidId });
+        if (photo && title && description && width && height) {
+          photo.title = title;
+          photo.description = description;
+          photo.dimensions.width = width;
+          photo.dimensions.height = height;
+          if (beforeFile) photo.images.before = beforeFile;
+          if (afterFile) photo.images.after = afterFile;
+          await photo.save();
+          res.status(200).json({ status: 'success', actionCode: actionCodes.DOC_UPDATED_SUCCESSFULLY, photoData: photo });
+        } else throw new Error('Wrong input!');
+      }
     } catch (err) {
-      res.status(500).json(err);
+      res.status(500).json({ error: true, errorCode: 9999 });
     }
   }
 };
@@ -131,7 +136,7 @@ const deleteById = (req: Request, res: Response): void => {
       }
     });
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json({ error: true, errorCode: 9999 });
   }
 };
 

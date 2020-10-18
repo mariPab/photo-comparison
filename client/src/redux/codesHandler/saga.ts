@@ -6,13 +6,20 @@ import {
 } from './types';
 import { all, fork, takeEvery } from 'redux-saga/effects';
 import { NotificationManager } from 'react-notifications';
-import { actionCodes } from '../../settings/codes';
+import { actionCodes, errorCodes } from '../../settings/codes';
 
 export function* executeErrorCodeWatcher(): Generator {
   yield takeEvery(EXECUTE_ERROR_CODE, executeErrorCode);
 }
 export function* executeErrorCode({ payload }: ExecuteErrorCode) {
-
+  const { code } = payload;
+  switch (code) {
+    case (errorCodes.NO_RECORD):
+      yield NotificationManager.error('Nie znaleziono takiego wpisu');
+      break;
+    default:
+      yield NotificationManager.error('Wystapił nieznany błąd');
+  }
 }
 
 export function* executeActionCodeWatcher(): Generator {
@@ -20,7 +27,6 @@ export function* executeActionCodeWatcher(): Generator {
 }
 export function* executeActionCode({ payload }: ExecuteActionCode) {
   const { code } = payload;
-  console.log(payload)
   switch (code) {
     case (actionCodes.DOC_DELETED_SUCCESSFULLY):
       yield NotificationManager.success('Dane zostały usunięte poprawnie');
@@ -31,8 +37,9 @@ export function* executeActionCode({ payload }: ExecuteActionCode) {
     case (actionCodes.DOC_UPDATED_SUCCESSFULLY):
       yield NotificationManager.success('Dane zostały zaktualizowane');
       break;
+    default:
+      break;
   }
-
 }
 
 export default function* rootSaga(): Generator {
