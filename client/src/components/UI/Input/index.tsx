@@ -26,7 +26,7 @@ const Component: FunctionComponent<InputProps> = ({ name, type, onChange, value 
             onChange={onChange}
             value={value}
             autoComplete="off"
-            minLength={10}
+            minLength={5}
             required
             placeholder={generateTitle(name)}
           />
