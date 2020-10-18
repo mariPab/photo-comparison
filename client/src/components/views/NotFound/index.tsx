@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import { NavLink } from 'react-router-dom';
 import { NotFoundPage } from './NotFound.style';
 
-const Component: FunctionComponent = () => (
+const NotFound: FunctionComponent = () => (
   <NotFoundPage>
     <p>Strona nie istnieje</p>
     <NavLink exact to={`/`}>
@@ -10,7 +10,4 @@ const Component: FunctionComponent = () => (
     </NavLink>
   </NotFoundPage>
 );
-export {
-  Component as NotFound,
-  Component as NotFoundComponent,
-};
+export default NotFound;

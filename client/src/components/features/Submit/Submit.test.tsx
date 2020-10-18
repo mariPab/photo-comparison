@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { SubmitComponent } from '.';
+import { Submit } from '.';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
 import { mockedHOCFunctions } from '../../../../__mocks__/photoData';
@@ -23,9 +23,9 @@ const mockProps = {
   ...mockedHOCFunctions,
 };
 
-describe('Component Submit', () => {
+describe('Submit', () => {
   it('should render without crashing', () => {
-    const component = shallow(<SubmitComponent {...mockProps} />);
+    const component = shallow(<Submit {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

@@ -24,7 +24,7 @@ type Props =
   RouteComponentProps &
   WithFormLogicHOC;
 
-class Component extends React.Component<Props> {
+export class Submit extends React.Component<Props> {
   submit = (e: React.FormEvent): void => {
     const { formFillData } = this.props;
     e.preventDefault();
@@ -107,16 +107,11 @@ class Component extends React.Component<Props> {
 const mapDispatchToProps: MapDispatchToProps = {
   submitPhotos,
 };
-const Container = compose<any>(
+export default compose<any>(
   connect(
     null,
     mapDispatchToProps
   ),
   withRouter,
   withFormLogic,
-)(Component) as React.ComponentClass<Props>;
-
-export {
-  Container as Submit,
-  Component as SubmitComponent,
-};
+)(Submit) as React.ComponentClass<Props>;

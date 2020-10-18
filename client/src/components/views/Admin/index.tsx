@@ -18,7 +18,7 @@ interface MapDispatchToProps {
 }
 type Props = MapStateToProps & MapDispatchToProps;
 
-class Component extends React.Component<Props> {
+export class Admin extends React.Component<Props> {
   componentDidMount(): void {
     this.props.getAllPhotos();
   }
@@ -47,11 +47,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 const mapDispatchToProps: MapDispatchToProps = {
   getAllPhotos,
 };
-const Container = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Component);
-export {
-  Container as Admin,
-  Component as AdminComponent,
-};
+)(Admin);

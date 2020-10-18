@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { AdminComponent } from '.';
+import { Admin } from '.';
 import { mockedPhotoData } from '../../../../__mocks__/photoData';
 
 const mockProps = {
@@ -10,7 +10,7 @@ const mockProps = {
 
 describe('Admin pure component', () => {
   it('should render without crashing', () => {
-    const component = shallow(<AdminComponent {...mockProps} />);
+    const component = shallow(<Admin {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

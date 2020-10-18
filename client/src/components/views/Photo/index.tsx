@@ -23,7 +23,7 @@ interface MatchProps {
 }
 type Props = MapStateToProps & MapDispatchToProps & RouteComponentProps<MatchProps>;
 
-class Component extends React.Component<Props> {
+export class Photo extends React.Component<Props> {
   componentDidMount(): void {
     this.props.getPhotoData(this.props.match.params.id);
   }
@@ -50,10 +50,7 @@ const mapStateToProps = (state: RootState): MapStateToProps => ({
 const mapDispatchToProps: MapDispatchToProps = {
   getPhotoData,
 };
-const Container = connect(
+export default connect(
   mapStateToProps,
-  mapDispatchToProps)(Component);
-export {
-  Container as Photo,
-  Component as PhotoComponent,
-};
+  mapDispatchToProps
+)(Photo);

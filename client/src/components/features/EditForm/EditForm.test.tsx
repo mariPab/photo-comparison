@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
-import { EditFormComponent } from '.';
+import { EditForm } from '.';
 import { mockedPhotoData, mockedHOCFunctions } from '../../../../__mocks__/photoData';
 
 const history = createMemoryHistory();
@@ -27,7 +27,7 @@ const mockProps = {
 
 describe('EditForm pure component ', () => {
   it('should render without crashing', () => {
-    const component = shallow(<EditFormComponent {...mockProps} />);
+    const component = shallow(<EditForm {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

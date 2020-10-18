@@ -12,7 +12,7 @@ interface MapDispatchToProps {
 
 type Props = MapDispatchToProps & RouteComponentProps;
 
-const Component = (props: Props): React.ReactElement => {
+export const Homepage = (props: Props): React.ReactElement => {
   const redirect = () => {
     props.redirectToRandomPhoto(props.history);
   };
@@ -23,14 +23,9 @@ const Component = (props: Props): React.ReactElement => {
 const mapDispatchToProps: MapDispatchToProps = {
   redirectToRandomPhoto,
 };
-const Container = compose(
+export default compose(
   connect(
     null,
     mapDispatchToProps),
   withRouter,
-)(Component) as React.ComponentType<Props>;
-
-export {
-  Container as Homepage,
-  Component as HomepageComponent,
-};
+)(Homepage) as React.ComponentType<Props>;

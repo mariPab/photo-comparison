@@ -3,12 +3,12 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import App from './App';
 import MainLayout from './components/layout/MainLayout';
 import { Switch, Route } from 'react-router-dom';
-import { Homepage } from './components/views/Homepage';
-import { Photo } from './components/views/Photo';
-import { Admin } from './components/views/Admin';
-import { Submit } from './components/features/Submit';
-import { EditForm } from './components/features/EditForm';
-import { NotFound } from './components/views/NotFound';
+import Homepage from './components/views/Homepage';
+import Photo from './components/views/Photo';
+import Admin from './components/views/Admin';
+import Submit from './components/features/Submit';
+import EditForm from './components/features/EditForm';
+import NotFound from './components/views/NotFound';
 
 describe('App', () => {
   let component: ShallowWrapper<{}>

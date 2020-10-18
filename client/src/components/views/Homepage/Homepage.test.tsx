@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { HomepageComponent } from '.';
+import { Homepage } from '.';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
 
@@ -20,9 +20,9 @@ const mockProps = {
   location: location,
   match: customMatch,
 };
-describe('Component Homepage', () => {
+describe('Homepage', () => {
   it('should render without crashing', () => {
-    const component = shallow(<HomepageComponent {...mockProps} />);
+    const component = shallow(<Homepage {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

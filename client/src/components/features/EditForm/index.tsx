@@ -37,7 +37,7 @@ type Props =
   RouteComponentProps<MatchProps> &
   WithFormLogicHOC;
 
-class Component extends React.Component<Props> {
+export class EditForm extends React.Component<Props> {
   componentDidMount(): void {
     this.props.getPhotoData(this.props.match.params.id);
   }
@@ -132,16 +132,11 @@ const mapDispatchToProps: MapDispatchToProps = {
   editComparison,
   getPhotoData,
 };
-const Container = compose(
+export default compose(
   connect(
     mapStateToProps,
     mapDispatchToProps
   ),
   withRouter,
   withFormLogic,
-)(Component) as React.ComponentClass<Props>;
-
-export {
-  Container as EditForm,
-  Component as EditFormComponent,
-};
+)(EditForm) as React.ComponentClass<Props>;

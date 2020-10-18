@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { PhotoComponent } from '.';
+import { Photo } from '.';
 import { createMemoryHistory, createLocation } from 'history';
 import { match } from 'react-router';
 import { mockedPhotoData } from '../../../../__mocks__/photoData';
@@ -21,9 +21,9 @@ const mockProps = {
   history: history,
   location: location,
 };
-describe('Component Photo', () => {
+describe('Photo', () => {
   it('should render without crashing', () => {
-    const component = shallow(<PhotoComponent {...mockProps} />);
+    const component = shallow(<Photo {...mockProps} />);
     expect(component).toBeTruthy();
   });
 });

@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { NotFoundComponent } from '.';
+import NotFound from '.';
 
 describe('Component NotFound', () => {
   it('should render without crashing', () => {
-    const component = shallow(<NotFoundComponent />);
+    const component = shallow(<NotFound />);
     expect(component).toBeTruthy();
   });
 });
