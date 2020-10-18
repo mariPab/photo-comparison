@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, NavLink } from 'react-router-dom';
 import { PhotoActions } from '../../../redux/photos/actions';
 import { Button } from '../../UI/Button';
-import { getPhotoById } from '../../../redux/photos/reducer';
+import { getPhoto } from '../../../redux/photos/reducer';
 import { PhotoInterface } from '../../../interfaces/photos';
 import { WithFormLogicHOC } from '../../../interfaces/global';
 import { RootState } from '../../../redux/store';
-import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faImages } from '@fortawesome/free-solid-svg-icons';
 import withFormLogic from '../../../HOC/withFormLogic';
@@ -40,16 +39,16 @@ type Props =
 
 class Component extends React.Component<Props> {
   componentDidMount(): void {
-    if (this.props.photoData) {
+    this.props.getPhotoData(this.props.match.params.id);
+  }
+  componentDidUpdate(prev: Props): void {
+    if (prev.photoData._id !== this.props.photoData._id) {
       this.props.updateFormFill(this.props.photoData);
-    } else {
-      this.props.getPhotoData(this.props.match.params.id);
     }
   }
-  submit = (e: React.FormEvent): void => {
+  submit = (): void => {
     const { formFillData } = this.props;
     const { id } = this.props.match.params;
-    e.preventDefault();
     if (formFillData.title && formFillData.description) {
       const data = this.props.convertToFormData(formFillData);
       this.props.editComparison(id, data);
@@ -126,8 +125,8 @@ class Component extends React.Component<Props> {
     );
   }
 }
-const mapStateToProps = (state: RootState, props: Props): MapStateToProps => ({
-  photoData: getPhotoById(state.Photos, props.match.params.id),
+const mapStateToProps = ({ Photos }: RootState): MapStateToProps => ({
+  photoData: getPhoto(Photos),
 });
 const mapDispatchToProps: MapDispatchToProps = {
   editComparison,

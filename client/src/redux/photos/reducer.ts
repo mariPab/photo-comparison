@@ -13,8 +13,6 @@ import { PhotoInterface } from '../../interfaces/photos';
 /* selectors */
 export const getPhoto = ({ photoData }: PhotoState): PhotoInterface => photoData;
 export const getList = ({ allPhotos }: PhotoState): Array<PhotoInterface> => allPhotos;
-export const getPhotoById = ({ allPhotos }: PhotoState, photoId: string): PhotoInterface =>
-  allPhotos.filter((photoData: PhotoInterface) => photoData._id === photoId)[0];
 
 const initialState: PhotoState = {
   photoData: {
