@@ -10,7 +10,7 @@
     "start:client": "cd client && npm start",
     "build": "npm-run-all -l -p build:*",
     "build:clear": "rm -rf build",
-    "build:server": "tsc && npm run copy",
+    "build:server": "tsc -p server.ts && npm run copy",
     "build:client": "cd client && npm install && npm run build",
     "copy": "cp --recursive ./public build/",
     "test": "mocha -r ts-node/register \"./{,!(node_modules|client)/**/}*.test.ts\"",
