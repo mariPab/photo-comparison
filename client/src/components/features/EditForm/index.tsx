@@ -40,8 +40,10 @@ type Props =
 export class EditForm extends React.Component<Props> {
   componentDidMount(): void {
     this.props.getPhotoData(this.props.match.params.id);
+    this.props.updateFormFill(this.props.photoData);
   }
   componentDidUpdate(prev: Props): void {
+    console.log(prev, this.props)
     if (prev.photoData._id !== this.props.photoData._id) {
       this.props.updateFormFill(this.props.photoData);
     }
