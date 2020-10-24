@@ -107,7 +107,7 @@ const editPhotoComparison: ServerRequest = async (req, res) => {
       const isValidId = mongoose.Types.ObjectId.isValid(req.params.id);
       if (!isValidId) res.status(404).json({ error: true, errorCode: errorCodes.NO_RECORD });
       else {
-        const photo = await Photo.findOne({ _id: isValidId });
+        const photo = await Photo.findOne({ _id: req.params.id });
         if (photo && title && description && width && height) {
           photo.title = title;
           photo.description = description;
